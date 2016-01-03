@@ -412,8 +412,4 @@ function FormUsuarios(){
 		}
 	});
 
-
-function activeClass(){
-	$("li").addClass("active");
-}
 }
