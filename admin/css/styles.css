@@ -58,6 +58,11 @@
     margin-top: 5px;
 }
 
+/* Estilos nav-left */
+.nav-left li:visited{
+    color: #fff;
+    background-color: #337ab7;
+}
 /********************************************* TOOLTIP PERSONALIZADO **************************************/
 /* Estilos para teléfonos móviles y tablet's*/
 .tooltip-inner{
