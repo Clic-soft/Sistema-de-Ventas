@@ -1,0 +1,240 @@
+.navbar-header>.navbar-brand{
+	color: #fff;
+}
+.navbar .nav> li>a{
+	color:#fff;
+	border-right: 1px solid #226fd1;
+}
+.navbar .nav>li:hover{
+	background-color: #226fd1;
+}
+
+/* estilos login con fotos */
+.navbar-login{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size{
+    font-size: 87px;
+}
+
+.top-container{
+    margin-top: 90px;
+}
+.contenido-button button{
+    margin-top: 7px;
+    margin-left: 10px;
+}
+.mensaje{
+    margin: 10px;
+    margin-top: 0;
+}
+.text-head{
+    color: #ff0000;
+    font-size: 15px;
+}
+.link-actualizar{
+    margin-top: 13px;
+    margin-right: 10px;
+    font-size: 17px;
+    color: #e67e22;
+    font-weight: bold;
+}
+.link-actualizar:hover{
+    color: #e67e22;
+}
+.link-actualizar:active{
+    color: #e67e22;
+}
+.top-link{
+    margin-top: 5px;
+}
+
+/********************************************* TOOLTIP PERSONALIZADO **************************************/
+/* Estilos para teléfonos móviles y tablet's*/
+.tooltip-inner{
+    max-width:200px;
+    padding:3px 8px;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;/*
+    background-color:#2E9999;*/
+    background: #004171;
+    border-radius:4px; 
+}
+.tooltip.top .tooltip-arrow{
+    bottom:0;left:50%;
+    margin-left:-5px;/*
+    border-top-color:#2E9999;*/
+    border-top-color: #004171;
+    border-width:5px 5px 0;
+}
+.tooltip.bottom .tooltip-arrow{
+    top:0;
+    left:50%;
+    margin-left:-5px;
+    border-bottom-color:#004171;
+    border-width:0 5px 5px;
+}
+
+.content{
+    border-left:1px solid #ddd;
+    overflow: hidden;
+    min-height: 450px;
+}
+.content-span{
+    margin-top: 9px;
+    font-family: Arial;
+    font-size: 20px;
+    margin-left: 20px;
+}
+.label-as-badge {
+    border-radius: 1em;
+}
+.alert-primary{
+    background: #337ab7;
+}
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
+#vistaPrevia {
+    background-color: #FFFFFF; 
+    border: 0.5px solid #444444;
+    vertical-align: top; 
+    width: 90%;
+    height: 225px;
+    background-size: 100% 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.content-compras{
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.content-form{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-top: 15px;
+    overflow: hidden;
+}
+.content-form + .content-form{
+    margin-top: 5px;
+}
+.comprobante-pago-content-venta{
+    border:1px solid #337ab7;
+    min-height: 170px;
+    border-radius: 4px;
+}
+.comprobante-pago-content-compra{
+    border:1px solid #337ab7;
+    min-height: 120px;
+    border-radius: 4px;
+}
+.comprobante-pago-title{
+    background: #337ab7;
+    min-height: 30px;
+    margin-bottom: 0;
+}
+.comprobante-pago-title>p{
+    color: #fff;
+    text-align: center;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.content-input{
+    padding: 10px;
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+.content-tipo p{
+    color: #337ab7;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.thead{
+    color: #ff0000;
+    font-size: 14px;
+}
+.text-body{
+    font-size: 12px;
+}
+.btn-right{
+    overflow: hidden;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.calculo{
+    font-weight: bold;
+}
+.total{
+    font-size: 20px;
+    margin-top: 4px;
+}
+.badge-red{
+    background: #ff0000;
+    color: #fff;
+}
+.badge-green{
+    background: #5cb85c;
+    color: #fff;
+}
+
+/**************************** profile usuario ******************************/
+.new-count{
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: #fbf1f1;
+    border-radius: 5px;
+}
+.new-count h3{
+    margin-bottom: 20px;
+    color: #1e82c4;
+    font-weight: bold;
+}
+
+.acceso{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.top-form{
+    margin-top: 15px;
+}
