@@ -28,25 +28,47 @@
                             <select name="categoria" required class="form-control"> 
                                 <option value="">Seleccione</option>
                                 <?php foreach ($fila as $key): ?>
-                                <option value="<?=$key[0]?>" <?php if($item[1]==$key[0]) echo 'Selected'; ?>><?=$key[1]?></option>
+                                <option value="<?=$key[0]?>" <?php if(isset($item)){if($item[1]==$key[0]) echo 'Selected';} ?>><?=$key[1]?></option>
                                 <?php endforeach; ?>
                             </select>
                             <label for="" class="hidden-xs">Producto</label>
                             <input type="text" name="producto" required placeholder="Producto" 
-                                class="form-control" value="<?=$item[3]?>">
+                                class="form-control" 
+                                <?php if(isset($item)){?>
+                                value="<?=$item[3]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?>>
                             <label for="" class="hidden-xs">Presentación</label>
                             <select name="presentacion" required class="form-control"> 
                                 <option value="">Seleccione</option>
                                 <?php foreach ($Prsent as $key): ?>
-                                <option value="<?=$key[0]?>" <?php if($item[2]==$key[0]) echo 'Selected'; ?>><?=$key[1]?></option>
+                                <option value="<?=$key[0]?>" <?php if(isset($item)){if($item[2]==$key[0]) echo 'Selected'; }?>><?=$key[1]?></option>
                                 <?php endforeach; ?>
                             </select>
                             <label for="">Unid. Medida</label>
-                            <input type='text' class='form-control' name="UnidMedida" value="<?=$item[4]?>" placeholder="Unidad de Medida">
+                            <input type='text' class='form-control' name="UnidMedida" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[4]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?>
+                            placeholder="Unidad de Medida">
                             <label for="">P. Venta</label>
-                            <input type='text' class='form-control' name="PVenta" value="<?=$item[5]?>" placeholder="12.20">
+                            <input type='text' class='form-control' name="PVenta" 
+                                <?php if(isset($item)){?>
+                                value="<?=$item[5]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?>
+                            placeholder="12.20">
                             <label for="">Stock</label>
-                            <input type='text' class='form-control' readonly name="stock" value="<?=$item[6]?>" placeholder="60">
+                            <input type='text' class='form-control' readonly name="stock" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[6]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?>placeholder="60">
                         </div>
                         <div class="col-xs-12 col-md-6"><!--
                             <div class="form-group">

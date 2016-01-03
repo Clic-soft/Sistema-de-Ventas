@@ -72,7 +72,7 @@ $repor=new Reporte();
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="">
+						<a href="menureporte.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i>4</span>

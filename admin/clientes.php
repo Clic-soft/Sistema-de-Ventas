@@ -31,7 +31,7 @@
 							<div class='modal fade' id='Modal_Mante_Clientes' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 
-							<a href="clientes" class="link-actualizar pull-right">
+							<a href="clientes.php" class="link-actualizar pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>

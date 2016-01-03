@@ -49,14 +49,14 @@
                                 value="<?=$item[3]?>"
                             <?php }else{?>
                                 value=""
-                            <?php } ?> placeholder="Av. Pachacutec N° 1234, Urb. Santa Rosa - La Victoria Chiclayo">
+                            <?php } ?> placeholder="Cra 1 # 70-210">
                             <label for="">Teléfono</label>
                             <input type='text' class='form-control' name="telefono" 
                             <?php if(isset($item)){?>
                                 value="<?=$item[4]?>"
                             <?php }else{?>
                                 value=""
-                            <?php } ?> placeholder="(074) - 234567">
+                            <?php } ?> placeholder="300234567">
                             <label for="">E-mail</label>
                             <input type='email' class='form-control' name="email" 
                             <?php if(isset($item)){?>
