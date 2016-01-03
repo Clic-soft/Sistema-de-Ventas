@@ -411,4 +411,9 @@ function FormUsuarios(){
 			alert("ERROR GENERAL DEL SISTEMA, POR FAVOR INTENTE MÁS TARDE.");
 		}
 	});
+
+
+function activeClass(){
+	$("li").addClass("active");
+}
 }

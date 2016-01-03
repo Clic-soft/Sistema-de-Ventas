@@ -11,10 +11,10 @@ if (isset($_SESSION["Usuario"])):
 	if(isset($url[4],$url[5]) && !empty($url[4]) && !empty($url[5])):
 		$fila=$objRep->Productos_vendidos_por_mes($url[4],$url[5]);
 		if(empty($fila)):
-			header('Location: ../productos-mas-vendidos');
+			header('Location: ../productos-mas-vendidos.php');
 		endif;
 	else:
-		header('Location: ../productos-mas-vendidos');
+		header('Location: ../productos-mas-vendidos.php');
 	endif;
 
 date_default_timezone_set("America/Lima");

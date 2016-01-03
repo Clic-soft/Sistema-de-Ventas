@@ -17,6 +17,9 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 				<?php require_once 'inc/menu.php'; ?>
+				<script type="text/javascript">
+					$("#clientes").addClass("active");
+				</script>
 			</div>
 			<div class="content">
 				<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
@@ -31,7 +34,7 @@
 							<div class='modal fade' id='Modal_Mante_Clientes' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 
-							<a href="clientes" class="link-actualizar pull-right">
+							<a href="clientes.php" class="link-actualizar pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>

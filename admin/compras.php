@@ -19,6 +19,9 @@ $objcomp=new Compras();
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 				<?php require_once 'inc/menu.php'; ?>
+				<script type="text/javascript">
+					$("#compras").addClass("active");
+				</script>
 			</div>
 			<div class="content">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -1,35 +1,44 @@
 <?php require_once 'clases/clsReportes.php'; 
 $repor=new Reporte();
 ?>
+<script type="text/javascript">
+	$('li').click(function(e) {
+    	$('.nav li.active').removeClass('active');
+    	var $this = $(this);
+    	$this.addClass('active');
+    	e.preventDefault();
+    	//alert("Si funciona mamá.");
+	});
+</script>
 				<ul class="nav nav-pills nav-stacked nav-left">
-					<li role="presentation" class="active">
+					<li id="categoria" role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "categoria.php":"#";?>">
 							<i class="glyphicon glyphicon-home"></i>
-							Categoría <span class="badge pull-right">
+							Categoría <span class="badge alert-primary pull-right">
 							<i class="glyphicon glyphicon-bell"></i><?=$repor->numcateg();?></span></a>
 					</li>
-					<li  role="presentation">
+					<li id="presentacion"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "presentacion.php":"#";?>">
 							<i class="glyphicon glyphicon-knight"></i> Presentación 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numpres();?></span>
 						</a>
 					</li>
-					<li  role="presentation">
+					<li id="productos"  role="presentation">
 						<a  href="productos.php">
 							<i class="glyphicon glyphicon-bed"></i> Productos 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numprod();?></span>
 						</a>
 					</li>
-					<li  role="presentation">
+					<li id="proveedores"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "proveedores.php":"#";?>">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numprov();?></span>
 						</a>
 					</li>
-					<li  role="presentation">
+					<li id="compras"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "compras.php":"#";?>">
 							<i class="glyphicon glyphicon-shopping-cart"></i> Compras 
 							<span class="badge alert-primary pull-right">
@@ -43,7 +52,7 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
-					<li  role="presentation">
+					<li id="clientes"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "clientes.php":"#";?>">
 							<i class="glyphicon glyphicon-folder-open"></i> Clientes 
 							<span class="badge alert-primary pull-right">
@@ -57,8 +66,8 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
-					<li  role="presentation">
-						<a data-target="ventas.php" data-toggle="pill" href="ventas.php">
+					<li id="ventas"  role="presentation">
+						<a href="ventas.php">
 							<i class="glyphicon glyphicon-credit-card"></i> Ventas 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i>
@@ -71,14 +80,14 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
-					<li  role="presentation">
-						<a  href="">
+					<li id="reportes" role="presentation">
+						<a href="menureporte.php">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i>4</span>
 						</a>
 					</li>
-					<li  role="presentation">
+					<li id="usuarios"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "usuarios.php":"#";?>">
 							<i class="glyphicon glyphicon-user"></i> Usuarios 
 							<span class="badge alert-primary pull-right">

@@ -58,7 +58,7 @@
 							endif;
 							?>
 							<span >Reporte de productos más vendidos - <?=$m?> del <?=$y?></span>
-							<a href="productos-mas-vendidos" class="link-actualizar top-link pull-right">
+							<a href="productos-mas-vendidos.php" class="link-actualizar top-link pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>
@@ -110,7 +110,7 @@
 		                                		$year=date('Y');
 		                                	endif;
 		                                	?>
-		                                	<a class="btn btn-success" href="informe/<?=$month?>/<?=$year?>/" target="_blank">
+		                                	<a class="btn btn-success" href="informe.php/<?=$month?>/<?=$year?>/" target="_blank">
 		                                		<i class="glyphicon glyphicon-print"></i> Generar Reporte
 		                                	</a>
 		                                </div>
