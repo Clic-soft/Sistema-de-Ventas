@@ -23,20 +23,47 @@
                                 <?php $array = array('Natural','Jurídica'); ?>
                                 <option value="">Seleccione</option>
                                 <?php foreach ($array as $key =>$value):?>
-                                <option value="<?=$value?>" <?php if($item[1]==$value) echo "selected";?>><?=$value?></option>
+                                <option value="<?=$value?>" <?php if(isset($item)){ if ($item[1]==$value) echo "selected";}?>><?=$value?></option>
                                 <?php endforeach; ?>
                             </select>
                             <label for="" class="hidden-xs">D.N.I. / R.U.C.</label>
                             <input type="text" name="dni" minlength="8" maxlength="11" required placeholder="D.N.I. / R.U.C." 
-                                class="form-control" value="<?=rtrim($_POST['dni'])?>" <?= (empty($_POST['dni'])) ? "":"readonly";?>>
+                                class="form-control" 
+
+                                <?php if(isset($_POST['dni'])){?>
+                                    value="<?=rtrim($_POST['dni'])?>" readonly
+                                <?php }else{?>
+                                    value=""
+                                <?php } ?>
+                                
                             <label for="">Nombre del cliente</label>
-                            <input type='text' class='form-control' required name="nombrecliente" value="<?=$item[2]?>" placeholder="Nombre del cliente">
+                            <input type='text' class='form-control' required name="nombrecliente" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[2]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="Nombre del cliente">
                             <label for="">Dirección</label>
-                            <input type='text' class='form-control' required name="direccion" value="<?=$item[3]?>" placeholder="Av. Pachacutec N° 1234, Urb. Santa Rosa - La Victoria Chiclayo">
+                            <input type='text' class='form-control' required name="direccion" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[3]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="Av. Pachacutec N° 1234, Urb. Santa Rosa - La Victoria Chiclayo">
                             <label for="">Teléfono</label>
-                            <input type='text' class='form-control' name="telefono" value="<?=$item[4]?>" placeholder="(074) - 234567">
+                            <input type='text' class='form-control' name="telefono" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[4]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="(074) - 234567">
                             <label for="">E-mail</label>
-                            <input type='email' class='form-control' name="email" value="<?=$item[5]?>" placeholder="ejemplo@gmail.com">
+                            <input type='email' class='form-control' name="email" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[5]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="ejemplo@gmail.com">
                         </div>
                     </div>
                 </div>
