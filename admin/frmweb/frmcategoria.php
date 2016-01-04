@@ -8,7 +8,7 @@
     endif;
 ?>
     <div class='modal-dialog'>
-        <form method='POST' id="formC">
+        <form method='POST' id="formC"> 
             <div class='modal-content'>
                 <div class='modal-header'>
                     <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
