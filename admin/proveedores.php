@@ -43,7 +43,7 @@
 							<div class='modal fade' id='Modal_Mante_Proveedores' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 
-							<a href="proveedores" class="link-actualizar pull-right">
+							<a href="proveedores.php" class="link-actualizar pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>

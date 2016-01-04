@@ -18,7 +18,11 @@
                     <input type='hidden' class='form-control' name="IdPre" value="<?=$_POST['IdPresen']?>">
                     <label for="" class="hidden-xs">Presentación</label>
                     <input type="text" name="presentacion" required placeholder="Presentación" 
-                        class="form-control" value="<?=$fila[0]?>">
+                        class="form-control" <?php if(isset($fila)){?>
+                            value="<?=$fila[0]?>"
+                        <?php }else{?>
+                            value=""
+                        <?php } ?> >
                 </div>
                 <div class='modal-footer'>
                     <button type="submit" class="btn btn-success" name="<?= (empty($_POST['IdPresen'])) ? "btnReg":"btnAct";?>">

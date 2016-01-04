@@ -23,7 +23,7 @@
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Reporte de productos con stock mínimo - <?=date('d/m/Y')?></span>
-							<a href="productos-stock-minimo" class="link-actualizar top-link pull-right">
+							<a href="productos-stock-minimo.php" class="link-actualizar top-link pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>
@@ -35,7 +35,7 @@
 						<div class="content-form">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<div class="form-group">
-									<a class="btn btn-success pull-right" href="informe3/" target="_blank">
+									<a class="btn btn-success pull-right" href="informe3.php/" target="_blank">
 										<i class="glyphicon glyphicon-print"></i> Generar Reporte
 									</a>
 									<div class="clearfix"></div>

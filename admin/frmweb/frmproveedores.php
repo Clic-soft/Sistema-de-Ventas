@@ -19,15 +19,37 @@
                         <div class="col-xs-12 col-md-12">
                             <label for="" class="hidden-xs">R.U.C.</label>
                             <input type="text" name="ruc" minlength="11" maxlength="11" required placeholder="R.U.C." 
-                                class="form-control" value="<?=$_POST['ruc']?>" <?= (empty($_POST['ruc'])) ? "":"readonly";?>>
+                                class="form-control" 
+                                <?php if(isset($_POST['ruc'])){?>
+                                    value="<?=rtrim($_POST['ruc'])?>" readonly
+                                <?php }else{?>
+                                    value=""
+                                <?php } ?>>
                             <label for="">Razón Social</label>
-                            <input type='text' class='form-control' required name="rasonsocial" value="<?=$item[1]?>" placeholder="Razón Social">
+                            <input type='text' class='form-control' required name="rasonsocial" 
+                            <?php if(isset($item)){?>
+                                value="<?=$item[1]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="Razón Social">
                             <label for="">Dirección</label>
-                            <input type='text' class='form-control' required name="direccion" value="<?=$item[2]?>" placeholder="Av. Pachacutec N° 1234, Urb. Santa Rosa - La Victoria Chiclayo">
+                            <input type='text' class='form-control' required name="direccion" <?php if(isset($item)){?>
+                                value="<?=$item[2]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="Av. Pachacutec N° 1234, Urb. Santa Rosa - La Victoria Chiclayo">
                             <label for="">Teléfono</label>
-                            <input type='text' class='form-control' name="telefono" value="<?=$item[3]?>" placeholder="(074) - 234567">
+                            <input type='text' class='form-control' name="telefono" <?php if(isset($item)){?>
+                                value="<?=$item[3]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="234567">
                             <label for="">E-mail</label>
-                            <input type='email' class='form-control' name="email" value="<?=$item[4]?>" placeholder="ejemplo@gmail.com">
+                            <input type='email' class='form-control' name="email" <?php if(isset($item)){?>
+                                value="<?=$item[4]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?> placeholder="ejemplo@gmail.com">
                         </div>
                     </div>
                 </div>
