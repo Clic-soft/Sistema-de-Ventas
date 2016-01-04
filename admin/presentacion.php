@@ -16,10 +16,19 @@
 
 	<div class="container-fluid top-container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-				<?php require_once 'inc/menu.php'; ?>
+			<!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">-->
+			<div class="m-left z-1 fixed inline-flex">
+				<div id="m" style="display:none;">
+					<?php require_once 'inc/menu.php'; ?>
+				</div>
+				<div id="barra-left" class="barra">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</div>
 				<script type="text/javascript">
 					$("#presentacion").addClass("active");
+					$("#barra-left").click(function(){
+						$("#m").toggle();
+					});
 				</script>
 			</div>
 			<div class="content">
@@ -85,7 +94,7 @@
 					</div>
 				</div>
 				
-				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<table class='table  table-bordered table-hover table-condensed' id="Tabla-Categoria">
 						<thead class="alert alert-info text-head">
 							<tr>

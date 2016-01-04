@@ -1,15 +1,6 @@
 <?php require_once 'clases/clsReportes.php'; 
 $repor=new Reporte();
 ?>
-<script type="text/javascript">
-	$('li').click(function(e) {
-    	$('.nav li.active').removeClass('active');
-    	var $this = $(this);
-    	$this.addClass('active');
-    	e.preventDefault();
-    	//alert("Si funciona mamá.");
-	});
-</script>
 				<ul class="nav nav-pills nav-stacked nav-left">
 					<li id="categoria" role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "categoria.php":"#";?>">
