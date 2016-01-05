@@ -15,7 +15,7 @@
 	<?php require_once 'inc/menu-l.php'; ?>
 	<script type="text/javascript">
 			$("#productos").addClass("active");					
-		</script>
+	</script>
 	<div class="container-fluid col-md-10 col-md-offset-2">
 		<div class="row">
 			<div>
@@ -30,17 +30,18 @@
 								<i class="glyphicon glyphicon-plus"></i> Nuevo Producto
 							</button>
 							<?php else: ?>
-							<button type="button" class="btn btn-small btn-default">
+							<!--<button type="button" class="btn btn-small btn-default">
 								<i class="glyphicon glyphicon-plus"></i> Nuevo Producto
-							</button>
+							</button>-->
 							<?php endif; ?>
 							<div class='modal fade' id='Modal_Mante_Producto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 							<div class='modal fade' id='Modal_Mante_VerFoto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 							<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "productos.php":"#";?>" class="link-actualizar pull-right">
-								<?= ($_SESSION['Tipo']=='Administrador') ? "<i class='glyphicon glyphicon-refresh'></i> Actualizar":"Usted no tiene permisos";?>
+								<?= ($_SESSION['Tipo']=='Administrador') ? "<i class='glyphicon glyphicon-refresh'></i> Actualizar":"";?>
 							</a>
+
 						</div>
 					</div>
 				</div>
