@@ -14,26 +14,44 @@ $objcomp=new Compras();
 	<?php require_once 'inc/header.php'; ?>
 </head>
 <body>
-	<?php require_once 'inc/navbar.php'; ?>
-	<div class="container-fluid top-container">
+	<div class="m-left z-1 fixed inline-flex col-md-2">
+		<div id="m">
+			<?php require_once 'inc/menu.php'; ?>
+		</div>
+	</div>
+	<div class="menu--top container-fluid col-md-10 col-md-offset-2">
+		<div class="row">
+			<div class="nav-top-menu">
+				<div class="col-xs-6">
+					<strong><?=$_SESSION['Usuario']?></strong>
+				</div>
+				<div class="col-xs-6">
+                	<a class="float-right" href="inc/CerrarSesion.php">Cerrar Sesión</a>
+                </div>
+			</div>
+			<div id="more-menu" class="more-menu">
+               	<span class="glyphicon glyphicon-chevron-down"></span>
+            </div>	
+            <script type="text/javascript">
+           		$("#more-menu").click(function(){
+           			$(".m-left").toggle();
+           		});
+            </script>
+		</div>
+	</div>
+
+	<div class="container-fluid col-md-10 col-md-offset-2">
 		<div class="row">
 			<!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">-->
-			<div class="m-left z-1 fixed inline-flex">
-				<div id="m" style="display:none;">
-					<?php require_once 'inc/menu.php'; ?>
-				</div>
-				<div id="barra-left" class="barra">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-				</div>
-				<script type="text/javascript">
-					$("#compras").addClass("active");
-					$("#barra-left").click(function(){
-						$("#m").toggle();
-					});
-				</script>
-			</div>
+			<script type="text/javascript">
+				$("#compras").addClass("active");
+				$("#barra-left").click(function(){
+					$("#m").toggle();
+				});
+			</script>
 			<div class="content">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="space"></div>
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Realizar compras</span>
