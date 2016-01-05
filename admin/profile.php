@@ -85,7 +85,7 @@
 	                            </div>
 	                            <div class="form-group">
 	                            	<label for="" class="control-label col-xs-3">Tipo de Usuario</label>
-	                            	<div class="col-xs-8"><?=$item[0]?>
+	                            	<div class="col-xs-8">
 	                            		<select class="form-control" required disabled name="tipo">
 	                                        <option value="">Selecione</option>
 	                                        <option value="Administrador" <?php if($fila[3]=="Administrador") echo "Selected";?>>Administrador</option>

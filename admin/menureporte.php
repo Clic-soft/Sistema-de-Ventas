@@ -21,25 +21,25 @@
 			<div>
 				<div class="space"></div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<table align="center" >
+					<table align="center" style"">
 							<tr style="heigth:50%;">
-								<td class="text-center" style="width:50%;">
-									<a href="productos-mas-vendidos.php"><img src="images/icono-reportes.png" ></a><br>
-									<span>Listado De Productos Mas Vendidos</span>
+								<td class="text-center" style="width:50%;padding:30px;">
+									<a href="ingresos-mensuales.php"><img src="images/icono-reportes.png" ></a><br>
+									<span>Reporte Ingresos Mensuales</span>
 								</td>
-								<td class="text-center" style="width:50%;">
+								<td class="text-center" style="width:50%;padding:30px;">
 									<a href="productos-mas-vendidos.php"><img src="images/icono-reportes.png" ></a><br>
-									<span>Listado De Productos Mas Vendidos</span>
+									<span>Reporte Productos Mas Vendidos</span>
 								</td>
 							</tr>
 							<tr style="heigth:50%;">
 								<td class="text-center">
-									<a href="productos-mas-vendidos.php"><img src="images/icono-reportes.png" ></a><br>
-									<span>Listado De Productos Mas Vendidos</span>
+									<a href="egresos-mensuales.php"><img src="images/icono-reportes.png" ></a><br>
+									<span>Reporte Egresos Mensuales</span>
 								</td>
 								<td class="text-center">
-									<a href="productos-mas-vendidos.php"><img src="images/icono-reportes.png" ></a><br>
-									<span>Listado De Productos Mas Vendidos</span>
+									<a href="productos-stock-minimo.php"><img src="images/icono-reportes.png" ></a><br>
+									<span>Reporte Stock Minimo de Productos</span>
 								<td>
 							</tr>
 					</table>

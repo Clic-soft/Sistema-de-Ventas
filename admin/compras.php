@@ -55,7 +55,7 @@ $objcomp=new Compras();
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Realizar compras</span>
-							<a href="compras" class="link-actualizar top-link pull-right">
+							<a href="compras.php" class="link-actualizar top-link pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>

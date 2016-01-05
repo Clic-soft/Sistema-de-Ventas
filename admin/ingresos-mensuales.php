@@ -51,7 +51,7 @@
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Reporte de Ingresos de dinero - Año: <?= isset($_POST['Consultar']) ? $_POST['year']:date('Y'); ?></span>
-							<a href="ingresos-mensuales" class="link-actualizar top-link pull-right">
+							<a href="ingresos-mensuales.php" class="link-actualizar top-link pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>
@@ -97,7 +97,7 @@
 		                                		$year=date('Y');
 		                                	endif;
 		                                	?>
-			                                <a class="btn btn-success" href="informe2/ingresos/<?=$year?>/" target="_blank">
+			                                <a class="btn btn-success" href="informe2/ingresos.php/<?=$year?>/" target="_blank">
 			                                	<i class="glyphicon glyphicon-print"></i> Generar Reporte
 			                                </a>
 		                                </div>

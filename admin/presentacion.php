@@ -56,7 +56,7 @@
 							<div class='modal fade' id='Modal_Mante_Present' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 
-							<a href="presentacion" class="link-actualizar pull-right">
+							<a href="presentacion.php" class="link-actualizar pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>

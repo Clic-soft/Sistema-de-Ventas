@@ -29,7 +29,7 @@ $numcomp=$objV->getNumComprobante();
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Realizar ventas</span>
-							<a href="ventas" class="link-actualizar top-link pull-right">
+							<a href="ventas.php" class="link-actualizar top-link pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>
@@ -205,9 +205,9 @@ $numcomp=$objV->getNumComprobante();
 
 								if($mensaje2==$mensaje1):
 									if($_POST['tipoPer']=="Natural"){
-										echo'<script>window.location="comprobante/boleta/'.rtrim($_POST["numero"]).'/";</script>';
+										echo'<script>window.location="comprobante.php/boleta/'.rtrim($_POST["numero"]).'/";</script>';
 									}else{
-										echo'<script>window.location="comprobante/factura/'.rtrim($_POST["numero"]).'/";</script>';
+										echo'<script>window.location="comprobante.php/factura/'.rtrim($_POST["numero"]).'/";</script>';
 									}
 									unset($_SESSION['carrito_ventas']);
 									?>

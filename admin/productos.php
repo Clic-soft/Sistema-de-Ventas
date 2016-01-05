@@ -38,7 +38,7 @@
 							</div>
 							<div class='modal fade' id='Modal_Mante_VerFoto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
-							<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "productos":"#";?>" class="link-actualizar pull-right">
+							<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "productos.php":"#";?>" class="link-actualizar pull-right">
 								<?= ($_SESSION['Tipo']=='Administrador') ? "<i class='glyphicon glyphicon-refresh'></i> Actualizar":"Usted no tiene permisos";?>
 							</a>
 						</div>
