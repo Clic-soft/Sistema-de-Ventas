@@ -276,6 +276,15 @@
     font-size: 20px;
     font-weight: 900px;
 }
+.margin-ico{
+    margin:10px;
+    width: calc(50% - 20px);
+    text-align: center;
+}
+.margin-ico:hover{
+    background: #ccc;
+    color: black;
+}
 .welcome{
     background: #337AB7;
     padding: 52px 40px;
@@ -346,6 +355,10 @@
     }
     .iconos-i{
         width: calc(50% - 20px);
+    }
+    .margin-ico{
+        width: calc(100% - 10px);
+
     }
     
 }

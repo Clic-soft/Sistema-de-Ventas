@@ -21,7 +21,7 @@
 			<div>
 				<div class="space"></div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<table align="center" style"">
+					<!--<table align="center" style"">
 							<tr style="heigth:50%;">
 								<td class="text-center" style="width:50%;padding:30px;">
 									<a href="ingresos-mensuales.php"><img src="images/icono-reportes.png" ></a><br>
@@ -43,6 +43,31 @@
 								<td>
 							</tr>
 					</table>
+					-->
+					<a href="ingresos-mensuales.php">
+						<div class="welcome margin-ico col-xs-12 col-md-6">
+							<p><span class="glyphicon glyphicon-upload"></span></p>
+							<p class="title">Reporte Ingresos Mensuales</p>
+						</div>
+					</a>
+					<a href="productos-mas-vendidos.php">
+						<div class="welcome margin-ico col-xs-12 col-md-6">
+							<p><span class="glyphicon glyphicon-thumbs-up"></span></p>
+							<p class="title">Reporte Productos Mas Vendidos</p>
+						</div>
+					</a>
+					<a href="egresos-mensuales.php">
+						<div class="welcome margin-ico col-xs-12 col-md-6">
+							<p><span class="glyphicon glyphicon-download"></span></p>
+							<p class="title">Reporte Egresos Mensuales</p>
+						</div>
+					</a>
+					<a href="productos-stock-minimo.php">
+						<div class="welcome margin-ico col-xs-12 col-md-6">
+							<p><span class="glyphicon glyphicon-info-sign"></span></p>
+							<p class="title">Reporte Stock Minimo de Productos</p>
+						</div>
+					</a>
 				</div>
 
 			</div>
