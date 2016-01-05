@@ -12,14 +12,15 @@
 	<?php require_once 'inc/header.php'; ?>
 </head>
 <body>
-	<?php require_once 'inc/navbar.php'; ?>
-	<div class="container-fluid top-container">
+	<?php require_once 'inc/menu-l.php'; ?>
+	<script type="text/javascript">
+		$("#reportes").addClass("active");					
+	</script>
+	<div class="container-fluid col-md-10 col-md-offset-2">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-				<?php require_once 'inc/menu.php'; ?>
 			</div>
-			<div class="content">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="space"></div>
 					<div class="navbar navbar-default">
 						<div class="navbar-inner content-span">
 							<span >Reporte de productos con stock mínimo - <?=date('d/m/Y')?></span>
