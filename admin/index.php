@@ -44,10 +44,10 @@
 							<p>En esta aplicación tu podrás Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua.</p>
-							<div class="col-xs-6">
+							<div class="col-xs-3">
 								<p><span class="glyphicon glyphicon-home"></span></p>
 							</div>
-							<div class="col-xs-6">
+							<div class="col-xs-9">
 								<p>Desarrollada por: Clic-Soft</p>
 								<p>Hecha con amor desde Colombia y México. <3</p>
 							</div>
