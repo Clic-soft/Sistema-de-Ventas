@@ -5,7 +5,7 @@ $repor=new Reporte();
 					<div>
 						<a 	href="./">Sistema - Tienda</a>
 					</div>
-					<li class="dropdown">
+					<li class="dropdown" style="margin-top:15px;">
 	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border-right: none;">
 	                        <span class="glyphicon glyphicon-user"></span> 
 	                        <strong>Perfil</strong>
@@ -44,12 +44,16 @@ $repor=new Reporte();
 	                        </li>
 	                    </ul>
 	                </li>
+	                <?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="categoria" role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "categoria.php":"#";?>">
 							<i class="glyphicon glyphicon-home"></i>
 							Categoría <span class="badge alert-primary pull-right">
 							<i class="glyphicon glyphicon-bell"></i><?=$repor->numcateg();?></span></a>
 					</li>
+					<?php } ?>
+
+					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="presentacion"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "presentacion.php":"#";?>">
 							<i class="glyphicon glyphicon-knight"></i> Presentación 
@@ -57,6 +61,8 @@ $repor=new Reporte();
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numpres();?></span>
 						</a>
 					</li>
+
+					<?php } ?>
 					<li id="productos"  role="presentation">
 						<a  href="productos.php">
 							<i class="glyphicon glyphicon-bed"></i> Productos 
@@ -64,6 +70,8 @@ $repor=new Reporte();
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numprod();?></span>
 						</a>
 					</li>
+
+					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="proveedores"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "proveedores.php":"#";?>">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
@@ -71,6 +79,9 @@ $repor=new Reporte();
 								<i class="glyphicon glyphicon-bell"></i><?=$repor->numprov();?></span>
 						</a>
 					</li>
+					<?php } ?>
+
+					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="compras"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "compras.php":"#";?>">
 							<i class="glyphicon glyphicon-shopping-cart"></i> Compras 
@@ -85,6 +96,9 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
+					<?php } ?>
+
+					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="clientes"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "clientes.php":"#";?>">
 							<i class="glyphicon glyphicon-folder-open"></i> Clientes 
@@ -99,6 +113,7 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
+					<?php } ?>
 					<li id="ventas"  role="presentation">
 						<a href="ventas.php">
 							<i class="glyphicon glyphicon-credit-card"></i> Ventas 
@@ -120,6 +135,7 @@ $repor=new Reporte();
 								<i class="glyphicon glyphicon-bell"></i>4</span>
 						</a>
 					</li>
+					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
 					<li id="usuarios"  role="presentation">
 						<a  href="<?= ($_SESSION['Tipo']=='Administrador') ? "usuarios.php":"#";?>">
 							<i class="glyphicon glyphicon-user"></i> Usuarios 
@@ -134,4 +150,5 @@ $repor=new Reporte();
 							</span>
 						</a>
 					</li>
+					<?php } ?>
 				</ul>

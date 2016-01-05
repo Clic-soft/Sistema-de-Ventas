@@ -6,7 +6,6 @@
 		$montoMensual=$Reporte->getVentasMensual($_POST['year']);
 	else
 		$montoMensual=$Reporte->getVentasMensual(date('Y'));
-
 	$meses=$Reporte->meses();
 ?>
 <!DOCTYPE html>

@@ -4,4 +4,5 @@
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
