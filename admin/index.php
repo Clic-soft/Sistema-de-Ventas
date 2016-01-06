@@ -39,18 +39,11 @@
 				<div class="index row col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="space"></div>
 					<a href="./">
-						<div class="col-xs-12 col-md-4 welcome">
+						<div class="col-xs-12 col-md-4 welcome" style="height: 352px;">
 							<p class="title">Bienvenido a XXXXXXXXX</p>
 							<p>En esta aplicación tu podrás Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.</p>
-							<div class="col-xs-3">
-								<p><span class="glyphicon glyphicon-home"></span></p>
-							</div>
-							<div class="col-xs-9">
-								<p>Desarrollada por: Clic-Soft</p>
-								<p>Hecha con amor desde Colombia y México. <3</p>
-							</div>
+							tempor incididunt ut labore et dolore magna aliqua.</p>							
 						</div>
 					</a>
 					<!--Perfil-->

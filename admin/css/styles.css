@@ -1,3 +1,6 @@
+.txt-left{text-align: left;}
+.txt-center{text-align: center;}
+.txt-right{text-align: right;}
 .navbar-header>.navbar-brand{
 	color: #fff;
 }
@@ -265,7 +268,7 @@
 #m a:hover{color:black;}
 .space{margin-bottom: 35px;}
 .more-menu{display: none;}
-
+.cont{width: 95%;margin:0 auto;}
 .nav-top-menu{background:#404040;padding:15px;color:white;display: flex;}
 .nav-top-menu a{margin:0;padding: 0;color: white;}
 .index a{
