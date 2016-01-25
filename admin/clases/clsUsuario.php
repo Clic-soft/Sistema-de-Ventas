@@ -2,13 +2,9 @@
 
 class Usuarios
 {
-	public $IdU;
-	public $nombres;
-	public $apellidos;
-	public $celular;
-	public $tipo;
-	public $email;
-	public $password;
+	public $id;
+	public $usuario;
+	public $pass;
 
 	private $List_usuarios;
 
@@ -30,7 +26,7 @@ class Usuarios
 	public function get_usuario_id($id)
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT Nombre,Apellidos,Celular,Tipo,Email FROM Usuario WHERE IdU='$id'");
+		$query=mysqli_query($conexion,"SELECT id,usuario,pass,estado FROM usuarios WHERE id='$id'");
 		$fila=mysqli_fetch_array($query);
 		return $fila;
 	}
