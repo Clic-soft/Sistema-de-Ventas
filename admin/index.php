@@ -1,9 +1,6 @@
 <?php session_start(); ?>
 <?php if(isset($_SESSION["Usuario"])):?>
-<?php require_once 'clases/clsCategoria.php'; 
-	$objCat=new Categoria();
-	$fila=$objCat->get_Categoria();
-?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -51,32 +48,10 @@
 						<div class="col-xs-6 col-md-2 iconos-i">
 							<p><span class="glyphicon glyphicon-user"></span></p>
 							<p class="title">Perfil</p>
-							<p class="hidden">Clic-Soft</p>
+							<p class="hidden">Deepcode</p>
 						</div>
 					</a>
-					<!--Categoria-->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "categoria.php":"#";?>">
-						<div class="col-xs-6 col-md-2 iconos-i">
-							<p><span class="glyphicon glyphicon-user"></span></p>
-							<p class="title">
-								Categoria
-							</p>
-							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numcateg();?></span></a></p>
-						</div>
-					</a>
-					<?php } ?>
-					 
-					<!--Presentación -->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "presentacion.php":"#";?>">
-						<div class="col-xs-6 col-md-2 iconos-i">
-							<p><span class="glyphicon glyphicon-knight"></span></p>
-							<p class="title">Presentación</p>
-							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numpres();?></span></p>
-						</div>
-					</a>
-					<?php } ?>
+
 					<!--Productos -->
 					<a href="productos.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
@@ -86,47 +61,32 @@
 						</div>
 					</a>
 					<!--Provedores -->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "proveedores.php":"#";?>">
+					<a href="proveedores.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
 							<p><span class="glyphicon glyphicon-scale"></span></p>
 							<p class="title">Provedores</p>
-							<i class="glyphicon glyphicon-bell"></i><?=$repor->numprov();?></span>
+							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numprov();?></span></p>
 						</div>
 					</a>
-					<?php } ?>
+
 					<!--Compras -->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "compras.php":"#";?>">
+					<a href="compras.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
 							<p><span class="glyphicon glyphicon-shopping-cart"></span></p>
-							<p class="title">Compras</p>
-								<i class="glyphicon glyphicon-bell"></i>
-								<?php 
-									if($repor->numcompras()<9)
-										echo $repor->numcompras();
-									else
-										echo '+ '.$repor->numcompras();
-								?>
+							<p class="title">Insumos</p>
+							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numcompras();?></span></p>
 						</div>
 					</a>
-					<?php } ?>
+
 					<!--Clientes -->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "clientes.php":"#";?>">
+					<a href="clientes.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
 							<p><span class="glyphicon glyphicon-folder-open"></span></p>
 							<p class="title">Clientes</p>
-							<i class="glyphicon glyphicon-bell"></i>
-								<?php 
-									if($repor->numclientes()<9)
-										echo $repor->numclientes();
-									else
-										echo '+ '.$repor->numclientes();
-								?>
+							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numclientes();?></span></p>
 						</div>
 					</a>
-					<?php } ?>
+
 					<!--Ventas -->
 					<a href="ventas.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
@@ -150,21 +110,13 @@
 						</div>
 					</a>
 					<!--Usuarios -->
-					<?php if(($_SESSION['Tipo']=='Administrador')) { ?>
-					<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "usuarios.php":"#";?>">
+					<a href="usuarios.php">
 						<div class="col-xs-6 col-md-2 iconos-i">
 							<p><span class="glyphicon glyphicon-user"></span></p>
 							<p class="title">Usuarios</p>
-							<i class="glyphicon glyphicon-bell"></i>
-								<?php 
-									if($repor->numusuario()<9)
-										echo $repor->numusuario();
-									else
-										echo '+ '.$repor->numusuario();
-								?>
+							<p><i class="glyphicon glyphicon-bell"></i><?=$repor->numusuario();?></span></p>
 						</div>
 					</a>
-					<?php } ?>
 				</div>
 			</div>
 		</div>

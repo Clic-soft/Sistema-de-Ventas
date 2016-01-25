@@ -23,7 +23,7 @@
 							<div  class= "col-sm-12" >
 								<div class="input-group" align="center">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									<input type="text" class="form-control" placeholder="E-mail o Celular" id="email" name="usuario">
+									<input type="text" class="form-control" placeholder="USUARIO" id="email" name="usuario">
 								</div>
 							</div> 
 						</div> 
@@ -31,7 +31,7 @@
 							<div  class= "col-sm-12" > 
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									<input type="password" class="form-control" placeholder="Contraseña" id="contrasena" name="contrasena">
+									<input type="password" class="form-control" placeholder="CONTRASEÑA" id="contrasena" name="contrasena">
 								</div>
 							</div> 
 						</div> 

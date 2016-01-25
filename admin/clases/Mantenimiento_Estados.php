@@ -7,37 +7,17 @@
 
 		switch ($_POST['Accion']):
 			case 'EU':
-				$consulta=mysqli_query($conexion,"SELECT Estado FROM Usuario WHERE IdU='$Id'");
+				$consulta=mysqli_query($conexion,"SELECT estado FROM usuarios WHERE id='$Id'");
 				$resultado=mysqli_fetch_array($consulta);
-				if($resultado[0]=='Activo'):
-					$query=mysqli_query($conexion,"UPDATE Usuario Set Estado='Inactivo' Where IdU='$Id'");
+				if($resultado[0]==1):
+					$query=mysqli_query($conexion,"UPDATE usuarios Set Estado=2 Where id='$Id'");
 					if($query==true):
 						$mensajeOk=true;
 					else:
 						$mensajeOk=false;
 					endif;
 				else:
-					$query=mysqli_query($conexion,"UPDATE Usuario Set Estado='Activo' Where IdU='$Id'");
-					if($query==true):
-						$mensajeOk=true;
-					else:
-						$mensajeOk=false;
-					endif;
-				endif;
-				break;
-
-			case 'EC':
-				$consulta=mysqli_query($conexion,"SELECT Estado FROM Categoria WHERE IdC='$Id'");
-				$resultado=mysqli_fetch_array($consulta);
-				if($resultado[0]=='Activo'):
-					$query=mysqli_query($conexion,"Update Categoria Set Estado='Inactivo' Where IdC='$Id'");
-					if($query==true):
-						$mensajeOk=true;
-					else:
-						$mensajeOk=false;
-					endif;
-				else:
-					$query=mysqli_query($conexion,"Update Categoria Set Estado='Activo' Where IdC='$Id'");
+					$query=mysqli_query($conexion,"UPDATE usuarios Set Estado=1 Where id='$Id'");
 					if($query==true):
 						$mensajeOk=true;
 					else:
@@ -47,17 +27,17 @@
 				break;
 
 				case 'EProv':
-				$consulta=mysqli_query($conexion,"SELECT Estado FROM Proveedor WHERE Ruc='$Id'");
+				$consulta=mysqli_query($conexion,"SELECT estado FROM proveedores WHERE id='$Id'");
 				$resultado=mysqli_fetch_array($consulta);
-				if($resultado[0]=='Activo'):
-					$query=mysqli_query($conexion,"Update Proveedor Set Estado='Inactivo' Where Ruc='$Id'");
+				if($resultado[0]==1):
+					$query=mysqli_query($conexion,"Update proveedores Set estado=2 Where id='$Id'");
 					if($query==true):
 						$mensajeOk=true;
 					else:
 						$mensajeOk=false;
 					endif;
 				else:
-					$query=mysqli_query($conexion,"Update Proveedor Set Estado='Activo' Where Ruc='$Id'");
+					$query=mysqli_query($conexion,"Update proveedores Set estado=1 Where id='$Id'");
 					if($query==true):
 						$mensajeOk=true;
 					else:

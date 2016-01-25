@@ -23,7 +23,7 @@
 					<div class="space"></div>
 					<div class="navbar navbar-default">
 						<div class="navbar-inner contenido-button">
-							<button type="button" <?= ($_SESSION['Tipo']=='Administrador') ? "onclick='FormUsuarios();'":"";?> 
+							<button type="button" onclick='FormUsuarios();' 
 							class="btn btn-small btn-default" data-toggle='modal' 
 							data-target='#Modal_Mante_Usuarios'>
 								<i class="glyphicon glyphicon-plus"></i> Nuevo Usuario
@@ -32,7 +32,7 @@
 							<div class='modal fade' id='Modal_Mante_Usuarios' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 							</div>
 
-							<a href="<?= ($_SESSION['Tipo']=='Administrador') ? "usuarios":"#";?>" 
+							<a href="usuarios.php" 
 								class="link-actualizar pull-right"><i class='glyphicon glyphicon-refresh'></i> Actualizar
 							</a>
 						</div>
@@ -73,11 +73,8 @@
 						<thead class="alert alert-info text-head">
 							<tr>
 								<th class="text-center">N°</th>
-								<th>Apellidos y Nombres</th>
-								<th>Tipo</th>
-								<th>Celular</th>
-								<th>E-mail</th>
-								<th class="text-center">Estado</th>
+								<th>USUARIO</th>
+								<th class="text-center">ESTADO</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,13 +82,11 @@
 							<?php foreach ($fila as $item):?>
 							<tr>
 								<td class="text-center"><?=$item[0]?></td>
-								<td><?= $item[2]?>, <?=$item[1]?></td>
-								<td><?=$item[4]?></td>
-								<td><?=$item[3]?></td>
-								<td><?=$item[5]?></td>
+								<td><?=$item[1]?></td>
 								<td class="text-center">
-									<span class="<?= ($item[6]=='Activo') ? "label label-success":"label label-danger";?>" 
-										style="cursor:pointer;font-size:13px; font-weight:normal" onclick="EUsuario('<?= $item[0]?>','EU');"><?= $item['Estado']?>
+									<span  class="<?= ($item[2]==1) ? "label label-success":"label label-danger";?>" 
+										style="cursor:pointer;font-size:13px; font-weight:normal" onclick="EUsuario('<?= $item[0]?>','EU');">
+										<?php if ($item[2] == 1) { echo "Activo"; }else{ echo "Inactivo"; } ?>
 									</span>
 								</td>
 							</tr>

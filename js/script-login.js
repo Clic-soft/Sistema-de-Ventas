@@ -9,7 +9,7 @@ $(function(){
 					type:"POST",
 					dataType:"json",
 					url:"admin/inc/loginuser.php",
-					data:{usuario:usuario,contrasena:contrasena,recordar:recordar},
+					data:{usuario:usuario,contrasena:pass,recordar:recordar},
 					success:function(response){
 						if(response.respuesta==false){
 							$("#mensaje").html("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert'>&times;</button><i class='glyphicon glyphicon-remove'></i>&nbsp;"+response.mensaje+"</div>");	

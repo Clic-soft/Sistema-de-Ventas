@@ -143,7 +143,7 @@ class Reporte
 	function numprov()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Proveedor");
+		$query=mysqli_query($conexion,"SELECT * FROM proveedores");
 		if(empty($query))
 			$num=0;
 		else
@@ -153,29 +153,7 @@ class Reporte
 	function numprod()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Producto");
-		if(empty($query))
-			$num=0;
-		else
-			$num=mysqli_num_rows($query);
-		return $num;
-	}
-
-	function numpres()
-	{
-		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Presentacion");
-		if(empty($query))
-			$num=0;
-		else
-			$num=mysqli_num_rows($query);
-		return $num;
-	}
-
-	function numcateg()
-	{
-		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Categoria");
+		$query=mysqli_query($conexion,"SELECT * FROM productos");
 		if(empty($query))
 			$num=0;
 		else
@@ -186,7 +164,7 @@ class Reporte
 	function numusuario()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Usuario");
+		$query=mysqli_query($conexion,"SELECT * FROM usuarios");
 		if(empty($query))
 			$num=0;
 		else
@@ -196,7 +174,7 @@ class Reporte
 	function numcompras()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Compras");
+		$query=mysqli_query($conexion,"SELECT * FROM insumos");
 		if(empty($query))
 			$num=0;
 		else
@@ -206,7 +184,7 @@ class Reporte
 	function numclientes()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Cliente");
+		$query=mysqli_query($conexion,"SELECT * FROM clientes");
 		if(empty($query))
 			$num=0;
 		else
@@ -217,7 +195,7 @@ class Reporte
 	function numventas()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT * FROM Ventas WHERE DAY(Fecha)=DAY(NOW())");
+		$query=mysqli_query($conexion,"SELECT * FROM encabezado_venta");
 		if(empty($query))
 			$num=0;
 		else

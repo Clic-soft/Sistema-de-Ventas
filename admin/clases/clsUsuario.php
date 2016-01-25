@@ -20,7 +20,7 @@ class Usuarios
 	public function get_usuarios()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"SELECT IdU,Nombre,Apellidos,Celular,Tipo,Email,Estado FROM Usuario");
+		$query=mysqli_query($conexion,"SELECT id,usuario,estado FROM usuarios");
 		while($fila=mysqli_fetch_array($query)):
 			$this->List_usuarios[]=$fila;
 		endwhile;
