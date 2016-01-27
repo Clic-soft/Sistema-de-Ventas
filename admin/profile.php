@@ -2,7 +2,7 @@
 <?php if(isset($_SESSION["Usuario"])):?>
 <?php require_once 'clases/clsUsuario.php'; 
 	$objUsu=new Usuarios();
-	$fila=$objUsu->get_usuario_id($_SESSION["IdU"]);
+	$fila=$objUsu->get_usuario_id($_SESSION["id"]);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,11 +20,8 @@
 					<div class="mensaje">
 						<?php 
 						if(isset($_POST['btnGuardar'])):
-							$objUsu->IdU=$_POST['codigo'];
-							$objUsu->nombres=$_POST['nombres'];
-							$objUsu->apellidos=$_POST['apellidos'];
-							$objUsu->celular=$_POST['celular'];
-							$objUsu->email=$_POST['email'];
+							$objUsu->id=$_SESSION["id"];
+							$objUsu->usuario=$_POST['usuario'];
 							$Mensaje=$objUsu->Update_Usuarios();
 							if($Mensaje=="Datos actualizados correctamente."):?>
 								<div class='alert alert-success' role='alert'>
@@ -48,60 +45,31 @@
 							<h3>Perfil del usuario: <?=$_SESSION["Usuario"]?></h3>
 						</div>
 						<div class="col-xs-12 col-md-4">
-							<a href="profile" class="link-actualizar pull-right">
+							<a href="profile.php" class="link-actualizar pull-right">
 								<i class="glyphicon glyphicon-refresh"></i> Actualizar
 							</a>
 						</div>
 						<div class="clearfix"></div>
 						<form class="form-horizontal" action="" method="POST" name="frmprofile">
 							<div class="acceso"><br>
-								<div class="form-group">
-									<input type="hidden" name="codigo" class="form-control" required value="<?=$_SESSION['IdU']?>">
-	                            	<label for="disabledTextInput" class="control-label col-xs-3">Nombres</label>
+
+	                            <div class="form-group">
+	                            	<label for="" class="control-label col-xs-3">Usuario</label>
 	                            	<div class="col-xs-8">
-	                            		<input type="text" name="nombres" class="form-control" required value="<?=utf8_encode($fila[0])?>">
+	                            		<input type="text" name="usuario" class="form-control" required
+	                            			placeholder="Usuario" value="<?=$fila[1]?>">
 	                            	</div>
 	                            </div>
 	                            <div class="form-group">
-	                            	<label for="" class="control-label col-xs-3">Apellidos</label>
-	                            	<div class="col-xs-8">
-	                            		<input type="text" name="apellidos" class="form-control" required
-	                            			placeholder="Apellidos" value="<?=$fila[1]?>">
-	                            	</div>
-	                            </div>
-	                            <div class="form-group">
-	                            	<label for="" class="control-label col-xs-3">Tipo de Usuario</label>
+	                            	<label for="" class="control-label col-xs-3">Estado</label>
 	                            	<div class="col-xs-8">
 	                            		<select class="form-control" required disabled name="tipo">
 	                                        <option value="">Selecione</option>
-	                                        <option value="Administrador" <?php if($fila[3]=="Administrador") echo "Selected";?>>Administrador</option>
-	                                        <option value="Trabajador" <?php if($fila[3]=="Trabajador") echo "Selected";?>>Trabajador</option>
+	                                        <option value="1" <?php if($fila[3]=="1") echo "Selected";?>>Activo</option>
+	                                        <option value="2" <?php if($fila[3]=="2") echo "Selected";?>>Inactivo</option>
 	                                    </select>
 	                            	</div>
 	                            </div>
-	                            <div class="form-group">
-	                            	<label for="" class="control-label col-xs-3">Celular</label>
-	                            	<div class="col-xs-8">
-	                            		<input type="text" name="celular" class="form-control" required value="<?=$fila[2]?>">
-	                            	</div>
-	                            </div>
-	                            <div class="form-group">
-	                            	<label for="" class="control-label col-xs-3">E-mail</label>
-	                            	<div class="col-xs-8">
-	                            		<input type="email" name="email" class="form-control" required
-	                            			placeholder="E-mail" value="<?=$fila[4]?>">
-	                            	</div>
-	                            </div>
-	                            <div class="form-group">
-	                                <label for="" class="control-label col-xs-3">Estado</label>
-	                                <div class="col-lg-8">
-	                                    <div class="checkbox">
-	                                        <label>
-	                                            <input type="checkbox" disabled checked> Activo
-	                                        </label>
-	                                    </div>
-									</div>
-								</div>
 							</div>
 
 							<center>

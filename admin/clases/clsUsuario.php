@@ -43,8 +43,7 @@ class Usuarios
 	public function Update_Usuarios()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"CALL Act_Usuario('$this->IdU','$this->nombres','$this->apellidos','$this->celular',
-			'$this->email',@Mensaje)");
+		$query=mysqli_query($conexion,"CALL Act_Usuario('$this->id','".$this->usuario."',@Mensaje)");
 		$query2=mysqli_query($conexion,"SELECT @Mensaje");
 		$mensaje=mysqli_fetch_array($query2);
 		return $mensaje[0];

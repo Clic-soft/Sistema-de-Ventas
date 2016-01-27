@@ -22,7 +22,7 @@
 							if($fila[3]!="Inactivo"):
 								$mensajeOk=true;
 								session_start();
-								$_SESSION['IdU']=$fila[0];
+								$_SESSION['id']=$fila[0];
 								$_SESSION['Usuario']=$fila[1];
 								$_SESSION['estado']=$fila[3];
 								$mensajeError="Logueado correctamente.";
