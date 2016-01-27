@@ -1,9 +1,9 @@
 <?php require_once '../clases/clsProducto.php'; ?>
 <?php 
-    if(isset($_POST['IdProducto'])):
-        if(!empty($_POST['IdProducto'])):
+    if(isset($_POST['id'])):
+        if(!empty($_POST['id'])):
             $objProd=new Producto();
-            $fila=$objProd->get_productos_id($_POST['IdProducto']);
+            $fila=$objProd->get_productos_id($_POST['id']);
         endif;
     endif;
 ?>
@@ -17,7 +17,7 @@
                 <div class='modal-body'>
                     <div class="row">
                         <div class="col-xs-12 col-md-6 col-md-offset-3">
-                            <img src="uploads/<?=$fila[7]?>" alt="<?=$fila[3]?>">
+                            <img src="uploads/<?=$fila[5]?>" alt="<?=$fila[5]?>">
                         </div>
                     </div>
                 </div>

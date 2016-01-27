@@ -18,20 +18,18 @@ $(document).ready(function() {
 
     //Para ventas
 
-    $("#categoria").change(function () {
-		$("#categoria option:selected").each(function () {
-        	IdC=$(this).val();
+		$("#unidad_medida option:selected").each(function () {
+
         	$("#Productos").empty();
         	$.getJSON("clases/funciones.php",
-        	{Accion:'GetProductos',IdC:IdC},
+        	{Accion:'GetUnidadesMedida'},
         	function(data){
-        		$("#Productos").append(new Option('Seleccione'));
+        		$("#unidad_medida").append(new Option('Seleccione'));
           		for (i = 0; i < data.length; i++) {
-            		$("#Productos").append(new Option(data[i].Descripcion,data[i].IdP));
+            		$("#unidad_medida").append(new Option(data[i].producto,data[i].id));
           		};
         	});
       	});
-    });
 
     $("#Productos").change(function(){
     	$("#Productos option:selected").each(function () {
@@ -120,11 +118,11 @@ function FormPresentacion(IdPresen){
 
 /************************************** Mantenimiento de Productos *****************************************/
 
-function FormProducto(IdProducto){
+function FormProducto(id){
 	$.ajax({
 		type:"POST",
 		url:"frmweb/frmproducto.php",
-		data:{IdProducto:IdProducto},
+		data:{id:id},
 		success:function(respuesta){
 			$("#Modal_Mante_Producto").html(respuesta);
 		},error:function(){
@@ -133,11 +131,11 @@ function FormProducto(IdProducto){
 	});
 }
 
-function FormVerFoto(IdProducto){
+function FormVerFoto(id){
 	$.ajax({
 		type:"POST",
 		url:"frmweb/frmverfoto.php",
-		data:{IdProducto:IdProducto},
+		data:{id:id},
 		success:function(respuesta){
 			$("#Modal_Mante_VerFoto").html(respuesta);
 		},error:function(){

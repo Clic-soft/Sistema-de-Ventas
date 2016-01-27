@@ -1,14 +1,15 @@
-<?php require_once '../clases/clsCategoria.php'; ?>
+
 <?php require_once '../clases/clsProducto.php'; ?>
 <?php 
-    $objCat=new Categoria();
-    $fila=$objCat->get_Categoria();
-    $objPre=new Presentacion();
-    $Prsent=$objPre->get_Presentacion();
-    if(isset($_POST['IdProducto'])):
-        if(!empty($_POST['IdProducto'])):
+
+    $objPro2=new Producto();
+    $item2=$objPro2->get_und_medida();
+
+    if(isset($_POST['id'])):
+        if(!empty($_POST['id'])):
             $objPro=new Producto();
-            $item=$objPro->get_productos_id($_POST['IdProducto']);
+            $item=$objPro->get_productos_id($_POST['id']);
+            
         endif;
     endif;
 ?>
@@ -22,53 +23,33 @@
                 <div class='modal-body'>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <input type='hidden' class='form-control' name="IdProd" value="<?=$_POST['IdProducto']?>">
-                            <input type='hidden' class='form-control' name="ruta" value="<?= $item[7];?>">
-                            <label for="">Categoría</label>
-                            <select name="categoria" required class="form-control"> 
-                                <option value="">Seleccione</option>
-                                <?php foreach ($fila as $key): ?>
-                                <option value="<?=$key[0]?>" <?php if(isset($item)){if($item[1]==$key[0]) echo 'Selected';} ?>><?=$key[1]?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <label for="" class="hidden-xs">Producto</label>
+                            <input type='hidden' class='form-control' name="id" value="<?=$_POST['id']?>">
+                            <input type='hidden' class='form-control' name="ruta" value="<?= $item[5];?>">
+                            <label for="" class="hidden-xs">PRODUCTO</label>
                             <input type="text" name="producto" required placeholder="Producto" 
                                 class="form-control" 
+                                <?php if(isset($item)){?>
+                                value="<?=$item[2]?>"
+                            <?php }else{?>
+                                value=""
+                            <?php } ?>>
+                            <label for="" class="hidden-xs">Unidad Medida</label>
+                            <select name="unidad_medida" id="unidad_medida" required class="form-control"> 
+                                <option value="">Seleccione</option>
+                                <?php foreach ($item2 as $key): ?>
+                                <option value="<?=$key[0]?>" <?php if(isset($item)){if($item[4]==$key[0]) echo 'Selected'; }?>><?=$key[1]?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <label for="">P. Venta</label>
+                            <input type='text' class='form-control' name="precio" 
                                 <?php if(isset($item)){?>
                                 value="<?=$item[3]?>"
                             <?php }else{?>
                                 value=""
-                            <?php } ?>>
-                            <label for="" class="hidden-xs">Presentación</label>
-                            <select name="presentacion" required class="form-control"> 
-                                <option value="">Seleccione</option>
-                                <?php foreach ($Prsent as $key): ?>
-                                <option value="<?=$key[0]?>" <?php if(isset($item)){if($item[2]==$key[0]) echo 'Selected'; }?>><?=$key[1]?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <label for="">Unid. Medida</label>
-                            <input type='text' class='form-control' name="UnidMedida" 
-                            <?php if(isset($item)){?>
-                                value="<?=$item[4]?>"
-                            <?php }else{?>
-                                value=""
                             <?php } ?>
-                            placeholder="Unidad de Medida">
-                            <label for="">P. Venta</label>
-                            <input type='text' class='form-control' name="PVenta" 
-                                <?php if(isset($item)){?>
-                                value="<?=$item[5]?>"
-                            <?php }else{?>
-                                value=""
-                            <?php } ?>
-                            placeholder="12.20">
-                            <label for="">Stock</label>
-                            <input type='text' class='form-control' readonly name="stock" 
-                            <?php if(isset($item)){?>
-                                value="<?=$item[6]?>"
-                            <?php }else{?>
-                                value=""
-                            <?php } ?>placeholder="60">
+                            placeholder="1200">
+
                         </div>
                         <div class="col-xs-12 col-md-6"><!--
                             <div class="form-group">
@@ -84,19 +65,19 @@
                             <p>
                                 <span class="btn btn-success fileinput-button">
                                     <i class="glyphicon glyphicon-plus"></i> Agregar Imagen
-                                    <input type="file" name="Imagen" id="Imagen" <?= (empty($_POST['IdProducto'])) ? "required":"";?>>
+                                    <input type="file" name="Imagen" id="Imagen" <?= (empty($_POST['id'])) ? "required":"";?>>
                                 </span>
                             </p>
                             <p>
                                 <img id="vistaPrevia" class="img-responsive"
-                                    <?= (empty($_POST['IdProducto'])) ? "":"src='uploads/$item[7]'";?>/>
+                                    <?= (empty($_POST['id'])) ? "":"src='uploads/$item[5]'";?>/>
                             </p>
                         </div>
-                    </div>
+                    </div>  
                     
                 </div>
                 <div class='modal-footer'>
-                    <button type="submit" class="btn btn-success" name="<?= (empty($_POST['IdProducto'])) ? "btnReg":"btnAct";?>">
+                    <button type="submit" class="btn btn-success" name="<?= (empty($_POST['id'])) ? "btnReg":"btnAct";?>">
                         <i class="glyphicon glyphicon-save"></i> Guardar
                     </button>
                     <button type='button' class="btn btn-danger" data-dismiss='modal'>No</button> 

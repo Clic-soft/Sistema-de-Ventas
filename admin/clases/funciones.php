@@ -16,6 +16,16 @@
 		echo json_encode($ListadoProductos);
 	}
 
+	function GetUnidadesMedida(){
+		include('conexion.php');
+		$Listadounidades_medidas=array();
+		$consulta=mysqli_query($conexion,"SELECT * FROM unidades_medidas");
+		while($fila=mysqli_fetch_array($consulta)):
+			$Listadounidades_medidas[]=$fila;
+		endwhile;
+		echo json_encode($Listadounidades_medidas);
+	}
+
 	function GetPrecioStock()
 	{
 		include('conexion.php');
