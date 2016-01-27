@@ -31,7 +31,7 @@
 							<div  class= "col-sm-12" > 
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									<input type="password" class="form-control" placeholder="CONTRASEÑA" id="contrasena" name="contrasena">
+									<input type="password" class="form-control" placeholder="CONTRASEÑA" id="pass" name="pass">
 								</div>
 							</div> 
 						</div> 

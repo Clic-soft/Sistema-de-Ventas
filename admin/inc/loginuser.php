@@ -4,10 +4,10 @@
 	$mensajeError="No se pudo ejecutar la aplicación";
 	
 	$usuario=trim($_POST['usuario']);
-	$contrasena=trim($_POST['contrasena']);
-	if(!empty($usuario) && !empty($contrasena)):
+	$pass=trim($_POST['pass']);
+	if(!empty($usuario) && !empty($pass)):
 		if(!empty($usuario)):
-			if(!empty($contrasena)):
+			if(!empty($pass)):
 				if(isset($usuario)){
 					$email=mysqli_query($conexion,"Select * From usuarios Where usuario='$usuario'");
 					$mensaje='ok';
@@ -16,7 +16,7 @@
 						
 				if($mensaje=='ok'):
 					if(mysqli_num_rows($email)>0):
-						$query=mysqli_query($conexion,"Select * From usuarios Where usuario='$usuario' And pass='".md5('$contrasena')."'");
+						$query=mysqli_query($conexion,"Select * From usuarios Where usuario='$usuario' And pass='".md5($pass)."'");
 						$fila=mysqli_fetch_array($query);
 						if(mysqli_num_rows($query)>0):
 							if($fila[3]!="Inactivo"):

@@ -34,8 +34,7 @@ class Usuarios
 	public function Add_Usuarios()
 	{
 		require 'conexion.php';
-		$query=mysqli_query($conexion,"CALL Reg_Usuario('$this->nombres','$this->apellidos','$this->celular',
-			'$this->tipo','$this->email','$this->password',@Mensaje)");
+		$query=mysqli_query($conexion,"CALL Reg_Usuario('".$this->usuario."','".md5($this->pass)."',@Mensaje)");
 		$query2=mysqli_query($conexion,"SELECT @Mensaje");
 		$mensaje=mysqli_fetch_array($query2);
 		return $mensaje[0];

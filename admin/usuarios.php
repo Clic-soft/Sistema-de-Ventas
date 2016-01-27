@@ -43,11 +43,7 @@
 					<div class="mensaje">
 						<?php 
 							if(isset($_POST['btnReg'])):
-								$objUsu->nombres=$_POST['nombres'];
-								$objUsu->apellidos=$_POST['apellidos'];
-								$objUsu->celular=$_POST['celular'];
-								$objUsu->tipo=$_POST['tipo'];
-								$objUsu->email=$_POST['email'];
+								$objUsu->usuario=$_POST['usuario'];
 								$objUsu->password=$_POST['password'];
 								$Mensaje=$objUsu->Add_Usuarios();
 								if($Mensaje=="Datos registrados correctamente."):?>
