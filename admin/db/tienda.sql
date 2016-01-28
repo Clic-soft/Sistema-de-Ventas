@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-01-2016 a las 21:41:46
+-- Tiempo de generación: 28-01-2016 a las 04:09:12
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -19,6 +19,77 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `tienda`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Act_Producto` (IN `rid` INT, IN `rproducto` VARCHAR(50), IN `runidad` INT, IN `rprecio` INT, IN `RRutaImagen` TEXT, OUT `Mensaje` VARCHAR(100))  BEGIN
+DECLARE sFoto VARCHAR(100);
+SET sFoto=(SELECT RutaImagen FROM productos WHERE id=rid);
+	IF(RRutaImagen="")THEN
+		SET RRutaImagen=sFoto;
+	ELSE
+		SET RRutaImagen=RRutaImagen;
+	END IF;
+	
+	IF(NOT EXISTS(SELECT*FROM productos WHERE id=rid))THEN
+		SET Mensaje='Este producto no existe.';
+	ELSE 
+		BEGIN 
+			IF(rprecio<1)THEN
+				SET Mensaje='Precio de venta no válido.';
+			ELSE 
+				BEGIN
+					UPDATE Producto SET    producto=rproducto, precio=rprecio, id_und_medida=r_unidad, RutaImagen=RRutaImagen WHERE id=rid;
+					SET Mensaje='El registro se ha actualizado correctamente.';
+				END;
+			END IF;
+		END;
+	END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Act_Usuario` (IN `rid` INT, IN `rusuario` VARCHAR(50), OUT `Mensaje` VARCHAR(100))  BEGIN
+	IF(EXISTS(SELECT * FROM usuarios WHERE usuario=rusuario AND id<>rid))THEN
+	SET Mensaje='Usuario no disponible, intente con otro.';
+	ELSE
+		BEGIN
+			UPDATE usuarios SET  usuario=rusuario WHERE id=rid;
+			SET Mensaje='Datos actualizados correctamente.';
+		END;
+	END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Reg_Producto` (IN `rproducto` VARCHAR(50), IN `runidad` INT, IN `rprecio` INT, IN `RRutaImagen` TEXT, OUT `Mensaje` VARCHAR(100))  BEGIN
+	IF(EXISTS(SELECT*FROM productos WHERE producto=rproducto))THEN
+		SET Mensaje='Este producto ya existe.';
+	ELSE 
+		BEGIN 
+			IF(rprecio<1)THEN
+				SET Mensaje='Precio de venta no válido.';
+			ELSE 
+				BEGIN
+					INSERT INTO productos (producto, precio, id_und_medida, RutaImagen) VALUES (rproducto, rprecio, runidad, RRutaImagen);
+					SET Mensaje='Registrado correctamente.';
+				END;
+			END IF;
+		END;
+	END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Reg_Usuario` (IN `rusuario` VARCHAR(40), IN `rpass` VARCHAR(40), OUT `Mensaje` VARCHAR(100))  BEGIN
+	IF(EXISTS(SELECT * FROM usuarios WHERE usuario=rusuario))THEN
+	SET Mensaje='Usuario no disponible, intente con otro.';
+	ELSE
+    	BEGIN
+        	INSERT INTO usuarios(usuario,pass)
+            VALUES(rusuario,rpass);
+            SET Mensaje='Datos registrados correctamente.';
+		END;
+	END IF;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -169,8 +240,17 @@ CREATE TABLE `productos` (
   `referencia` varchar(10) NOT NULL,
   `producto` varchar(30) NOT NULL,
   `precio` int(10) NOT NULL,
-  `id_und_medida` int(11) NOT NULL
+  `id_und_medida` int(11) NOT NULL,
+  `RutaImagen` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `referencia`, `producto`, `precio`, `id_und_medida`, `RutaImagen`) VALUES
+(1, '1', 'arena', 100, 1, NULL),
+(2, '', 'arena roja', 1200, 1, '88216e09b9ae4b15953888fdbafa6a74.jpg');
 
 -- --------------------------------------------------------
 
@@ -204,6 +284,13 @@ CREATE TABLE `tipo_clientes` (
   `tipo_cliente` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipo_clientes`
+--
+
+INSERT INTO `tipo_clientes` (`id`, `tipo_cliente`) VALUES
+(1, 'Natural');
+
 -- --------------------------------------------------------
 
 --
@@ -212,8 +299,17 @@ CREATE TABLE `tipo_clientes` (
 
 CREATE TABLE `unidades_medida` (
   `id` int(11) NOT NULL,
-  `unidad_medida` int(11) NOT NULL
+  `unidad_medida` varchar(30) NOT NULL,
+  `Simbolo` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `unidades_medida`
+--
+
+INSERT INTO `unidades_medida` (`id`, `unidad_medida`, `Simbolo`) VALUES
+(1, 'Metro', 'm'),
+(2, 'Centimetro', 'cm');
 
 -- --------------------------------------------------------
 
@@ -233,7 +329,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `estado`) VALUES
-(1, 'adminarenera', '827ccb0eea8a706c4c34a16891f84e7b', 1);
+(1, 'adminarenera', '827ccb0eea8a706c4c34a16891f84e7b', 1),
+(2, 'pruebas', 'ee2ec3cc66427bb422894495068222a8', 1);
 
 -- --------------------------------------------------------
 
@@ -394,7 +491,7 @@ ALTER TABLE `prefijos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
@@ -404,17 +501,17 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `tipo_clientes`
 --
 ALTER TABLE `tipo_clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `unidades_medida`
 --
 ALTER TABLE `unidades_medida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
