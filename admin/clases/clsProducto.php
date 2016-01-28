@@ -62,7 +62,7 @@ class Producto
 	{
 		require('conexion.php');
 		$query=mysqli_query($conexion,"CALL Act_Producto('$this->id','$this->producto','$this->unidad_medida',
-			'$this->precio','$this->RutaImagen',, @Mensaje)");
+			'$this->precio','$this->RutaImagen', @Mensaje)");
 		$query2=mysqli_query($conexion,"SELECT @Mensaje");
 		$mensaje=mysqli_fetch_array($query2);
 		return $mensaje[0];

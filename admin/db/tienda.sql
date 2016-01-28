@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-01-2016 a las 04:09:12
+-- Tiempo de generación: 28-01-2016 a las 21:45:10
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -41,7 +41,7 @@ SET sFoto=(SELECT RutaImagen FROM productos WHERE id=rid);
 				SET Mensaje='Precio de venta no válido.';
 			ELSE 
 				BEGIN
-					UPDATE Producto SET    producto=rproducto, precio=rprecio, id_und_medida=r_unidad, RutaImagen=RRutaImagen WHERE id=rid;
+					UPDATE productos SET    producto=rproducto, precio=rprecio, id_und_medida=runidad, RutaImagen=RRutaImagen WHERE id=rid;
 					SET Mensaje='El registro se ha actualizado correctamente.';
 				END;
 			END IF;
@@ -214,6 +214,13 @@ CREATE TABLE `iva` (
   `valor` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `iva`
+--
+
+INSERT INTO `iva` (`id`, `concepto`, `valor`) VALUES
+(1, 'IVA', 16);
+
 -- --------------------------------------------------------
 
 --
@@ -228,6 +235,14 @@ CREATE TABLE `prefijos` (
   `actual` varchar(3) NOT NULL,
   `final` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `prefijos`
+--
+
+INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
+(1, 'Factura', 'FAC', '001', '001', '999'),
+(2, 'Remision', 'REM', '001', '001', '999');
 
 -- --------------------------------------------------------
 
@@ -249,7 +264,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `referencia`, `producto`, `precio`, `id_und_medida`, `RutaImagen`) VALUES
-(1, '1', 'arena', 100, 1, NULL),
+(1, '1', 'arena rocosa', 1000, 2, 'ee6d365a1a85791278c4445ca6879506.jpg'),
 (2, '', 'arena roja', 1200, 1, '88216e09b9ae4b15953888fdbafa6a74.jpg');
 
 -- --------------------------------------------------------
@@ -481,12 +496,12 @@ ALTER TABLE `insumos`
 -- AUTO_INCREMENT de la tabla `iva`
 --
 ALTER TABLE `iva`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `prefijos`
 --
 ALTER TABLE `prefijos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --

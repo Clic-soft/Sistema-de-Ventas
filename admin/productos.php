@@ -153,11 +153,11 @@
 											data-placement="top">
 											<i class="glyphicon glyphicon-picture"></i>
 										</span>
-										<span title="Eliminar" class="btn btn-xs btn-danger" 
+										<!--<span title="Eliminar" class="btn btn-xs btn-danger" 
 											onclick="FormVerFoto('<?=$item[0]?>');" id="tool<?=$item[0]?>" data-toggle="tooltip"
 											data-placement="top">
 											<i class="glyphicon glyphicon-trash"></i>
-										</span>
+										</span>-->
 
 									</center>
 								</td>

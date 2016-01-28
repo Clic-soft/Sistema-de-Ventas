@@ -16,8 +16,8 @@
                 </div>
                 <div class='modal-body'>
                     <div class="row">
-                        <div class="col-xs-12 col-md-6 col-md-offset-3">
-                            <img src="uploads/<?=$fila[5]?>" alt="<?=$fila[5]?>">
+                        <div class="col-xs-12">
+                            <img class="img-responsive" src="uploads/<?=$fila[5]?>" alt="<?=$fila[5]?>">
                         </div>
                     </div>
                 </div>
