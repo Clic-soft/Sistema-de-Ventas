@@ -26,12 +26,12 @@
 		echo json_encode($Listadounidades_medidas);
 	}
 
-	function GetPrecioStock()
+	function GetPrecio()
 	{
 		include('conexion.php');
 		$IdP=$_REQUEST['IdP'];
 		$List_Productos=array();
-		$consulta=mysqli_query($conexion,"SELECT P_Venta AS 'PVenta',Stock FROM Producto WHERE IdP='$IdP'");
+		$consulta=mysqli_query($conexion,"SELECT precio FROM productos WHERE id='$id'");
 		while($fila=mysqli_fetch_array($consulta)):
 			$List_Productos[]=$fila;
 		endwhile;

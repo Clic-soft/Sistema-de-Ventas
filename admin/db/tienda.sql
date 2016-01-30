@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-01-2016 a las 21:45:10
+-- Tiempo de generación: 30-01-2016 a las 01:35:31
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -24,6 +24,10 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `act_consecutivo` (IN `ract` INT, IN `rpref` VARCHAR(4))  BEGIN
+    UPDATE prefijos SET  actual=ract WHERE prefijo=rpref;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Act_Producto` (IN `rid` INT, IN `rproducto` VARCHAR(50), IN `runidad` INT, IN `rprecio` INT, IN `RRutaImagen` TEXT, OUT `Mensaje` VARCHAR(100))  BEGIN
 DECLARE sFoto VARCHAR(100);
 SET sFoto=(SELECT RutaImagen FROM productos WHERE id=rid);
@@ -60,6 +64,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Act_Usuario` (IN `rid` INT, IN `rus
 	END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Act_Ventasencabezado` (IN `rid` INT, IN `rcliente` INT, IN `rfecha` DATETIME, OUT `Mensaje` VARCHAR(100))  BEGIN
+  	UPDATE encabezado_venta SET id_cliente=rcliente, fecha_venta=rfecha WHERE id = rid;
+    SET Mensaje='Datos actualizados correctamente.';
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Reg_Producto` (IN `rproducto` VARCHAR(50), IN `runidad` INT, IN `rprecio` INT, IN `RRutaImagen` TEXT, OUT `Mensaje` VARCHAR(100))  BEGIN
 	IF(EXISTS(SELECT*FROM productos WHERE producto=rproducto))THEN
 		SET Mensaje='Este producto ya existe.';
@@ -84,6 +93,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Reg_Usuario` (IN `rusuario` VARCHAR
     	BEGIN
         	INSERT INTO usuarios(usuario,pass)
             VALUES(rusuario,rpass);
+            SET Mensaje='Datos registrados correctamente.';
+		END;
+	END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Reg_Ventasencabezado` (IN `rpref` VARCHAR(4), IN `rnum` INT, IN `rcliente` INT, IN `rforma` INT, IN `rfecha` DATETIME, IN `Mensaje` VARCHAR(100))  BEGIN
+	IF(EXISTS(SELECT * FROM encabezado_venta WHERE prefijo=rpref and num_prefijo=rnum))THEN
+	SET Mensaje='consecutivo no disponible.';
+	ELSE
+    	BEGIN
+        	INSERT INTO encabezado_venta(prefijo,num_prefijo,id_cliente,forma_pago,fecha_venta)
+            VALUES(rpref,rnum,rcliente,rforma,rfecha);
             SET Mensaje='Datos registrados correctamente.';
 		END;
 	END IF;
@@ -138,6 +159,14 @@ CREATE TABLE `clientes` (
   `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `nit`, `rucom`, `razon_social`, `rep_legal`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
+(1, 1, '1234567899', '123456', 'pruebas sas', 'alfredo gonzales', 1, 1, '1234567', '1234567891', 'calle falsa 123', 'alfredg@pruebassas.com', 1),
+(2, 2, '9876543219', '58763', 'la coquita S.A.C', 'guillermo beltran', 1, 1, '1234578', '9845873', 'clle 44 # 32-65', 'lacoqinfo@gmail.com', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +193,13 @@ CREATE TABLE `detalle_ventas` (
   `total_detalle` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `detalle_ventas`
+--
+
+INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantidad`, `total_detalle`) VALUES
+(1, 10, 1, 2000, 4, 8000);
+
 -- --------------------------------------------------------
 
 --
@@ -173,7 +209,7 @@ CREATE TABLE `detalle_ventas` (
 CREATE TABLE `encabezado_venta` (
   `id` int(11) NOT NULL,
   `prefijo` varchar(4) NOT NULL,
-  `num_prefijo` varchar(3) NOT NULL,
+  `num_prefijo` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `fecha_venta` datetime NOT NULL,
   `forma_pago` int(1) NOT NULL COMMENT '1:efectivo, 2:credito',
@@ -184,6 +220,19 @@ CREATE TABLE `encabezado_venta` (
   `iva_venta` int(10) NOT NULL,
   `total_venta` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `encabezado_venta`
+--
+
+INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `id_cliente`, `fecha_venta`, `forma_pago`, `estado_venta`, `id_placa`, `sub_total_venta`, `descuento_venta`, `iva_venta`, `total_venta`) VALUES
+(4, 'FAC', 1, 1, '2016-01-29 15:45:24', 1, 1, 0, 0, 0, 0, 0),
+(5, 'FAC', 2, 1, '2016-01-29 10:00:25', 1, 1, 0, 0, 0, 0, 0),
+(6, 'REM', 1, 1, '2016-01-29 10:00:31', 2, 1, 0, 0, 0, 0, 0),
+(7, 'REM', 2, 1, '2016-01-29 10:03:18', 2, 1, 0, 0, 0, 0, 0),
+(8, 'REM', 3, 1, '2016-01-29 10:03:39', 2, 1, 0, 0, 0, 0, 0),
+(9, 'FAC', 3, 1, '2016-01-29 10:03:49', 1, 1, 0, 0, 0, 0, 0),
+(10, 'FAC', 4, 2, '2016-01-29 15:05:31', 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -231,9 +280,9 @@ CREATE TABLE `prefijos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `prefijo` varchar(4) NOT NULL,
-  `inicial` varchar(3) NOT NULL,
-  `actual` varchar(3) NOT NULL,
-  `final` varchar(3) NOT NULL
+  `inicial` int(11) NOT NULL,
+  `actual` int(11) NOT NULL,
+  `final` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -241,8 +290,8 @@ CREATE TABLE `prefijos` (
 --
 
 INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
-(1, 'Factura', 'FAC', '001', '001', '999'),
-(2, 'Remision', 'REM', '001', '001', '999');
+(1, 'Factura', 'FAC', 1, 5, 5000),
+(2, 'Remision', 'REM', 1, 4, 5000);
 
 -- --------------------------------------------------------
 
@@ -304,7 +353,8 @@ CREATE TABLE `tipo_clientes` (
 --
 
 INSERT INTO `tipo_clientes` (`id`, `tipo_cliente`) VALUES
-(1, 'Natural');
+(1, 'Natural'),
+(2, 'Juridico');
 
 -- --------------------------------------------------------
 
@@ -471,7 +521,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -481,12 +531,12 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `encabezado_venta`
 --
 ALTER TABLE `encabezado_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `insumos`
 --
@@ -516,7 +566,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `tipo_clientes`
 --
 ALTER TABLE `tipo_clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `unidades_medida`
 --

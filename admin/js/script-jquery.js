@@ -33,14 +33,13 @@ $(document).ready(function() {
 
     $("#Productos").change(function(){
     	$("#Productos option:selected").each(function () {
-        	IdP=$(this).val();
+        	id=$(this).val();
         	$("#precio").empty();
         	$.getJSON("clases/funciones.php",
-        	{Accion:'GetPrecioStock',IdP:IdP},
+        	{Accion:'GetPrecio',id:id},
         	function(data){
           		for (i = 0; i < data.length; i++) {
-            		$("#precio").val(data[i].PVenta);
-            		$("#stock").val(data[i].Stock);
+            		$("#precio").val(data[i].precio);
           		};
         	});
       	});
@@ -144,6 +143,33 @@ function FormVerFoto(id){
 	});
 }
 
+/************************************** Ventas *****************************************/
+
+function FormCabezaVenta(id){
+	$.ajax({
+		type:"POST",
+		url:"frmweb/frmventas.php",
+		data:{id:id},
+		success:function(respuesta){
+			$("#Modal_Mante_Venta").html(respuesta);
+		},error:function(){
+			alert("ERROR GENERAL DEL SISTEMA, POR FAVOR INTENTE MÁS TARDE.");
+		}
+	});
+}
+
+function Formadditems(idenc){
+	$.ajax({
+		type:"POST",
+		url:"frmweb/Formadditems.php",
+		data:{idenc:idenc},
+		success:function(respuesta){
+			$("#Modal_Mante_Venta_detalle").html(respuesta);
+		},error:function(){
+			alert("ERROR GENERAL DEL SISTEMA, POR FAVOR INTENTE MÁS TARDE.");
+		}
+	});
+}
 /************************************ Mantenimiento de Proveedores ***************************************/
 function FormProveedores(ruc){
 	$.ajax({
@@ -309,35 +335,28 @@ function AgregarClie(ruc,nombre,direccion){
 }
 
 function AgregCarritoVenta(){
-	var cate=$("#categoria").val();
-	var IdProd=$("#Productos").val();
-	var prodTexto=$("#Productos option:selected").text();
-	var precio=$("#precio").val();
-	var stock=$("#stock").val();
-	var cant=$("#replyNumber").val();
-	if(cate.length>0){
-		if(precio.length>0){/*
-			if(stock>=cant){*/
+	var id=$("#id").val();
+	var id_producto=$("#producton").val();
+	var precio=$("#precion").val();
+	var cantidad=$("#cantidad").val();
+	alert(id);
+	alert(id_producto);
+	alert(precio);
+	alert(cantidad);
+		if(precio>0){
 				$.ajax({
 					type:"POST",
 					url:"inc/carritoventas.php",
-					data:{IdP:IdProd,prodTexto:prodTexto,precio:precio,cant:cant},
+					data:{id:id,id_producto:id_producto,precio:precio,cantidad:cantidad},
 					success:function(respuesta){
 						$(".tabla-carrito-ventas").html(respuesta);
 					},error:function(){
 						alert("ERROR GENERAL DEL SISTEMA, POR FAVOR INTENTE MÁS TARDE.");
 					}
-				});/*
-			}else{
-				$(".mensajeError").html("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert'>&times;</button><i class='glyphicon glyphicon-remove'></i>&nbsp; Stock insuficiente, por favor verifique.</div>");
-			}*/
+				});
 		}else{
 			$(".mensajeError").html("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert'>&times;</button><i class='glyphicon glyphicon-remove'></i>&nbsp; Seleccione un producto</div>");
 		}
-	}else{
-		$(".mensajeError").html("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert'>&times;</button><i class='glyphicon glyphicon-remove'></i>&nbsp; Seleccione una categoría</div>");
-		//$(".mensajeError").fadeOut(3000);
-	}	
 }
 
 function AgregarVentas(codigo,action){

@@ -1,13 +1,10 @@
 <?php session_start(); ?>
 <?php if(isset($_SESSION["Usuario"])):?>
-<?php require_once 'clases/clsCategoria.php';
-require_once 'clases/clsVentas.php'; 
-$objV=new Ventas();
-$serie=$objV->getSerie();
-$numcomp=$objV->getNumComprobante();
+<?php require_once 'clases/clsVentas.php'; 
+$objVentas=new Ventas();
+$item=$objVentas->getVentas();
 
-	$objCat=new Categoria();
-	$fila=$objCat->get_Categoria();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,226 +21,160 @@ $numcomp=$objV->getNumComprobante();
 	<div class="container-fluid col-md-10 col-md-offset-2">
 		<div class="row">
 			<div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
 					<div class="space"></div>
 					<div class="navbar navbar-default">
-						<div class="navbar-inner content-span">
-							<span >Realizar ventas</span>
-							<a href="ventas.php" class="link-actualizar top-link pull-right">
-								<i class="glyphicon glyphicon-refresh"></i> Actualizar
+						<div class="navbar-inner contenido-button">
+
+							<button type="button" onclick="FormCabezaVenta();" 
+							class="btn btn-small btn-default" data-toggle='modal' 
+							data-target='#Modal_Mante_Venta'>
+								<i class="glyphicon glyphicon-plus"></i> Nueva Venta
+							</button>
+
+							<div class='modal fade' id='Modal_Mante_Venta' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+							</div>
+							<a href="ventas.php" class="link-actualizar pull-right">
+								<i class='glyphicon glyphicon-refresh'></i> Actualizar
 							</a>
+
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="content-compras">
-						<form class="form-horizontal top-form" name="formVent" method="post">
-							<div class="content-form">
-								<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-									<div class="form-group">
-		                                <label for="" class="control-label col-xs-3">D.N.I. / R.U.C.</label>
-		                                <div class="col-xs-6">
-		                                    <input type="text" readonly class="form-control" name="ruc" placeholder="R.U.C." required minlength="11" maxlength="11" value="">
-		                                </div>
-		                                <div class="col-xs-3">
-		                                    <button type="button" onclick="FormListadoClientes();" 
-											class="btn btn-small btn-default" data-toggle='modal' 
-											data-target='#Modal_Listado_Clientes'>
-												<i class="glyphicon glyphicon-search"></i> Buscar Clientes
-											</button>
-		                                </div>
-		                            </div>
-		                            <div class="form-group">
-		                                <label for="" class="control-label col-xs-3">Cliente</label>
-		                                <div class="col-xs-9">
-		                                    <input type="text" readonly class="form-control" name="nombre" 
-		                                    placeholder="Nombre de Cliente" required minlength="5">
-		                                </div>
-		                            </div>
-		                            <div class="form-group">
-		                                <label for="" class="control-label col-xs-3">Dirección</label>
-		                                <div class="col-xs-9">
-		                                    <input type="text" readonly class="form-control" name="direccion" placeholder="Dirección" required minlength="5">
-		                                </div>
-		                            </div>
-		                            <div class="form-group">
-		                                <label for="" class="control-label col-xs-3">Tipo Persona</label>
-		                                <div class='col-xs-4'>
-		                                	<select class="form-control" id="tipoPer" name="tipoPer">
-		                                		<?php $tipo=array('Natural','Jurídica'); 
-			                                    foreach ($tipo as $key => $value):?>
-			                                    	<option value="<?=$value?>"><?=$value?></option>
-			                                   <?php endforeach;?>
-		                                	</select>
-		                                </div>
-		                                <label for="" class="control-label col-xs-2">Fecha</label>
-		                                <div class="col-xs-3">
-		                                    <input type="text" readonly class="form-control" name="fecha" required value="<?=date('d/m/Y')?>">
-		                                </div>
-		                            </div>
-								</div>
 
-								<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-1">
-									<div class="comprobante-pago-content-venta">
-										<div class="comprobante-pago-title">
-											<p>R.U.C. N° 20395834584</p>
-										</div>
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12">
-												<div class="content-tipo">
-													<p class="documento">BOLETA DE VENTA</p>
-												</div>
-											</div>
-											<br>
-											<div class="content-input">
-												<div class="col-xs-12 col-sm-12 col-md-6">
-													<label for="">Serie</label>
-													<input type="text" readonly name="serie" value="<?=$serie?>" class="form-control">
-												</div>
-												<div class="col-xs-12 col-sm-12 col-md-6">
-													<label for="">N° Comprobante</label>
-													<input type="text" readonly id="numero" name="numero" class="form-control" value="<?=$numcomp?>">
-												</div>
-											</div>
-											
-										</div>
-									</div>
-								</div>
 
-								<div class='modal fade' id='Modal_Listado_Clientes' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-								</div>
-							</div>
-
-							<div class="content-form">
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-									<div class="form-group">
-										<label for="" class="control-label col-xs-2">Categoría</label>
-		                                <div class="col-xs-4">
-		                                    <select class="form-control" name="categ" id="categoria">
-		                                        <option value="">Selecione</option>
-		                                        <?php foreach ($fila as $key):?>
-		                                        <option value="<?=$key[0]?>"><?=$key[1]?></option>
-		                                        <?php endforeach; ?>
-		                                    </select>
-		                                </div>
-		                                <label for="" class="control-label col-xs-1">Producto</label>
-		                                <div class="col-xs-5">
-		                                    <select class="form-control" name="Producto" id="Productos">
-		                                    	<option value="">Selecione</option>
-		                                    </select>
-		                                </div>
-									</div>
-
-									<div class="form-group">
-										<label for="" class="control-label col-xs-2">Precio Compra S/.</label>
-		                                <div class="col-xs-2">
-		                                    <input type="text" readonly id="precio" class="form-control" minlength="2" placeholder="20.40">
-		                                </div>
-		                                <label for="" class="control-label col-xs-1">Stock</label>
-		                                <div class="col-xs-2">
-		                                    <input type="text" readonly id="stock" class="form-control" placeholder="20">
-		                                </div>
-		                                <label for="" class="control-label col-xs-1">Cantidad</label>
-		                                <div class="col-xs-2">
-		                                    <input type="number" class="form-control" min="1" step="1" value="1" id="replyNumber" data-bind="value:replyNumber">
-		                                </div>
-		                                <div class="col-xs-2">
-		                                    <button type="button" class="btn btn-default pull-right" onclick="AgregCarritoVenta();" >
-												<i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito
-											</button>
-		                                </div>
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-									<div class="mensajeError"></div>
-								</div>
-							</div>
-
-							<div class="content-form">
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<!--<div class="table-responsive hidden-md">-->
-									<div class="tabla-carrito-ventas">
-										
-									</div>
-								</div><button name="btnGuardar" class="btn btn-default pull-right btn-right">
-								<i class="glyphicon glyphicon-floppy-saved"></i>	Registrar Venta</button>
-							</div>
-						</form>
-
+				<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
+					<div class="mensaje">
 						<?php 
-						if(isset($_POST['btnGuardar'])):
-							if(!empty($_SESSION['carrito_ventas'])):
-								$Total=0;
-								foreach ($_SESSION['carrito_ventas'] as $key):
-									$Total=$Total+$key['SubTotal'];
-								endforeach;
-								$fecha=date('Y-m-d');
-
-								if($_POST['tipoPer']=="Natural"){
-									$tipoDoc='Boleta';
-								}else{
-									$tipoDoc='Factura';
-								}
-									
-
-								$objV->dni=rtrim($_POST['ruc']);
-								$objV->serie=rtrim($_POST['serie']);
-								$objV->numero=rtrim($_POST['numero']);
-								$objV->fecha=$fecha;
-								$objV->tipo=$tipoDoc;
-								$objV->monto=$Total;
-								$mensaje1=$objV->Add_Ventas();
-
-								foreach ($_SESSION['carrito_ventas'] as $key) {
-									$objV->IdP=$key['Id'];
-									$objV->PVenta=$key['Precio'];
-									$objV->Cantidad=$key['Cantidad'];
-									$objV->SubTotal=$key['SubTotal'];
-									$objV->Igv=$key['Igv'];
-									$mensaje2=$objV->Add_DetalleVentas();
-								}
-
-								if($mensaje2==$mensaje1):
-									if($_POST['tipoPer']=="Natural"){
-										echo'<script>window.location="comprobante.php/boleta/'.rtrim($_POST["numero"]).'/";</script>';
-									}else{
-										echo'<script>window.location="comprobante.php/factura/'.rtrim($_POST["numero"]).'/";</script>';
-									}
-									unset($_SESSION['carrito_ventas']);
-									?>
+							if(isset($_POST['btnRegve'])):
+								$objVentas->id_cliente=$_POST['id_cliente'];
+								$objVentas->forma_pago=$_POST['forma_pago'];
+								$Mensaje=$objVentas->Add_EncabezadoVenta();
+								if($Mensaje=="Datos registrados correctamente."):?>
 									<div class='alert alert-success' role='alert'>
 										<button type='button' class='close' data-dismiss='alert'>&times;</button>
-										<i class='glyphicon glyphicon-ok'></i>&nbsp;<?=$mensaje2;?>
+										<i class='glyphicon glyphicon-ok'></i>&nbsp;<?=$Mensaje;?>
 									</div>
-							  	<?php 
-							  	else: ?>
+						  		<?php 
+						  		else: ?>
 									<div class='alert alert-danger' role='alert'>
 										<button type='button' class='close' data-dismiss='alert'>&times;</button>
 										<i class='glyphicon glyphicon-remove'></i>&nbsp;<?=$Mensaje;?>
 									</div>
-							  	<?php 
-							  	endif;
-							else:?>
-								<div class='alert alert-danger' role='alert'>
-									<button type='button' class='close' data-dismiss='alert'>&times;</button>
-									<i class='glyphicon glyphicon-remove'></i>&nbsp;Carrito vacio, agregue productos.
-								</div>
-							<?php	
+						  		<?php 
+						  		endif;
 							endif;
-						endif;
 						?>
-
 					</div>
-					<script type="text/javascript">
-						$(function () {
-							$('#datetimepicker1').datetimepicker()
-						});
-					</script>
 				</div>
 
+				<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
+					<div class="mensaje">
+						<?php 
+							if(isset($_POST['btnActve'])):
+								$objVentas->id=$_POST['id'];
+								$objVentas->id_cliente=$_POST['id_cliente'];
+								$Mensaje=$objVentas->act_encventa();
+								if($Mensaje=="Datos actualizados correctamente."):?>
+									<div class='alert alert-success' role='alert'>
+										<button type='button' class='close' data-dismiss='alert'>&times;</button>
+										<i class='glyphicon glyphicon-ok'></i>&nbsp;<?=$Mensaje;?>
+									</div>
+						  		<?php 
+						  		else: ?>
+									<div class='alert alert-danger' role='alert'>
+										<button type='button' class='close' data-dismiss='alert'>&times;</button>
+										<i class='glyphicon glyphicon-remove'></i>&nbsp;<?=$Mensaje;?>
+									</div>
+						  		<?php 
+						  		endif;
+							endif;
+						?>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
+					<div class="mensaje">
+						<?php 
+							if(isset($_POST['btnReg'])):
+								$objUsu->usuario=$_POST['usuario'];
+								$objUsu->password=$_POST['password'];
+								$Mensaje=$objUsu->Add_Usuarios();
+								if($Mensaje=="Datos registrados correctamente."):?>
+									<div class='alert alert-success' role='alert'>
+										<button type='button' class='close' data-dismiss='alert'>&times;</button>
+										<i class='glyphicon glyphicon-ok'></i>&nbsp;<?=$Mensaje;?>
+									</div>
+						  		<?php 
+						  		else: ?>
+									<div class='alert alert-danger' role='alert'>
+										<button type='button' class='close' data-dismiss='alert'>&times;</button>
+										<i class='glyphicon glyphicon-remove'></i>&nbsp;<?=$Mensaje;?>
+									</div>
+						  		<?php 
+						  		endif;
+							endif;
+						?>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<table class='table  table-bordered table-hover table-condensed' id="Tabla-Categoria">
+						<thead class="alert alert-info text-head">
+							<tr>
+								<th class="text-center">N°</th>
+								<th class="text-center">FECHA</th>
+								<th class="text-center">CLIENTE</th>
+								<th class="text-center">FORMA PAGO</th>
+								<th class="text-center">ESTADO</th>
+								<th class="text-center">TOTAL</th>
+								<th class="text-center">OPCIONES</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php if(!empty($item)):?>
+							<?php foreach ($item as $item):?>
+							<tr>
+								<td class="text-center"><?=$item[1]."000".$item[2]?></td>
+								<td class="text-center"><?=date('Y-m-d',strtotime($item[4]) )?></td>
+								<td class="text-center"><?=$item[12]?></td>
+								<td class="text-center"><?php if ($item[5] == 1){ echo "Efectivo";} elseif ($item[5] == 2){ echo "Credito";} ?></td>
+								<td class="text-center"><?php if ($item[6] == 1){ echo "Creado";} elseif ($item[6] == 2){ echo "Pendiente";} elseif ($item[6] == 3){echo "Finalizado";} ?></td>
+								<td class="text-center">$<?=$item[11]?></td>
+								<td>
+									<center>
+										<span title="Editar Venta" class="btn btn-xs btn-success" 
+											onclick="FormCabezaVenta('<?=$item[0]?>');" data-toggle='modal' 
+											data-target='#Modal_Mante_Venta' id="tooltip<?=$item[0]?>" data-toggle="tooltip"
+											data-placement="top">
+											<i class="glyphicon glyphicon-pencil"></i>
+										</span>
+
+										
+										<span title="Cambiar Estado" class="btn btn-xs btn-info" 
+											onclick="FormVerFoto('<?=$item[0]?>');" data-toggle='modal' 
+											data-target='#Modal_Mante_VerFoto' id="tool<?=$item[0]?>" data-toggle="tooltip"
+											data-placement="top">
+											<i class="glyphicon glyphicon-picture"></i>
+										</span>
+										<span title="Ver Documento" class="btn btn-xs btn-warning" 
+											onclick="FormVerFoto('<?=$item[0]?>');" data-toggle='modal' 
+											data-target='#Modal_Mante_VerFoto' id="tool<?=$item[0]?>" data-toggle="tooltip"
+											data-placement="top">
+											<i class="glyphicon glyphicon-picture"></i>
+										</span>
+									</center>
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						<?php endif; ?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
+	
 	<?php require_once 'inc/footer.php'; ?>
 </body>
 </html>
