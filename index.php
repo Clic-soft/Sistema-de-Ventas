@@ -1,57 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Sistema Facturación - Arenera Riopaila</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-</head>
-<body>
+<?php
 
-	<div class="container login-top">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 login-panel">
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 login-panel">
-			<div class="panel panel-info">
-				<div class="panel-heading text-center">
-					<strong>Iniciar Sesión</strong>
-				</div>
-				<div class="panel-body">
-					<form  class= "form-horizontal"  role= "form" name="f1" method="post"> 
-						<div  class= "form-group">
-							<div  class= "col-sm-12" >
-								<div class="input-group" align="center">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									<input type="text" class="form-control" placeholder="USUARIO" id="email" name="usuario">
-								</div>
-							</div> 
-						</div> 
-						<div  class= "form-group" > 
-							<div  class= "col-sm-12" > 
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-									<input type="password" class="form-control" placeholder="CONTRASEÑA" id="pass" name="pass">
-								</div>
-							</div> 
-						</div> 
-						<div  class = "forma -group " > 
-							<div  class = "col-sm-12 text-center">
-								<button type="button" class="btn btn-primary" id="iniciar">
-									<i class="glyphicon glyphicon-off"></i>&nbsp; Iniciar Sesión 
-								</button>
-							</div> 
-						</div> 
-					</form>    
-				</div>
-				<div class="panel-footer" id="mensaje"></div>
-			</div>
-		</div>
-	</div>
-</div>
+ini_set('display_erros', 1);
+ini_set("memory_limit", "2048M"); // Aumentar memoria
+//echo uniqid();exit; id unico
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', realpath(dirname(__FILE__)) . DS);
+define('ROOT_ADMIN', "sistema.-de-ventas" . DS);
 
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/script-login.js"></script>
-</body>
-</html>
+define('APP_PATH', ROOT . 'application' . DS);
+
+
+//echo md5('1234');exit;
+
+
+try {
+    require_once APP_PATH . 'Autoload.php';
+    require_once APP_PATH . 'Config.php';
+    require_once APP_PATH . 'Config2.php';
+    require_once APP_PATH . 'ez_sql_core.php';
+    require_once APP_PATH . 'ez_sql_mysql.php';
+
+//echo Hash::getHash('sha1', '1234', HASH_KEY);exit;
+    Session::init();
+
+    //Se crea una nueva instancia de registro
+    $registry = Registry::getInstancia();
+    $registry->_request = new Request();
+    $registry->_db = new ezSQL_mysql(DB_USER, DB_PASS, DB_NAME, DB_HOST, DB_CHAR);
+    $registry->_db->query("SET NAMES utf8");
+    //$registry->_db2 = new Database(DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_CHAR);
+    $registry->_acl = new Acl();
+
+    Bootstrap::run($registry->_request);
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+?>

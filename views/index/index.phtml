@@ -1,0 +1,128 @@
+<?php if(isset($_SESSION["usuario"])):?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema - Tienda Virtual</title>
+  <?php require_once '/inc/header.php'; ?>
+</head>
+<body>
+
+  <div class="menu--top container-fluid col-md-12">
+    <div class="row">
+      <div class="nav-top-menu">
+        <div class="col-xs-6">
+          <strong><?=$_SESSION['usuario']?></strong>
+        </div>
+        <div class="col-xs-6">
+                  <a class="float-right" href="inc/CerrarSesion.php">Cerrar Sesión</a>
+                </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid col-md-12">
+    <div class="row">
+      <!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">-->
+      <!--<div class="content">-->
+      <div>
+        <!--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-2">-->
+        <div class="index row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="space"></div>
+          <a href="./">
+            <div class="col-xs-12 col-md-4 welcome" style="height: 352px;">
+              <p class="title">Bienvenido a XXXXXXXXX</p>
+              <p>En esta aplicación tu podrás Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>             
+            </div>
+          </a>
+          <!--Perfil-->
+          <a href="<?php echo BASE_URL; ?>perfil/<?php echo $_SESSION["id_usuario"]; ?>">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-user"></span></p>
+              <p class="title">Perfil</p>
+              <p class="hidden">Deepcode</p>
+            </div>
+          </a>
+
+          <!--Productos -->
+          <a href="<?php echo BASE_URL; ?>productos">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-bed"></span></p>
+              <p class="title">Productos</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+          <!--Provedores -->
+          <a href="<?php echo BASE_URL; ?>proveedores">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-scale"></span></p>
+              <p class="title">Provedores</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+
+          <!--Compras -->
+          <a href="<?php echo BASE_URL; ?>insumos">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-shopping-cart"></span></p>
+              <p class="title">Insumos</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+
+          <!--Clientes -->
+          <a href="<?php echo BASE_URL; ?>clientes">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-folder-open"></span></p>
+              <p class="title">Clientes</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+
+          <!--Ventas -->
+          <a href="<?php echo BASE_URL; ?>ventas">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-credit-card"></span></p>
+              <p class="title">Ventas</p>
+              <i class="glyphicon glyphicon-bell"></i></div>
+          </a>
+          <!--Reportes -->
+          <a href="<?php echo BASE_URL; ?>menureporte">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-list-alt"></span></p>
+              <p class="title">Reportes</p>
+              <i class="glyphicon glyphicon-bell"></i></span>
+            </div>
+          </a>
+          <!--Usuarios -->
+          <a href="<?php echo BASE_URL; ?>usuarios">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-user"></span></p>
+              <p class="title">Usuarios</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+
+          <a href="<?php echo BASE_URL; ?>Empleados">
+            <div class="col-xs-6 col-md-2 iconos-i">
+              <p><span class="glyphicon glyphicon-user"></span></p>
+              <p class="title">Empleados</p>
+              <p><i class="glyphicon glyphicon-bell"></i></span></p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php require_once 'inc/footer.php'; ?>
+
+</body>
+</html>
+<?php 
+else:
+  header( 'Location: ../' );
+endif;
+?>

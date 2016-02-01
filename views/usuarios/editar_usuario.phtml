@@ -1,0 +1,62 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+</head>
+<body>
+        <div class="new-count">
+            <div class="clearfix"></div>
+            <form class="form-horizontal" action="" method="POST" id="form" name="form1">
+                <div class="acceso">
+                    <input type="hidden" name="guardar" value="1" />
+                    <?php if (isset($this->_error)): ?>
+                        <div id="_error" class="alert alert-error">
+                            <a class="close" data-dismiss="alert">x</a>
+                            <?php echo $this->_error; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($this->_mensaje)): ?>
+                        <div id="_mensaje" class="alert alert-success">
+                            <a class="close" data-dismiss="alert">x</a>
+                            <?php echo $this->_mensaje; ?>
+                        </div>
+                    <?php endif; ?>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Usuario:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="usuario" id="usuario" class="form-control" required placeholder="Usuario" value="<?php if (isset($this->datos->usuario)) echo $this->datos->usuario; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Estado</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" required name="estado" id="estado">
+                                <option value="">Selecione</option>
+                                <option value="1" <?php if($this->datos->estado == 1){ ?> selected <?php } ?> >ACTIVO</option>
+                <option value="2" <?php if($this->datos->estado == 2){ ?> selected <?php } ?>>INACTIVO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <center>
+                    <a href="#" class="btn btn-primary btn-center btn" onclick="document.getElementById('form').submit()">Guardar</a>
+                </center>
+            </form>
+        </div>
+    </div>
+ 
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

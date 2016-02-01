@@ -1,0 +1,83 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#usuarios").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="space"></div>
+                    <div class="navbar navbar-default">
+                        <div class="navbar-inner contenido-button">
+                            <a href="<?php echo BASE_URL; ?>usuarios/nuevo_usuario" class="btn btn-small btn-default"><i class="glyphicon glyphicon-plus"></i>&nbsp;Nuevo Usuario</a>
+
+                            <a href="<?php echo BASE_URL; ?>usuarios" 
+                                class="link-actualizar pull-right"><i class='glyphicon glyphicon-refresh'></i> Actualizar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros">     
+                        <?php if (isset($this->usuario) && count($this->usuario)) : ?>  
+                            <table class='table  table-bordered table-hover table-condensed'>
+                                <thead class="alert alert-info text-head">
+                                    <tr>
+                                        <th class="text-center">N°</th>
+                                        <th class="text-center">USUARIO</th>
+                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->usuario as $usuario):?>
+                                    <tr>
+                                        <td><?php echo $usuario->id;?></td>
+                                        <td><?php echo $usuario->usuario;?></td>
+                                        <td><?php if($usuario->estado == 1){echo "Activo";}else{echo "inactivo";}?> 
+                                        </td>
+                                    <td>
+                                        <a href="<?php echo BASE_URL; ?>usuarios/editar_usuario/<?php echo $usuario->id?>" class="btn2 ventanausuario"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+                                        <a href="<?php echo BASE_URL; ?>usuarios/cambio_clave/<?php echo $usuario->id?>" class="btn2 ventanausuario"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+
+                                        <a href="javascript:borrar_usuario(<?php echo $usuario->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay usuarios creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>
