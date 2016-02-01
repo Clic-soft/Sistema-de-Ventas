@@ -39,7 +39,6 @@ function borrar_usuario(id){
                 function() {
                     var respuesta = $.post(_ruta_ + 'usuarios/eliminarusuario/'+ id);
                     respuesta.done(function(data) {
-                        alert(data);
                         if ($.isEmptyObject(data)) {
                                  window.location.reload();
                         } else {

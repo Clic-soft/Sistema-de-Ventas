@@ -16,8 +16,8 @@ $(document).ready(function() {
 
     $(".ventanacliente").fancybox({
         'showCloseButton': true,
-        'width': 670,
-        'height': 370,
+        'width': 800,
+        'height': 500,
         'autoSize': false,
         'autoDimensions': false,
         'transitionIn': 'none',
@@ -55,7 +55,6 @@ function borrar_cliente(id){
                 function() {
                     var respuesta = $.post(_ruta_ + 'clientes/eliminarcliente/'+ id);
                     respuesta.done(function(data) {
-                        alert(data);
                         if ($.isEmptyObject(data)) {
                                  window.location.reload();
                         } else {

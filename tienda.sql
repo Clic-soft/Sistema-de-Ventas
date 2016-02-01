@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2016 a las 20:28:03
+-- Tiempo de generación: 02-02-2016 a las 00:16:41
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -146,10 +146,11 @@ CREATE TABLE `ciudades` (
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
   `id_tipo_cliente` int(11) NOT NULL,
+  `tipo_documento` int(11) NOT NULL,
   `nit` varchar(15) NOT NULL,
   `rucom` varchar(20) NOT NULL,
   `razon_social` varchar(50) NOT NULL,
-  `rep_legal` varchar(50) NOT NULL,
+  `nomcom` varchar(50) NOT NULL,
   `id_depto` int(11) NOT NULL,
   `id_ciudad` int(11) NOT NULL,
   `telefono1` varchar(20) NOT NULL,
@@ -163,9 +164,9 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `nit`, `rucom`, `razon_social`, `rep_legal`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
-(1, 1, '1234567899', '123456', 'pruebas sas', 'alfredo gonzales', 1, 1, '1234567', '1234567891', 'calle falsa 123', 'alfredg@pruebassas.com', 1),
-(2, 2, '9876543219', '58763', 'la coquita S.A.C', 'guillermo beltran', 1, 1, '1234578', '9845873', 'clle 44 # 32-65', 'lacoqinfo@gmail.com', 1);
+INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `tipo_documento`, `nit`, `rucom`, `razon_social`, `nomcom`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
+(1, 1, 1, '7587549653', '123456', 'Pruebas Sas', 'Alfredo Gonzales', 1, 1, '1234567', '', 'calle falsa 123', 'alfredg@pruebassas.com', 2),
+(2, 2, 1, '9876543219', '58763', 'la coquita S.A.C', 'guillermo beltran', 1, 1, '1234578', '9845873', 'clle 44 # 32-65', 'lacoqinfo@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -376,6 +377,27 @@ INSERT INTO `tipo_clientes` (`id`, `tipo_cliente`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipo_documento`
+--
+
+CREATE TABLE `tipo_documento` (
+  `id` int(11) NOT NULL,
+  `tipo_documento` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_documento`
+--
+
+INSERT INTO `tipo_documento` (`id`, `tipo_documento`) VALUES
+(1, 'NIT'),
+(2, 'CEDULA'),
+(3, 'RUT'),
+(4, 'CEDULA EXTRANJERIA');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `unidades_medida`
 --
 
@@ -411,8 +433,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `estado`) VALUES
-(1, 'adminarenera', '827ccb0eea8a706c4c34a16891f84e7b', 1),
-(2, 'pruebas', 'ee2ec3cc66427bb422894495068222a8', 1);
+(1, 'adminarenera', 'c9369cbf82de476e1bd18e0c497c4be9', 1),
+(2, 'pruebas', 'c9369cbf82de476e1bd18e0c497c4be9', 1);
 
 -- --------------------------------------------------------
 
@@ -509,6 +531,12 @@ ALTER TABLE `tipo_clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tipo_documento`
+--
+ALTER TABLE `tipo_documento`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `unidades_medida`
 --
 ALTER TABLE `unidades_medida`
@@ -544,7 +572,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -595,6 +623,11 @@ ALTER TABLE `proveedores`
 --
 ALTER TABLE `tipo_clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tipo_documento`
+--
+ALTER TABLE `tipo_documento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `unidades_medida`
 --

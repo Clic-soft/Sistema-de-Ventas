@@ -1,110 +1,89 @@
-	<head>
-    	<title><?php if (isset($this->titulo)) echo $this->titulo; ?></title>
-     	<meta charset="utf-8">
-     	<meta name = "format-detection" content = "telephone=no" />
-     	<link rel="icon" href="images/favicon.ico">
-     	<link rel = "shortcut icon" type = "image/png" href = "<?php echo BASE_URL; ?>public/img/favicon.ico" />
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#clientes").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="space"></div>
+                    <div class="navbar navbar-default">
+                        <div class="navbar-inner contenido-button">
+                            <a href="<?php echo BASE_URL; ?>clientes/nuevo_cliente" class="btn btn-small btn-default"><i class="glyphicon glyphicon-plus"></i>&nbsp;Nuevo Cliente</a>
 
-        <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
-<script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
-     
-     	<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
-     	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/EstilosPagina.css" >
-        <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/custom-theme/jquery-ui-1.10.3.custom.css"> 
+                            <a href="<?php echo BASE_URL; ?>clientes" 
+                                class="link-actualizar pull-right"><i class='glyphicon glyphicon-refresh'></i> Actualizar
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-		<style type="text/css">
-			.titulo1{
-			font-size:20px;
-			color:#a0a2a2;
-			font-weight:900;
-			}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros">     
+                        <?php if (isset($this->cliente) && count($this->cliente)) : ?>  
+                            <table class='table  table-bordered table-hover table-condensed'>
+                                <thead class="alert alert-info text-head">
+                                    <tr>
+                                        <th class="text-center">TIPO CLIENTE</th>
+                                        <th class="text-center">TIPO DOCUMENTO</th>
+                                        <th class="text-center">NUMERO DOCUMENTO</th>
+                                        <th class="text-center">NOMBRE</th>
+                                        <th class="text-center">DIRECCION</th>
+                                        <th class="text-center">EMAIL</th>
+                                        <th class="text-center">TELEFONO</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->cliente as $cliente):?>
+                                    <tr>
+                                        <td><?php echo $cliente->tipo_cliente;?></td>
+                                        <td><?php echo $cliente->tdoc;?></td>
+                                        <td><?php echo $cliente->nit;?></td>
+                                        <td><?php echo $cliente->nomcom;?></td>
+                                        <td><?php echo $cliente->direccion;?></td>
+                                        <td><?php echo $cliente->email;?></td>
+                                        <td><?php echo $cliente->telefono1;?></td>
+                                    <td>
+                                        <a href="<?php echo BASE_URL; ?>clientes/editar_cliente/<?php echo $cliente->id?>" class="btn2 ventanacliente"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
 
-			.titulo2{
-			font-size:14px;
-			color:#a0a2a2;
-			font-weight:900;
-			}
-
-			.form_imput{
-			width:240px;
-			height:32px;
-			border:1px solid #cdcfd2;
-			}
-
-			.form_imput::-moz-placeholder{
-			color:#777;opacity:
-			}
-
-			.form_imput:focus{
-			border-color:#0B6EC7;
-			-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #0B6EC7;
-			box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 6px #0B6EC7
-			}
-			
-		</style>
-	</head>
-     
-<div class="content">
-    <div class="container_12">
-    	<br>
-    	<div class="grid_12">
-    		<a style="text-align:left;" title="PANEL" href="<?php echo BASE_URL; ?>panel"><img src="<?php echo BASE_URL; ?>public/img/prev.png" align="left"></a>
-    	</div>		
-<br>
-        <div >
-            <div align="left">
-                <br />
-                <br>
-                <font style="font-size:18px;font-weight:bold">CLIENTES</font>
-                <hr style="color:#999" />
-                <!--<a href="<?php echo BASE_URL; ?>clientes/nuevo_cliente" class="btn5 ">
-                <img src="<?php echo BASE_URL; ?>public/img/crear.png" style="vertical-align:middle"/> 
-                Crear</a> 
-                <br/>-->
+                                        <a href="javascript:borrar_cliente(<?php echo $cliente->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay clientes creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
             </div>
         </div>
-
-        <div class="grid_12">
-            <div id="lista_registros">     
-                <?php if (isset($this->cliente) && count($this->cliente)) : ?>   
-                    <table class="table" style="width:100%; font-size:12px;">
-                    <thead>
-                        <tr>
-                            <td style="width:20%;"><b>NOMBRE</b></td>
-                            <td style="width:15%;"><b>TIPO DOCUMENTO</b></td>
-                            <td style="width:15%;"><b>NUM. DOCUMENTO</b></td>
-                            <td style="width:15%;"><b>FECHA REGISTRO</b></td>
-                            <td style="width:15%;"><b>USUARIO</b></td>
-                            <td style="width:25%;"><b>ACCIONES</b></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($this->cliente as $cliente):?>
-                            <tr>
-                                <td><?php echo $cliente->nombre;?></td>
-                                <td><?php echo $cliente->tipo_doc;?></td>
-                                <td><?php echo $cliente->num_doc;?></td>
-                                <td><?php echo $cliente->fecha_reg;?></td>
-                                <td><?php echo $cliente->usuario;?></td>
-                                <td>
-                                    <a href="<?php echo BASE_URL; ?>clientes/ver_cliente/<?php echo $cliente->id?>" class="btn3 ventanavcliente"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> VER</a>
-                                </td>
-                            </tr>
-                        <?php endforeach;?>
-                        <tr>
-                            <td colspan="6">
-                                <div class="clear"></div>
-                                <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <div class='alert alert-info'>
-                    <strong>No hay Clientes creados.</strong>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>
-</div>    
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

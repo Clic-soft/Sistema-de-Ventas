@@ -13,7 +13,7 @@ class clientesController extends Controller {
     }
 
 	public function index() {
-		if (Session::Get('autenticado_adminsciocco') == true ){ 
+		if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 			$this->_view->titulo = 'CLIENTES';
 			$this->_view->navegacion = '';
@@ -21,7 +21,7 @@ class clientesController extends Controller {
 				//Se instancia la libreria
 			$paginador = new Paginador();
 		
-			$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(),1,1);
+			$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(),1,20);
 			$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
 			$this->_view->setJs(array('clientes'));
 
@@ -34,12 +34,12 @@ class clientesController extends Controller {
 	// paginacion listado
 	public function paginacionDinamicaclientes() {
         
-		if (Session::Get('autenticado_adminsciocco') == true ){ 
+		if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
         	$pagina = $this->getInt('pagina');
 				
         	$paginador = new Paginador();
-        	$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(), $pagina,1);
+        	$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(), $pagina,20);
         	$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
         	$this->_view->setJs(array('clientes'));
         	$this->_view->renderizar('refrescar_listado_clientes', false, true);
@@ -49,98 +49,137 @@ class clientesController extends Controller {
 		
     }
 
-    // paginacion listado
-	public function ver_cliente($id) {
-        
-		if (Session::Get('autenticado_adminsciocco') == true ){ 
-			Session::set('modulo', "admin");
-			$this->_view->titulo = 'CLIENTE';
-
-			if (!$this->filtrarInt($id)) {
-	            //Se redirecciona al index
-	            $this->redireccionar('index','clientes');
-	        }
-	        //Si no existe un registro con ese id
-	        if (!$this->_clientes->getCliente($this->filtrarInt($id))) {
-	            //Se redirecciona al index
-	            $this->redireccionar('index','clientes');
-	        }
-
-			
-			$this->_view->cliente = $this->_clientes->getCliente($this->filtrarInt($id));
-
-        	$this->_view->renderizar('ver_cliente', false, true);
-        } else {
-      		$this->redireccionar('admin');
-      	}
-		
-    }
-
     public function nuevo_cliente() {
-		if (Session::Get('autenticado_adminsciocco') == true ){ 
+		if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 			$this->_view->titulo = 'Nuevo Cliente';
 			$this->_view->navegacion = '';
 
-			$this->_view->roles = $this->_usuarios->getroles();
+			$this->_view->empresa = $this->_clientes->gettipe();
+			$this->_view->documento = $this->_clientes->gettido();
 
 			if ($this->getInt('guardar') == 1) {
 				
 				$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
 			//Se valida que las dos contraseñas digitadas coincidan
 
-				if (!$this->getTexto('usuario')) {
+				if (!$this->getInt('tipo_empresa') || $this->getInt('tipo_empresa')== 0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el rol';
+					$this->_view->_error = 'Debe Ingresar Tipo de Empresa';
 					//Vista de la pagina actual
-					$this->_view->renderizar('nuevo_usuario','usuarios');
+					$this->_view->renderizar('nuevo_cliente','clientes');
 					//Saca de la funcion principal
 					exit;
 				}
 
-				if (!$this->getSql('pass')) {
+				if (!$this->getInt('tipo_doc') || $this->getInt('tipo_doc')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+
+				if (!$this->getTexto('numdoc')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el numero de documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('rucom')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el numero de rucom';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('rsocial')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la razon social';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('nomcom')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el nombre comercial';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('tel1')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el telefono 1 ';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getSql('dir')) {
 	                //Si no cumple la validacion sale mensaje de error
-	                $this->_view->_error = 'Debe introducir su contrase&ntilde;a';
+	                $this->_view->_error = 'Debe introducir la direccion';
 	                //Vista de la pagina actual
-	                $this->_view->renderizar('nuevo_usuario','usuarios');
+	                $this->_view->renderizar('nuevo_cliente','clientes');
 	                //Saca de la funcion principal
 	                exit;
             	}
 
-            	if (!$this->getSql('repitepass')) {
+            	if (!$this->getSql('email')) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe ingresar la contrase&ntilde;a nuevamente.';
+					$this->_view->_error = 'Debe ingresar el email.';
 					//Se renderiza a la pagina actual
-					$this->_view->renderizar('nuevo_usuario','usuarios');
-					//Saca de la funcion principal
-					exit;
-				}
-
-				if (!$this->getInt('id_rol') || $this->getInt('id_rol')== 0) {
-					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el rol';
-					//Vista de la pagina actual
-					$this->_view->renderizar('nuevo_usuario','usuarios');
+					$this->_view->renderizar('nuevo_cliente','clientes');
 					//Saca de la funcion principal
 					exit;
 				}
 
 				//Se valida que no exista otro usuario con el mismo nombre
-				if ($this->_usuarios->validarusuario($this->getTexto('usuario'))) {
+				if ($this->_clientes->validarnumdoc($this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'El nombre de usuario ya existe';
+					$this->_view->_error = 'El numero de documento ya existe con este tipo de documento';
 					//Vista de la pagina actual
-					$this->_view->renderizar('nuevo_usuario','usuarios');
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				//Se valida que no exista otro usuario con el mismo nombre
+				if ($this->_clientes->validarrucom($this->getTexto('rucom'))) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'El numero rucom ya existe';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
 					//Saca de la funcion principal
 					exit;
 				}	
 
 				
-				$this->_clientes->crear_cliente($this->getTexto('usuario'),$this->getSql('pass'),$this->getInt('id_rol'));
+				$this->_clientes->crear_cliente($this->getInt('tipo_empresa'),
+					$this->getInt('tipo_doc'),
+					$this->getTexto('numdoc'),
+					$this->getTexto('rucom'),
+					$this->getTexto('rsocial'),
+					$this->getTexto('nomcom'),
+					$this->getTexto('tel1'),
+					$this->getTexto('tel2'),
+					$this->getSql('dir'),
+					$this->getSql('email'));
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
-			$this->_view->renderizar('nuevo_usuario', "usuarios");
+			$this->_view->renderizar('nuevo_cliente', "clientes");
 		} else {
       		$this->redireccionar('admin');
       	}
@@ -149,7 +188,7 @@ class clientesController extends Controller {
 	public function editar_cliente($id) {
 		
 		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
-    	if (Session::Get('autenticado_adminsciocco') == true ){ 
+    	if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 		
 			if (!$this->filtrarInt($id)) {
@@ -163,7 +202,8 @@ class clientesController extends Controller {
 	        }
 
 				
-			$this->_view->roles = $this->_clientes->getUsuario();
+			$this->_view->empresa = $this->_clientes->gettipe();
+			$this->_view->documento = $this->_clientes->gettido();
 			$this->_view->datos = $this->_clientes->getCliente($this->filtrarInt($id));
 			 /* VALIDACION */
 				if ($this->getInt('guardar') == 1) {
@@ -171,20 +211,84 @@ class clientesController extends Controller {
 					$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
 				//Se valida que las dos contraseñas digitadas coincidan
 				
-				if (!$this->getTexto('usuario')) {
+				if (!$this->getInt('tipo_empresa') || $this->getInt('tipo_empresa')== 0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el rol';
+					$this->_view->_error = 'Debe Ingresar Tipo de Empresa';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_usuario',false,true);
+					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
 
-				if (!$this->getInt('id_rol') || $this->getInt('id_rol')== 0) {
+				if (!$this->getInt('tipo_doc') || $this->getInt('tipo_doc')== 0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el rol';
+					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_usuario',false,true);
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+
+				if (!$this->getTexto('numdoc')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el numero de documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('rucom')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el numero de rucom';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('rsocial')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la razon social';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('nomcom')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el nombre comercial';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getTexto('tel1')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el telefono 1 ';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getSql('dir')) {
+	                //Si no cumple la validacion sale mensaje de error
+	                $this->_view->_error = 'Debe introducir la direccion';
+	                //Vista de la pagina actual
+	                $this->_view->renderizar('editar_cliente',false,true);
+	                //Saca de la funcion principal
+	                exit;
+            	}
+
+            	if (!$this->getSql('email')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe ingresar el email.';
+					//Se renderiza a la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
@@ -193,24 +297,42 @@ class clientesController extends Controller {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'Debe Ingresar el estado del tipo de novedad';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_usuario',false,true);
+					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
 
 				//Se valida que no exista otro usuario con el mismo nombre
-				if ($this->_usuarios->validarusuarioedita($this->getTexto('usuario'),$this->filtrarInt($id))) {
+				if ($this->_clientes->validarnumdocedita($this->filtrarInt($id),$this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'El nombre de usuario ya existe';
+					$this->_view->_error = 'El numero de documento ya existe con este tipo de documento';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_usuario',false,true);
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				//Se valida que no exista otro usuario con el mismo nombre
+				if ($this->_clientes->validarrucomedita($this->filtrarInt($id),$this->getTexto('rucom'))) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'El numero rucom ya existe';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
 					
 					$this->_clientes->editar_cliente($this->filtrarInt($id),
-						$this->getTexto('usuario'),
-						$this->getInt('id_rol'),
+						$this->getInt('tipo_empresa'),
+						$this->getInt('tipo_doc'),
+						$this->getTexto('numdoc'),
+						$this->getTexto('rucom'),
+						$this->getTexto('rsocial'),
+						$this->getTexto('nomcom'),
+						$this->getTexto('tel1'),
+						$this->getTexto('tel2'),
+						$this->getSql('dir'),
+						$this->getSql('email'),
 						$this->getInt('estado'));
 				
 				$this->_view->_mensaje = 'Datos Actualizados Correctamente';
@@ -218,7 +340,7 @@ class clientesController extends Controller {
 			 	
 				$this->_view->datos = $this->_clientes->getCliente($this->filtrarInt($id));
 				
-			 $this->_view->renderizar('editar_usuario',false,true);
+			 $this->_view->renderizar('editar_cliente',false,true);
 
 		} else {
       		$this->redireccionar('admin');
@@ -228,7 +350,7 @@ class clientesController extends Controller {
     public function eliminarcliente($id) {
 		
 		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
-    	if (Session::Get('autenticado_adminsciocco') == true ){ 
+    	if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 	        //Si el id no es un nro entero
 	        if (!$this->filtrarInt($id)) {

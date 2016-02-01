@@ -19,7 +19,7 @@ class adminController extends Controller {
 			$this->_view->navegacion = '';
 
 		
-		/*if (Session::get('autenticado_adminsciocco')) {
+		/*if (Session::get('autenticado')) {
             //Se redirecciona a otra página
             $this->redireccionar('panel');
         }*/

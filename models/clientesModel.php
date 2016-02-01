@@ -11,15 +11,9 @@ class clientesModel extends Model {
 
     public function getClientes() {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT  c.id,
-                                                c.num_doc,
-                                                CONCAT(c.nombres,' ',c.apellidos) AS nombre,
-                                                c.fecha_reg,
-                                                u.usuario,
-                                                td.tipo_doc
-                                                FROM usuarios AS u, cliente AS c,  tipo_documento AS td
-                                                WHERE c.id_usuario = u.id
-                                                AND c.id_tipo_doc = td.id;");
+            $consulta = $this->_db->get_results("SELECT c.*,te.tipo_cliente,td.tipo_documento as tdoc
+                                                FROM clientes AS c, tipo_documento AS td, tipo_clientes as te 
+                                                WHERE c.tipo_documento = td.id AND c.id_tipo_cliente = te.id ;");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -29,77 +23,97 @@ class clientesModel extends Model {
     public function getCliente($id) {
         //Se crea y ejecuta la consulta
         $id = (int) $id; /* Parse de la variable */
-            $consulta = $this->_db->get_row("SELECT  c.*,
-                                                CONCAT(c.nombres,' ',c.apellidos) AS nombre,
-                                                u.usuario,
-                                                td.tipo_doc
-                                                FROM usuarios AS u, cliente AS c,  tipo_documento AS td
-                                                WHERE c.id_usuario = u.id
-                                                AND c.id_tipo_doc = td.id
+            $consulta = $this->_db->get_row("SELECT c.*,te.tipo_cliente,td.tipo_documento as tdoc
+                                                FROM clientes AS c, tipo_documento AS td, tipo_clientes as te 
+                                                WHERE c.tipo_documento = td.id AND c.id_tipo_cliente = te.id 
                                                 AND c.id = $id;");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
 
-     public function getusuarios() {
+    public function gettipe() {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT * FROM usuarios WHERE 1");
+            $consulta = $this->_db->get_results("SELECT * from tipo_clientes");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function gettido() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from tipo_documento");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
     
-    public function validardocumento($tipodoc, $numdoc) {
+    public function validarnumdoc($tipodoc, $numdoc) {
         //Se crea y ejecuta la consulta
         $tipodoc = (int) $tipodoc; /* Parse de la variable */
-            $consulta = $this->_db->get_row("SELECT c.id FROM cliente AS c 
-                                            WHERE c.id_tipo_doc = $tipodoc
-                                            AND c.num_doc = '".$numdoc."';");
+            $consulta = $this->_db->get_row("SELECT c.id FROM clientes AS c 
+                                            WHERE c.tipo_documento = $tipodoc
+                                            AND c.nit = '".$numdoc."';");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
-
-    public function validarusuarioedita($tipodoc, $numdoc, $id) {
+    
+    public function validarrucom($rucom) {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_row("SELECT u.id FROM usuarios AS u WHERE u.usuario = '".$usuario."'
-                and id != $id;");
+            $consulta = $this->_db->get_row("SELECT c.id FROM clientes AS c 
+                                            WHERE c.rucom = '".$rucom."';");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function validarnumdocedita($id,$tipodoc, $numdoc) {
+        //Se crea y ejecuta la consulta
+        $id = (int) $id; /* Parse de la variable */
+            $consulta = $this->_db->get_row("SELECT c.id FROM clientes AS c 
+                                            WHERE c.tipo_documento = $tipodoc
+                                            AND c.nit = '".$numdoc."'
+                                             AND c.id <> $id;");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+    
+    public function validarrucomedita($id,$rucom) {
+        //Se crea y ejecuta la consulta
+        $id = (int) $id; /* Parse de la variable */
+            $consulta = $this->_db->get_row("SELECT c.id FROM clientes AS c 
+                                            WHERE c.rucom = '".$rucom."'
+                                             AND c.id <> $id;");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
 
 
-    public function crear_usuario($usuario, $pass, $rol) {
+    public function crear_cliente($tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,
+                    $dir, $email) {
 
-        $this->_db->query("INSERT INTO usuarios (usuario, pass, id_rol) VALUES
-                            ('".$usuario."',
-                            '". Hash::getHash('md5', $pass, HASH_KEY) ."',
-                            ".$rol.");");
+        $this->_db->query("INSERT INTO clientes (id_tipo_cliente, tipo_documento, nit, rucom, razon_social,
+                            nomcom, telefono1, telefono2, direccion, email) VALUES
+                            (".$tipo_emp.", ".$tipo_doc.", '".$numdoc."', '".$rucom."', '".$rsocial."',
+                            '".$nomcom."', '".$telefono1."', '".$telefono2."', '".$dir."', '".$email."');");
     }
 
-    public function editar_usuario($id, $usuario, $rol, $estado) {
+    public function editar_cliente($id, $tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,
+                    $dir, $email, $estado) {
 
-        $this->_db->query("UPDATE usuarios SET usuario='".$usuario."', 
-                            id_rol=".$rol.", 
+        $this->_db->query("UPDATE clientes SET id_tipo_cliente='".$tipo_emp."', 
+                            tipo_documento=".$tipo_doc.",
+                            nit='".$numdoc."', 
+                            rucom='".$rucom."', 
+                            razon_social='".$rsocial."', 
+                            nomcom='".$nomcom."', 
+                            telefono1='".$telefono1."', 
+                            telefono2='".$telefono2."', 
+                            direccion='".$dir."', 
+                            email='".$email."', 
                             estado=".$estado."
                             WHERE id = $id;");
     }
 
-    public function validarclave($pass,$id) {
-        //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_row("SELECT u.id FROM usuarios AS u WHERE u.pass = '". Hash::getHash('md5', $pass, HASH_KEY) ."'
-                and id = $id;");
-        //Se retorna la consulta y se recorren los registros
-        return $consulta;
-    }
-
-    public function editar_clave($id, $pass) {
-
-        $this->_db->query("UPDATE usuarios SET pass='". Hash::getHash('md5', $pass, HASH_KEY) ."'
-                            WHERE id = $id;");
-    }
-
-    public function eliminar_usuario($id) {
+    public function eliminar_cliente($id) {
         $id = (int) $id; /* Parse de la variable */
-        $this->_db->query("Delete FROM usuarios Where id = $id;");
+        $this->_db->query("Delete FROM clientes Where id = $id;");
     }
 }
 
