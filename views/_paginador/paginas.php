@@ -1,7 +1,7 @@
 <?php if (isset($this->_paginacion)): ?>
 
-    <div class="pagination" style="text-align: center;">
-        <ul>
+    <div class="" style="text-align: center;">
+        <ul class="pagination">
             <?php if ($this->_paginacion['primero']): ?>
 
                 <li><a class="pagina" href="<?php echo $link . $this->_paginacion['primero']; ?>">&laquo;</a></li>

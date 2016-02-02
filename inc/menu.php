@@ -53,7 +53,7 @@
 						<a  href="proveedores.php">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
 							<span class="badge alert-primary pull-right">
-								<i class="glyphicon glyphicon-bell"></i>/span>
+								<i class="glyphicon glyphicon-bell"></i></span>
 						</a>
 					</li>
 

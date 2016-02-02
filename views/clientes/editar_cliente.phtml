@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Sistema - Tienda Virtual</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
     <?php require_once 'inc/header.php'; ?>
 </head>
 <body>
-        <div class="new-count">
+        <div class="new-count col-xs-12">
             <div class="clearfix"></div>
             <form class="form-horizontal" action="" method="POST" id="form" name="form1">
                 <div class="acceso">
@@ -31,9 +32,9 @@
                         <label for="" class="control-label col-xs-3">Tipo Empresa:</label>
                         <div class="col-xs-8">
                             <select class="form-control" name="tipo_empresa" id="tipo_empresa" >
-                                <option value="">-Seleccione-</option>
+                                <option class="form-control col-xs-12" value="">-Seleccione-</option>
                                 <?php foreach ($this->empresa as $empresa): ?>
-                                        <option value="<?php echo $empresa->id; ?>" <?php if($this->datos->id_tipo_cliente == $empresa->id){ ?> selected <?php } ?> ><?php echo $empresa->tipo_cliente; ?></option>
+                                        <option class="col-xs-12 form-control"value="<?php echo $empresa->id; ?>" <?php if($this->datos->id_tipo_cliente == $empresa->id){ ?> selected <?php } ?> ><?php echo $empresa->tipo_cliente; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -43,9 +44,9 @@
                         <label for="" class="control-label col-xs-3">Tipo Documento:</label>
                         <div class="col-xs-8">
                             <select class="form-control" name="tipo_doc" id="tipo_doc" >
-                                <option value="">-Seleccione-</option>
+                                <option class="col-xs-12 form-control" value="">-Seleccione-</option>
                                 <?php foreach ($this->documento as $documento): ?>
-                                        <option value="<?php echo $documento->id; ?>"  <?php if($this->datos->tipo_documento == $documento->id){ ?> selected <?php } ?>><?php echo $documento->tipo_documento; ?></option>
+                                        <option class="col-xs-12 form-control" value="<?php echo $documento->id; ?>"  <?php if($this->datos->tipo_documento == $documento->id){ ?> selected <?php } ?>><?php echo $documento->tipo_documento; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -54,7 +55,7 @@
                     <div class="form-group">
                         <label for="" class="control-label col-xs-3">Numero Documento:</label>
                         <div class="col-xs-8">
-                            <input type="text" name="numdoc" id="numdoc" class="form-control" required placeholder="Numero Documento" value="<?php if (isset($this->datos->nit)) echo $this->datos->nit; ?>">
+                            <input type="text" name="numdoc" id="numdoc" class="col-xs-12 form-control" required placeholder="Numero Documento" value="<?php if (isset($this->datos->nit)) echo $this->datos->nit; ?>">
                         </div>
                     </div>
 
