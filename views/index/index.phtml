@@ -21,111 +21,108 @@
       </div>
     </div>
   </div>
+  <section class="container">
+    <div class="container-fluid col-md-12">
+      <div class="row">
+        <!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">-->
+        <!--<div class="content">-->
+        <div>
+          <!--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-2">-->
+          <div class="index row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="space"></div>
+            <div class="alert alert-dismissible alert-success">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Bienvenido de nuevo al Sistema de Ventas.</strong>
+            </div>
+            <!--Perfil-->
+            <a class="disable" onClick="javascript:alert('El módulo Perfil está deshabilitado por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-user"></span></p>
+                <p class="title">Perfil</p>
+                <p class="hidden">Deepcode</p>
+              </div>
+            </a>
 
-  <div class="container-fluid col-md-12">
-    <div class="row">
-      <!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">-->
-      <!--<div class="content">-->
-      <div>
-        <!--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-2">-->
-        <div class="index row col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="space"></div>
-          <a href="./">
-            <div class="col-xs-12 col-md-4 welcome" style="height: 352px;">
-              <p class="title">Bienvenido a XXXXXXXXX</p>
-              <p>En esta aplicación tu podrás Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>             
-            </div>
-          </a>
-          <!--Perfil-->
-          <a href="<?php echo BASE_URL; ?>perfil/<?php echo $_SESSION["id_usuario"]; ?>">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-user"></span></p>
-              <p class="title">Perfil</p>
-              <p class="hidden">Deepcode</p>
-            </div>
-          </a>
+            <!--Productos -->
+            <a href="<?php echo BASE_URL; ?>productos">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-bed"></span></p>
+                <p class="title">Productos</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
+            <!--Provedores -->
+            <a class="disable" onClick="javascript:alert('El módulo Proveedores está deshabilitado por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-scale"></span></p>
+                <p class="title">Provedores</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <!--Productos -->
-          <a href="<?php echo BASE_URL; ?>productos">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-bed"></span></p>
-              <p class="title">Productos</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
-          <!--Provedores -->
-          <a href="<?php echo BASE_URL; ?>proveedores">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-scale"></span></p>
-              <p class="title">Provedores</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
+            <!--Compras -->
+            <a onClick="javascript:alert('El módulo Insumos está deshabilitado por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')" class="disable">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-shopping-cart"></span></p>
+                <p class="title">Insumos</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <!--Compras -->
-          <a href="<?php echo BASE_URL; ?>insumos">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-shopping-cart"></span></p>
-              <p class="title">Insumos</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
+            <!--Clientes -->
+            <a href="<?php echo BASE_URL; ?>clientes">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-folder-open"></span></p>
+                <p class="title">Clientes</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <!--Clientes -->
-          <a href="<?php echo BASE_URL; ?>clientes">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-folder-open"></span></p>
-              <p class="title">Clientes</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
+            <!--Ventas -->
+            <a href="<?php echo BASE_URL; ?>ventas">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-credit-card"></span></p>
+                <p class="title">Ventas</p>
+                <i class="glyphicon glyphicon-bell"></i></div>
+            </a>
+            <!--Reportes -->
+            <a class="disable" onClick="javascript:alert('El módulo Reportes está deshabilitado por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-list-alt"></span></p>
+                <p class="title">Reportes</p>
+                <i class="glyphicon glyphicon-bell"></i></span>
+              </div>
+            </a>
+            <!--Usuarios -->
+            <a href="<?php echo BASE_URL; ?>usuarios">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-user"></span></p>
+                <p class="title">Usuarios</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <!--Ventas -->
-          <a href="<?php echo BASE_URL; ?>ventas">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-credit-card"></span></p>
-              <p class="title">Ventas</p>
-              <i class="glyphicon glyphicon-bell"></i></div>
-          </a>
-          <!--Reportes -->
-          <a href="<?php echo BASE_URL; ?>reportes">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-list-alt"></span></p>
-              <p class="title">Reportes</p>
-              <i class="glyphicon glyphicon-bell"></i></span>
-            </div>
-          </a>
-          <!--Usuarios -->
-          <a href="<?php echo BASE_URL; ?>usuarios">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-user"></span></p>
-              <p class="title">Usuarios</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
+            <a href="<?php echo BASE_URL; ?>Empleados">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-user"></span></p>
+                <p class="title">Empleados</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <a href="<?php echo BASE_URL; ?>Empleados">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-user"></span></p>
-              <p class="title">Empleados</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
+            <a href="<?php echo BASE_URL; ?>Vehiculos">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-user"></span></p>
+                <p class="title">Vehiculos</p>
+                <p><i class="glyphicon glyphicon-bell"></i></span></p>
+              </div>
+            </a>
 
-          <a href="<?php echo BASE_URL; ?>Vehiculos">
-            <div class="col-xs-6 col-md-2 iconos-i">
-              <p><span class="glyphicon glyphicon-user"></span></p>
-              <p class="title">Vehiculos</p>
-              <p><i class="glyphicon glyphicon-bell"></i></span></p>
-            </div>
-          </a>
-
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <?php require_once 'inc/footer.php'; ?>
 
 </body>

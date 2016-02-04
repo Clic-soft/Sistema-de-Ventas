@@ -2,8 +2,8 @@
 					<div>
 						<a 	href="./">Sistema - Tienda</a>
 					</div>
-					<li class="dropdown" style="margin-top:15px;">
-	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border-right: none;">
+					<li class="dropdown disable" style="margin-top:15px;">
+	                    <a onClick="javascript:alert('La opción está deshabilitada por el momento. \n Si tiene alguna duda, contacte a su desarrollador.')" class="dropdown-toggle" data-toggle="dropdown" style="border-right: none;">
 	                        <span class="glyphicon glyphicon-user"></span> 
 	                        <strong>Perfil</strong>
 	                    </a>
@@ -49,16 +49,16 @@
 					</li>
 
 
-					<li id="proveedores"  role="presentation">
-						<a  href="<?php echo BASE_URL; ?>proveedores">
+					<li id="proveedores" class="disable" role="presentation">
+						<a  onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
 						</a>
 					</li>
 
-					<li id="compras"  role="presentation">
-						<a  href="<?php echo BASE_URL; ?>insumos">
+					<li id="compras" class="disable"  role="presentation">
+						<a  onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')" >
 							<i class="glyphicon glyphicon-shopping-cart"></i> Insumos 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -81,8 +81,8 @@
 								<i class="glyphicon glyphicon-bell"></i></span>
 						</a>
 					</li>
-					<li id="reportes" role="presentation">
-						<a href="<?php echo BASE_URL; ?>reportes">
+					<li id="reportes" class="disable" role="presentation">
+						<a onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>

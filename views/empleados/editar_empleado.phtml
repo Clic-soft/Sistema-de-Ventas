@@ -5,88 +5,104 @@
     <meta charset="UTF-8">
     <title>Sistema - Tienda Virtual</title>
     <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
+    <style>
+        .fixed{
+            position: fixed !important;
+        }
+    </style>
 </head>
 <body>
-        <div class="new-count">
-            <div class="clearfix"></div>
-            <form class="form-horizontal" action="" method="POST" id="form" name="form1">
-                <div class="acceso">
-                    <input type="hidden" name="guardar" value="1" />
-                    <?php if (isset($this->_error)): ?>
-                        <div id="_error" class="alert alert-error">
-                            <a class="close" data-dismiss="alert">x</a>
-                            <?php echo $this->_error; ?>
-                        </div>
-                    <?php endif; ?>
+    <script type="text/javascript">
+        $("#empleados").addClass("active");                  
+    </script>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="space"></div>
+                <div>
+                <div class="clearfix"></div>
+                    <form class="form-horizontal col-xs-12" action="" method="POST" id="form" name="form1">
+                        <div class="acceso">
+                            <input type="hidden" name="guardar" value="1" />
+                            <?php if (isset($this->_error)): ?>
+                                <div id="_error" class="alert alert-error">
+                                    <a class="close" data-dismiss="alert">x</a>
+                                    <?php echo $this->_error; ?>
+                                </div>
+                            <?php endif; ?>
 
-                    <?php if (isset($this->_mensaje)): ?>
-                        <div id="_mensaje" class="alert alert-success">
-                            <a class="close" data-dismiss="alert">x</a>
-                            <?php echo $this->_mensaje; ?>
-                        </div>
-                    <?php endif; ?>
-                    <br>
+                            <?php if (isset($this->_mensaje)): ?>
+                                <div id="_mensaje" class="alert alert-success">
+                                    <a class="close" data-dismiss="alert">x</a>
+                                    <?php echo $this->_mensaje; ?>
+                                </div>
+                            <?php endif; ?>
+                            <br>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Codigo Empleado:</label>
-                        <div class="col-xs-8">
-                            <input type="text" name="codigo" id="codigo" class="form-control" required placeholder="codigo" value="<?php if (isset($this->datos->codigo)) echo $this->datos->codigo; ?>">
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Codigo Empleado:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="codigo" id="codigo" class="form-control" required placeholder="codigo" value="<?php if (isset($this->datos->codigo)) echo $this->datos->codigo; ?>">
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Tipo Documento:</label>
-                        <div class="col-xs-8">
-                            <select class="form_imput" name="tipo_doc" id="tipo_doc" >
-                                <option value="">-Seleccione-</option>
-                                <?php foreach ($this->documento as $documento): ?>
-                                        <option value="<?php echo $documento->id; ?>" <?php if($this->datos->tipo_documento == $documento->id){ ?> selected <?php } ?> ><?php echo $documento->tipo_documento; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Tipo Documento:</label>
+                                <div class="col-xs-8">
+                                    <select class="form_imput" name="tipo_doc" id="tipo_doc" >
+                                        <option value="">-Seleccione-</option>
+                                        <?php foreach ($this->documento as $documento): ?>
+                                                <option value="<?php echo $documento->id; ?>" <?php if($this->datos->tipo_documento == $documento->id){ ?> selected <?php } ?> ><?php echo $documento->tipo_documento; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Numero Documento:</label>
-                        <div class="col-xs-8">
-                            <input type="text" name="numdoc" id="numdoc" class="form-control" required placeholder="Numero Documento" value="<?php if (isset($this->documento->nit)) echo $this->datos->documento; ?>">
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Numero Documento:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="numdoc" id="numdoc" class="form-control" required placeholder="Numero Documento" value="<?php if (isset($this->documento->nit)) echo $this->datos->documento; ?>">
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Nombres:</label>
-                        <div class="col-xs-8">
-                            <input type="text" name="nombres" id="nombres" class="form-control" required
-                                placeholder="Nombres" value="<?php if (isset($this->datos->nombres)) echo $this->datos->nombres; ?>">
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Nombres:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="nombres" id="nombres" class="form-control" required
+                                        placeholder="Nombres" value="<?php if (isset($this->datos->nombres)) echo $this->datos->nombres; ?>">
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Apellidos:</label>
-                        <div class="col-xs-8">
-                            <input type="text" name="apellidos" id="apellidos" class="form-control" required
-                                placeholder="Apellidos" value="<?php if (isset($this->datos->apellidos)) echo $this->datos->apellidos; ?>">
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Apellidos:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="apellidos" id="apellidos" class="form-control" required
+                                        placeholder="Apellidos" value="<?php if (isset($this->datos->apellidos)) echo $this->datos->apellidos; ?>">
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Salario:</label>
-                        <div class="col-xs-8">
-                            <input type="text" name="salario" id="salario" class="form-control" required placeholder="Nombre Comercial" value="<?php if (isset($this->datos->salario_b)) echo $this->datos->salario_b; ?>">
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-3">Salario:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="salario" id="salario" class="form-control" required placeholder="Nombre Comercial" value="<?php if (isset($this->datos->salario_b)) echo $this->datos->salario_b; ?>">
+                                </div>
+                            </div>
 
+                        </div>
+
+                        <center>
+                            <a href="#" class="btn btn-primary btn-center btn" onclick="document.getElementById('form').submit()">Guardar</a>
+                        </center>
+                    </form>
                 </div>
-
-                <center>
-                    <a href="#" class="btn btn-primary btn-center btn" onclick="document.getElementById('form').submit()">Guardar</a>
-                </center>
-            </form>
+            </div>
         </div>
     </div>
- 
-</body>
-</html>
 <?php 
 else:
     header( 'Location: ../' );

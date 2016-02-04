@@ -4,6 +4,9 @@
 .navbar-header>.navbar-brand{
 	color: #fff;
 }
+.disable{
+    opacity: .5;
+}
 .navbar .nav> li>a{
 	color:#fff;
 	border-right: 1px solid #226fd1;
@@ -302,8 +305,8 @@
     text-align: center;
     padding: 40px;
     background: #337AB7;
-    margin:10px;
-    width:calc(16.91% - 30px);
+    margin:5px;
+    width:calc(16.91% - 13px);
     color:white;
     max-height: 166px;
 }

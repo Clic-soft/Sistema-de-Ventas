@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title>Sistema - Tienda Virtual</title>
     <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
 </head>
 <body>
         <div class="new-count">
             <div class="clearfix"></div>
-            <form class="form-horizontal" action="" method="POST" id="form" name="form1">
+            <form class="form-horizontal col-xs-12" action="" method="POST" id="form" name="form1">
                 <div class="acceso">
                     <input type="hidden" name="guardar" value="1" />
                     <?php if (isset($this->_error)): ?>
