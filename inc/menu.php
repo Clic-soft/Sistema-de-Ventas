@@ -41,7 +41,7 @@
 	                </li>
 
 					<li id="productos"  role="presentation">
-						<a  href="productos.php">
+						<a  href="<?php echo BASE_URL; ?>productos">
 							<i class="glyphicon glyphicon-bed"></i> Productos 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -50,7 +50,7 @@
 
 
 					<li id="proveedores"  role="presentation">
-						<a  href="proveedores.php">
+						<a  href="<?php echo BASE_URL; ?>proveedores">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -58,7 +58,7 @@
 					</li>
 
 					<li id="compras"  role="presentation">
-						<a  href="compras.php">
+						<a  href="<?php echo BASE_URL; ?>insumos">
 							<i class="glyphicon glyphicon-shopping-cart"></i> Insumos 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -67,7 +67,7 @@
 
 
 					<li id="clientes"  role="presentation">
-						<a  href="clientes.php">
+						<a  href="<?php echo BASE_URL; ?>clientes">
 							<i class="glyphicon glyphicon-folder-open"></i> Clientes 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -75,14 +75,14 @@
 					</li>
 
 					<li id="ventas"  role="presentation">
-						<a href="ventas.php">
+						<a href="<?php echo BASE_URL; ?>ventas">
 							<i class="glyphicon glyphicon-credit-card"></i> Ventas 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
 						</a>
 					</li>
 					<li id="reportes" role="presentation">
-						<a href="menureporte.php">
+						<a href="<?php echo BASE_URL; ?>reportes">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
@@ -90,8 +90,24 @@
 					</li>
 					
 					<li id="usuarios"  role="presentation">
-						<a  href="usuarios.php">
+						<a  href="<?php echo BASE_URL; ?>usuarios">
 							<i class="glyphicon glyphicon-user"></i> Usuarios 
+							<span class="badge alert-primary pull-right">
+								<i class="glyphicon glyphicon-bell"></i></span>
+						</a>
+					</li>
+
+					<li id="empleados"  role="presentation">
+						<a  href="<?php echo BASE_URL; ?>empleados">
+							<i class="glyphicon glyphicon-user"></i> Empleados 
+							<span class="badge alert-primary pull-right">
+								<i class="glyphicon glyphicon-bell"></i></span>
+						</a>
+					</li>
+
+					<li id="vehiculos"  role="presentation">
+						<a  href="<?php echo BASE_URL; ?>vehiculos">
+							<i class="glyphicon glyphicon-user"></i> Vehiculos 
 							<span class="badge alert-primary pull-right">
 								<i class="glyphicon glyphicon-bell"></i></span>
 						</a>

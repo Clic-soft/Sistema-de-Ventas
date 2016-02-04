@@ -1,0 +1,85 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#empleados").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="space"></div>
+                    <div class="navbar navbar-default">
+                        <div class="navbar-inner contenido-button">
+                            <a href="<?php echo BASE_URL; ?>empleados/nuevo_empleado" class="btn btn-small btn-default"><i class="glyphicon glyphicon-plus"></i>&nbsp;Nuevo Empleado</a>
+
+                            <a href="<?php echo BASE_URL; ?>empleados" 
+                                class="link-actualizar pull-right"><i class='glyphicon glyphicon-refresh'></i> Actualizar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros">     
+                        <?php if (isset($this->empleado) && count($this->empleado)) : ?>  
+                            <table class='table  table-bordered table-hover table-condensed'>
+                                <thead class="alert alert-info text-head">
+                                    <tr>
+                                        <th class="text-center">CODIGO EMPLEADO</th>
+                                        <th class="text-center">TIPO DOCUMENTO</th>
+                                        <th class="text-center">NUMERO DOCUMENTO</th>
+                                        <th class="text-center">NOMBRE</th>
+                                        <th class="text-center">SALARIO</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->empleado as $empleado):?>
+                                    <tr>
+                                        <td><?php echo $empleado->codigo;?></td>
+                                        <td><?php echo $empleado->tdoc;?></td>
+                                        <td><?php echo $empleado->documento;?></td>
+                                        <td><?php echo $empleado->nombres." ".$empleado->apellidos;?></td>
+                                        <td>$<?php echo $empleado->salario_b;?></td>
+                                    <td>
+                                        <a href="<?php echo BASE_URL; ?>empleados/editar_empleado/<?php echo $empleado->id?>" class="btn2 ventanaempleado"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+
+                                        <a href="javascript:borrar_empleado(<?php echo $empleado->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay empleados creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

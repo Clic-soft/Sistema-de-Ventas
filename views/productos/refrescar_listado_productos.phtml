@@ -1,0 +1,36 @@
+<?php if (isset($this->producto) && count($this->producto)) : ?>  
+                            <table class='table  table-bordered table-hover table-condensed'>
+                                <thead class="alert alert-info text-head">
+                                    <tr>
+                                        <th class="text-center">PRODUCTO</th>
+                                        <th class="text-center">UNIDAD</th>
+                                        <th class="text-center">PRECIO</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->producto as $producto):?>
+                                    <tr>
+                                        <td><?php echo $producto->producto;?></td>
+                                        <td><?php echo $producto->unidad_medida." (".$producto->Simbolo.")";?></td>
+                                        <td><?php echo $producto->precio;?></td>
+                                    <td>
+                                        <a href="<?php echo BASE_URL; ?>productos/editar_producto/<?php echo $producto->id?>" class="btn2 ventanaproducto"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+
+                                        <a href="javascript:borrar_producto(<?php echo $producto->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay Produtos creados.</strong>
+                        </div>
+                        <?php endif; ?>

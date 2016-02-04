@@ -1,0 +1,34 @@
+<?php if (isset($this->vehiculo) && count($this->vehiculo)) : ?>  
+                            <table class='table  table-bordered table-hover table-condensed'>
+                                <thead class="alert alert-info text-head">
+                                    <tr>
+                                        <th class="text-center">CLIENTE</th>
+                                        <th class="text-center">PLACA</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->vehiculo as $vehiculo):?>
+                                    <tr>
+                                        <td><?php echo $vehiculo->nomcom;?></td>
+                                        <td><?php echo strtoupper($vehiculo->placa);?></td>
+                                    <td>
+                                        <a href="<?php echo BASE_URL; ?>vehiculos/editar_vehiculo/<?php echo $vehiculo->id?>" class="btn2 ventanavehiculo"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+
+                                        <a href="javascript:borrar_vehiculo(<?php echo $vehiculo->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay vehiculos creados.</strong>
+                        </div>
+                        <?php endif; ?>
