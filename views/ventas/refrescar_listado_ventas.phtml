@@ -1,0 +1,43 @@
+<?php if (isset($this->encabezado) && count($this->encabezado)) : ?>  
+    <table class='table  table-bordered table-hover table-condensed'>
+        <thead class="alert alert-info text-head">
+            <tr>
+                <th class="text-center">N°</th>
+                <th class="text-center">FECHA</th>
+                <th class="text-center">CLIENTE</th>
+                <th class="text-center">FORMA PAGO</th>
+                <th class="text-center">ESTADO</th>
+                <th class="text-center">TOTAL</th>
+                <th class="text-center">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($this->encabezado as $encabezado):?>
+            <tr>
+                <td><?php echo $encabezado->prefijo." 000".$encabezado->num_prefijo;?></td>
+                <td><?php echo $encabezado->fecha_venta;?></td>
+                <td><?php echo $encabezado->nomcom;?></td>
+                <td class="text-center"><?php if ($encabezado->forma_pago == 1){ echo "Efectivo";} elseif ($encabezado->forma_pago == 2){ echo "Remision";} elseif ($encabezado->forma_pago == 3){ echo "InfoRem";}?></td>
+                <td class="text-center"><?php if ($encabezado->estado_venta == 1){ echo "Creado";} elseif ($encabezado->estado_venta == 2){ echo "Pendiente";} elseif ($encabezado->estado_venta == 3){echo "Finalizado";} ?></td>
+                <td>$<?php echo $encabezado->total_venta;?></td>
+                
+            <td>
+                <a href="<?php echo BASE_URL; ?>ventas/editar_venta/<?php echo $encabezado->id?>" class="btn2 ventanavehiculo"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+
+                <a href="javascript:borrar_vehiculo(<?php echo $encabezado->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+        <tr>
+            <td colspan="4">
+                <div class="clear"></div>
+                <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<?php else: ?>
+<div class='alert alert-info'>
+<strong>No hay ventas creados.</strong>
+</div>
+<?php endif; ?>
