@@ -39,11 +39,11 @@ class ventasModel extends Model {
         return $consulta;
     }
 
-    public function getplacas() {
+    public function getplacas($id) {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT * from vehiculos");
-        //Se retorna la consulta y se recorren los registros
-        return $consulta;
+            $consulta = $this->_db->get_results("SELECT * from vehiculos where id_cliente=$id order by placa ASC");
+        return json_encode($consulta);
+
     }
 
     public function getclientes() {
@@ -67,12 +67,12 @@ class ventasModel extends Model {
     }
 
     
-    public function crear_venta($id_cliente, $id_empleado, $id_placa, $forma, $prefijo, $numero) {
+    public function crear_venta($id_cliente, $id_empleado, $id_placa, $forma, $prefijo, $numero, $prefijoco, $numeroco) {
         $fechaactual = date("Y-m-d H:i:s");
         $this->_db->query("INSERT INTO encabezado_venta (prefijo, num_prefijo, id_cliente, id_empleado,
-            fecha_venta, forma_pago, id_placa ) 
+            fecha_venta, forma_pago, id_placa, pref_co, num_co) 
             VALUES ('".$prefijo."', '".$numero."', '".$id_cliente."', '".$id_empleado."', '".$fechaactual."',
-             '".$forma."', '".$id_placa."');");
+             '".$forma."', '".$id_placa."','".$prefijoco."', '".$numeroco."');");
     }
 
     public function editar_vehiculo($id, $cliente, $placa) {

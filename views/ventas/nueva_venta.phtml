@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Sistema - Tienda Virtual</title>
     <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/custom-theme/jquery-ui-1.10.3.custom.css"> 
 </head>
 <body>
     <?php require_once 'inc/menu-l.php'; ?>
@@ -72,9 +73,6 @@
                                     <div class="col-xs-8">
                                         <select class="form_imput" name="id_placa" id="id_placa" >
                                             <option value="">-Seleccione-</option>
-                                            <?php foreach ($this->placa as $placa): ?>
-                                                    <option value="<?php echo $placa->id; ?>"><?php echo $placa->placa; ?></option>
-                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
