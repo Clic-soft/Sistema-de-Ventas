@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="" class="control-label col-xs-3">Unidad Medida:</label>
                         <div class="col-xs-8">
-                            <select class="form_imput" name="unidad" id="unidad" >
+                            <select class="form-control form_imput" name="unidad" id="unidad" >
                                 <option value="">-Seleccione-</option>
                                 <?php foreach ($this->unidad as $unidad): ?>
                                         <option value="<?php echo $unidad->id; ?>" <?php if($this->datos->id_und_medida == $unidad->id){ ?> selected <?php } ?> ><?php echo $unidad->unidad_medida." (".$unidad->Simbolo.")"; ?></option>

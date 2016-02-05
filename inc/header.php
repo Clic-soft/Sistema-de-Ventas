@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/dataTables.bootstrap.css"
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/styles.css">
-	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 
 	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/bootstrap-material-design.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/ripples.css">-->

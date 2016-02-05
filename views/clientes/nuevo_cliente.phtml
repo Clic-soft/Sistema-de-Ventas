@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Tipo Empresa:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="tipo_empresa" id="tipo_empresa" >
+                                        <select class="form-control form_imput" name="tipo_empresa" id="tipo_empresa" >
                                             <option value="">-Seleccione-</option>
                                             <?php foreach ($this->empresa as $empresa): ?>
                                                     <option value="<?php echo $empresa->id; ?>"><?php echo $empresa->tipo_cliente; ?></option>
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Tipo Documento:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="tipo_doc" id="tipo_doc" >
+                                        <select class="form-control form_imput" name="tipo_doc" id="tipo_doc" >
                                             <option value="">-Seleccione-</option>
                                             <?php foreach ($this->documento as $documento): ?>
                                                     <option value="<?php echo $documento->id; ?>"><?php echo $documento->tipo_documento; ?></option>

@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="" class="control-label col-xs-3">Cliente:</label>
                         <div class="col-xs-8">
-                            <select class="form_imput" name="id_cliente" id="id_cliente" >
+                            <select class="form-control form_imput" name="id_cliente" id="id_cliente" >
                                 <option value="">-Seleccione-</option>
                                 <?php foreach ($this->cliente as $cliente): ?>
                                         <option value="<?php echo $cliente->id; ?>" <?php if($this->datos->id_cliente == $cliente->id){ ?> selected <?php } ?>><?php echo $cliente->nomcom; ?></option>
