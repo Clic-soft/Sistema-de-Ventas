@@ -17,10 +17,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="space"></div>
                     <div class="navbar navbar-default">
-                            <a href="<?php echo BASE_URL; ?>productos" 
-                                class="link-actualizar pull-right"><i class='glyphicon glyphicon-arrow-left'></i> Volver
-                            </a>
-                        </div>
+                        <a href="<?php echo BASE_URL; ?>productos" 
+                            class="link-actualizar pull-right"><i class='glyphicon glyphicon-arrow-left'></i> Volver
+                        </a>
+                    </div>
                     </div>
 
                     <div class="new-count">
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Unidad Medida:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="unidad" id="unidad" >
+                                        <select class="form-control form_imput" name="unidad" id="unidad" >
                                             <option value="">-Seleccione-</option>
                                             <?php foreach ($this->unidad as $unidad): ?>
                                                     <option value="<?php echo $unidad->id; ?>"><?php echo $unidad->unidad_medida." (".$unidad->Simbolo.")"; ?></option>

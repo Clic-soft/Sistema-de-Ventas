@@ -6,7 +6,7 @@
     <title>Sistema - Tienda Virtual</title>
     <?php require_once 'inc/header.php'; ?>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
-    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>    <script src="ventas.js"></script> 
 </head>
 <body>
     <?php require_once 'inc/menu-l.php'; ?>
@@ -54,16 +54,16 @@
                                         <td>$<?php echo $encabezado->total_venta;?></td>
                                         
                                     <td>
-                                        <a href="<?php echo BASE_URL; ?>ventas/editar_venta/<?php echo $encabezado->id?>" class="ventanaventa"><span class="label label-primary">Editar venta</span></a>
+                                        <!--<a data-toggle="tooltip" data-placement="left" title="Editar venta" href="<?php echo BASE_URL; ?>ventas/editar_venta/<?php echo $encabezado->id?>" class="ventanaventa"><span class="glyphicon glyphicon-cog"></span></a>
 
-                                        <a href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="label label-primary">detalles</span></a>
+                                        <a data-toggle="tooltip" data-placement="left" title="Eliminar venta" href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-trash"></span></a>-->
 
-                                        <a href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="label label-danger">Borrar venta</span></a>
+                                        <a data-toggle="tooltip" data-placement="left" title="lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="7">
                                         <div class="clear"></div>
                                         <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
                                     </td>
@@ -81,6 +81,11 @@
         </div>
     </div>  
     <?php require_once 'inc/footer.php'; ?>
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>
 <?php 

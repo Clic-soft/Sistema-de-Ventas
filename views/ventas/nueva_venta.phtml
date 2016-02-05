@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Cliente:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="id_cliente" id="id_cliente" >
+                                        <select class="form-control form_imput" name="id_cliente" id="id_cliente" >
                                             <option value="">-Seleccione-</option>
                                             <?php foreach ($this->cliente as $cliente): ?>
                                                     <option value="<?php echo $cliente->id; ?>"><?php echo $cliente->nomcom; ?></option>
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Empleado:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="id_empleado" id="id_empleado" >
+                                        <select class="form-control form_imput" name="id_empleado" id="id_empleado" >
                                             <option value="">-Seleccione-</option>
                                             <?php foreach ($this->empleado as $empleado): ?>
                                                     <option value="<?php echo $empleado->id; ?>"><?php echo $empleado->nombres." ".$empleado->apellidos; ?></option>
@@ -71,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Placa:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="id_placa" id="id_placa" >
+                                        <select class="form-control form_imput" name="id_placa" id="id_placa" >
                                             <option value="">-Seleccione-</option>
                                         </select>
                                     </div>
@@ -80,7 +80,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Forma Pago:</label>
                                     <div class="col-xs-8">
-                                        <select class="form_imput" name="forma" id="forma" >
+                                        <select class="form-control form_imput" name="forma" id="forma" >
                                             <option value="">-Seleccione-</option>
                                             <option value="1">-Efectivo-</option>
                                             <option value="2">-Remision-</option>
@@ -92,7 +92,7 @@
                             </div>
 
                             <center>
-                                <a href="#" class="btn btn-primary btn-center btn" onclick="document.getElementById('form').submit()">Guardar</a>
+                                <a href="#" class="btn btn-primary btn-center" onclick="document.getElementById('form').submit()">Guardar</a>
                             </center>
                         </form>
                     </div>

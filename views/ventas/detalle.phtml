@@ -20,9 +20,12 @@
                     <div class="space"></div>
                     <div>
                         <div class="contenido-button">
-                            <a href="<?php echo BASE_URL; ?>ventas/agregar_detalle/<?php echo $this->idenc;?>"><span class="label label-primary">agregar detalle</span></a>
+                            <a href="<?php echo BASE_URL; ?>ventas/agregar_detalle/<?php echo $this->idenc;?>"><span class="label label-primary">agregar detalle venta</span></a>
 
                             <a href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $this->idenc;?>"><span class="label label-primary">Actualizar lista</span>
+                            </a>
+
+                            <a href="<?php echo BASE_URL; ?>ventas"><span class="label label-primary">ventas</span>
                             </a>
                         </div>
                     </div>
@@ -69,7 +72,7 @@
                         <?php else: ?>
                         <div class="space"></div>
                         <div class='alert alert-info'>
-                        <strong>No hay ventas creados.</strong>
+                        <strong>No hay detalles de venta creados.</strong>
                         </div>
                         <?php endif; ?>
                 </div>

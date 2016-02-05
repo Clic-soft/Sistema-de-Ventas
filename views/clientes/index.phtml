@@ -49,9 +49,9 @@
                                         <td><?php echo $cliente->email;?></td>
                                         <td><?php echo $cliente->telefono1;?></td>
                                         <td>
-                                            <a href="<?php echo BASE_URL; ?>clientes/editar_cliente/<?php echo $cliente->id?>" class=" ventanacliente"><span class="material-icons">build</span></a>
+                                            <a href="<?php echo BASE_URL; ?>clientes/editar_cliente/<?php echo $cliente->id?>" class=" ventanacliente"><span class="glyphicon glyphicon-cog"></span></a>
 
-                                            <a href="javascript:borrar_cliente(<?php echo $cliente->id;?>)" class=""><span class="material-icons">delete</span></a>
+                                            <a href="javascript:borrar_cliente(<?php echo $cliente->id;?>)" class=""><span class="glyphicon glyphicon-trash"></span></a>
                                         </td>
                                 </tr>
                                 <?php endforeach;?>
