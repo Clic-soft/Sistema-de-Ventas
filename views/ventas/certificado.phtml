@@ -20,10 +20,14 @@
 		<table class="table Table-list ">
 			  <thead >
 				  <tr>
-				    <th class="col-xs Table-Cam ">Expedientes</th>
-				    <th class="col-xs Table-Cam">Nombre / Razón social</th>
-				    <th class="col-xs Table-Cam">Minerales</th>
-				    <th class="col-xs Table-Cam">Ubicaciones</th>
+				    <th class="col-xs Table-bordered">Expedientes</th>
+
+				    <th class="col-xs Table-bordered">Nombre Comercial : playa rica
+										
+				    </th>
+
+				    <th class="col-xs Table-bordered">Minerales</th>
+				    <th class="col-xs Table-bordered">Ubicaciones: Roldanillo valle del cauca</th>
 
 				    
 				  </tr>
@@ -40,11 +44,11 @@
 	</section>
 	<section class="contenedor">
 		<p class="text-center col-xs-10">ARENERA EL PASO - TIERRA BLANCA</p>
-		<p class="text-right folio col-xs-2">12354</p>
+		<p class="text-right folio col-xs-2">  <?php  echo  "000" .  $this->datos->num_co;  ?></p>
 	</section>
 	<section class="contenedor datos">
 		<div class="bolqueta col-xs-12 flex">
-			<p class="col-xs-2">Bolqueta Placa</p>
+			<p class="col-xs-2 ">Volqueta Placa &nbsp;<?php  echo $this->vehiculo->placa;?> </p>
 			<input type="text" name="bolqueta_placa">
 		</div>
 		<div class="col-xs-7 flex">
@@ -60,7 +64,7 @@
 			<input type="text" name="destino">
 		</div>
 		<div class="col-xs-5 flex">
-			<p class="">Fecha</p>
+			<p class="">FECHA&nbsp;<?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?> </p>
 			<input type="text" name="fecha">
 		</div>
 		<div class="col-xs-7 flex">

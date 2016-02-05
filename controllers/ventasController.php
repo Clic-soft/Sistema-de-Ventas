@@ -304,7 +304,7 @@ class ventasController extends Controller {
 	        	$total = $total + $detalle->total_detalle;
 	        }
 
-	        $subtotal=$total-$descuento;
+	        $subtotal=$total+$descuento;
 
         	$this->_ventas->cambiar_estado($this->filtrarInt($id),$estado, $subtotal, $descuento, $total);
         } else {
@@ -495,6 +495,7 @@ class ventasController extends Controller {
 
 	        $datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
 	        $this->_view->pendientes = $this->_ventas->getpendienteFacturas($datos->id_cliente,3);
+	        $this->_view->idenc = $this->filtrarInt($id);
 
         	$this->_view->renderizar('gestionar_remision', 'ventas');
         } else {
@@ -504,22 +505,44 @@ class ventasController extends Controller {
 
 
 
+public function facturar($idrem, $idfac) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	        if (!$this->filtrarInt($idfac)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getEncabezado($this->filtrarInt($idfac))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+
+	        $datos = $this->_ventas->getEncabezado($this->filtrarInt($idfac));
+	        $detalles = $this->_ventas->getDetalles($this->filtrarInt($idrem));
+	        
+	        $estado=4;
 
 
+	        foreach ($detalles as $detalle) {
 
+	        	$this->_ventas->agregar_detalle_ges($this->filtrarInt($idfac),
+					$detalle->id_producto,
+					$detalle->precio,
+					$detalle->cantidad,
+					$detalle->descuento,
+					$detalle->total_detalle,
+					$this->filtrarInt($idrem));
+	        }
 
+        	$this->_ventas->cambiar_estado_ges($this->filtrarInt($idrem),$estado);
 
-
-
-
-
-
-
-
-
-
-
-
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
 
 
 
@@ -565,7 +588,7 @@ class ventasController extends Controller {
     			$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
     			$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
     			$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
-
+    			$deta = $this->_ventas->getDetalles($this->filtrarInt($id));  			
 
 
         $this->_view->renderizar('factura', false,true);	
@@ -576,12 +599,17 @@ class ventasController extends Controller {
 
 //CERTIFICADO VER
 
-public function ver_certificado($id) {
+	public function ver_certificado($id) {
 		
 		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
     	if (Session::Get('autenticado') == true ){ 
 	        //Si el id no es un nro entero
 	     
+
+    	$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+    	$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
+    	$this->_view->vehiculo = $this->_ventas->get_placas_certificado($data->id_placa);
+
 
         $this->_view->renderizar('certificado', false,true);	
         } else {

@@ -168,6 +168,26 @@ class ventasModel extends Model {
         return $consulta;
     }
 
+    public function agregar_detalle_ges($id, $producto, $precio, $cant, $desc, $total, $idrem) {
+        $this->_db->query("INSERT INTO detalle_ventas (id_venta, id_producto, precio, cantidad, descuento,
+            total_detalle, id_remision) 
+            VALUES ('".$id."','".$producto."', '".$precio."', '".$cant."', '".$desc."', '".$total."', '".$idrem."');");
+    }
+
+    public function cambiar_estado_ges($id, $estado) {
+        
+        $this->_db->query("UPDATE encabezado_venta SET estado_venta ='".$estado."'
+                                 where id = $id" ); 
+            
+    }
+
+    public function get_placas_certificado($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_row("SELECT * from vehiculos where id=$id ");
+        return $consulta;
+
+    }
+
 }
 
 ?>

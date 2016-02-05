@@ -16,9 +16,9 @@
 				<img src="<?php echo BASE_URL; ?>public/img/logo_arenera.jpg" alt="" class="logo">
 			</div>
 			<div class="col-xs text-center nada ">
-				<p>Arenera Pkaya Rica SAS</p>
+				<p>Arenera Playa Rica SAS</p>
 				<p>Isugu-Roldanillo-Valle</p>
-				<p>Calle Curiosa 415, Cali Colombia</p>
+				<p>Calle Curiosa 415</p>
 				<p>Tel 123456789009</p>
 			</div>
 			<div class="col-xs text-right facdes ">
@@ -70,26 +70,27 @@
 			  <thead>
 
 				  <tr>
-				    <th class="col-xs-1">Código</th>
-				    <th class="col-xs-5">Producto</th>
+				    <th class="col-xs-6">Producto</th>
 				    <th class="col-xs-2">Cantidad</th>
 				    <th class="col-xs-2">VL Unitario</th>
 				    <th class="col-xs-2">Subtotal</th>
 				  </tr>
 			  </thead>
+			  <?php if (isset($this->detalle) && count($this->detalle)) : ?> 
 			  <tbody>
 				  
-				 
+				  
 				<?php foreach($this->detalle as $detalle):?>
 			  <tr>
-				    <td class="col-xs-1 text-center"><?php  echo  $detalle->id; ?></td>
-				    <td class="col-xs-5"><?php echo $detalle->producto;?></td>
+				    <td class="col-xs-6"><?php echo $detalle->producto;?></td>
 				    <td class="text-center col-xs-2"><?php  echo  $detalle->cantidad;?></td>
 				    <td class="text-center col-xs-2"><?php  echo  $detalle->precio;?></td>
 				    <td class="col-xs-2 text-center"><?php  echo  $detalle->total_detalle;?></td>
 				  </tr>
 					<?php endforeach;?>
+
 			  </tbody>
+			  <?php endif; ?>
 			</table>
 			<footer class="flex">
 				<div class="notes col-xs-8 observaciones">

@@ -70,12 +70,12 @@
                                         &nbsp;
                                         <?php } 
 
-                                         if ($encabezado->estado_venta == 1){?>
+                                         if ($encabezado->estado_venta == 1 and $encabezado->forma_pago == 1){?>
 
                                         <a data-toggle="tooltip" data-placement="left" title="gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
                                         &nbsp;
                                         <?php } 
-                                        if ($encabezado->estado_venta == 2) {?>
+                                        if ($encabezado->estado_venta == 2 and $encabezado->forma_pago == 3) {?>
 
                                         <a data-toggle="tooltip" data-placement="left" title="abonos" href="<?php echo BASE_URL; ?>ventas/abonos/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-usd"></span></a>
                                         &nbsp;
