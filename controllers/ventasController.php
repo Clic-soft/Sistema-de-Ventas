@@ -275,14 +275,46 @@ class ventasController extends Controller {
       	}
     }
 
+    public function cambiar_estado($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	        if (!$this->filtrarInt($id)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getEncabezado($this->filtrarInt($id))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+
+	        $datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+	        $detalles = $this->_ventas->getDetalles($this->filtrarInt($id));
+
+	        if($datos->forma_pago == 3){
+	        	$estado=2;
+	        }else{
+	        	$estado=4;
+	        }
+
+        	$this->_ventas->cambiar_estado($this->filtrarInt($id),$estado);
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
+
     public function detalle($id) {
 		if (Session::Get('autenticado') == true ){ 
 			$this->_view->titulo = 'VENTAS';
 			$this->_view->navegacion = '';
 
+			$this->_view->setJs(array('detalle'));
+			
 			$this->_view->detalle =$this->_ventas->getDetalles($this->filtrarInt($id));
 			$this->_view->idenc=$this->filtrarInt($id);
-			$this->_view->setJs(array('detalle'));
+			
 
 
 			$this->_view->renderizar('detalle', "ventas");
@@ -297,6 +329,7 @@ class ventasController extends Controller {
 			$this->_view->navegacion = '';
 			$this->_view->idenc=$this->filtrarInt($id);
 			$this->_view->producto = $this->_ventas->getproductos();
+
 
 			if ($this->getInt('guardar') == 1) {
 				
@@ -348,9 +381,71 @@ class ventasController extends Controller {
       	}
 	}
 
+	public function editar_detalle($id) {
+		if (Session::Get('autenticado') == true ){ 
+			$this->_view->titulo = 'Nueva Venta';
+			$this->_view->navegacion = '';
 
+			$this->_view->producto = $this->_ventas->getproductos();
+			
+			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
+			
+			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$this->_view->id =$dato->id;
 
+			if ($this->getInt('guardar') == 1) {
+				
+				$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
+			//Se valida que las dos contraseñas digitadas coincidan
 
+				if (!$this->getInt('producto') || $this->getInt('producto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el producto';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('precio') || $this->getInt('precio')<1) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el precio';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getDecimal('cant') || $this->getDecimal('cant')<=0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la placa del vehiculo';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				$total=($this->getInt('precio')*$this->getDecimal('cant'))-$this->getInt('desc');				
+
+				$this->_ventas->editar_detalle($this->filtrarInt($id),
+					$this->getInt('producto'),
+					$this->getInt('precio'),
+					$this->getDecimal('cant'),
+					$this->getInt('desc'),
+					$total);
+
+				$this->_view->_mensaje = 'Datos Creados Correctamente';
+			}
+
+			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$this->_view->id =$dato->id;
+
+			$this->_view->renderizar('editar_detalle', false, true);
+		} else {
+      		$this->redireccionar('admin');
+      	}
+	}
 
 
 	public function eliminardetalle($id) {

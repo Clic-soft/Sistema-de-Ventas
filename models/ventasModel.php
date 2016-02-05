@@ -103,12 +103,20 @@ class ventasModel extends Model {
     }
 
 
+    public function cambiar_estado($id, $estado, $sub, $desc, $total) {
+        
+        $this->_db->query("UPDATE encabezado_venta SET estado_venta ='".$estado."',
+                                 sub_total_venta = '".$sub."',
+                                 descuento_venta = '".$desc."',
+                                 total_venta = '".$total."'
+                                 where id = $id" ); 
+            
+    }
 
 
     public function getDetalle($id) {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT d.* from detalle_ventas as d
-                where d.id=$id");
+            $consulta = $this->_db->get_row("SELECT d.* from detalle_ventas as d where d.id=$id");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -119,7 +127,23 @@ class ventasModel extends Model {
             VALUES ('".$id."','".$producto."', '".$precio."', '".$cant."', '".$desc."', '".$total."');");
     }
 
+    public function editar_detalle($id, $producto, $precio, $cant, $desc, $total) {
+        
+        $this->_db->query("UPDATE detalle_ventas SET id_producto ='".$producto."',
+                                 precio = '".$precio."',
+                                 cantidad = '".$cant."',
+                                 descuento = '".$desc."',
+                                 total_detalle = '".$total."'
+                                 where id = $id" ); 
+            
+    }
 
+
+
+    public function eliminar_detalle($id) {
+        $id = (int) $id; /* Parse de la variable */
+        $this->_db->query("Delete FROM detalle_ventas Where id = $id;");
+    }
     
 
     public function eliminar_vehiculo($id) {

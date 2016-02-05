@@ -55,9 +55,11 @@
                                         <td>$<?php echo $detalle->total_detalle;?></td>
                                         
                                     <td>
-                                        <a href="<?php echo BASE_URL; ?>ventas/editar_detalle/<?php echo $detalle->id?>"><span class="label label-primary">editar detalle</span></a>
 
-                                        <a href="javascript:borrar_detalle(<?php echo $detalle->id;?>)"><span class="label label-danger">Borrar venta</span></a>
+
+                                        <a href="<?php echo BASE_URL; ?>ventas/editar_detalle/<?php echo $detalle->id?>" class="ventanadetalle"><span class="label label-primary">editar detalle</span></a>
+
+                                        <a href="javascript:borrar_detalle(<?php echo $detalle->id;?>)"><span class="label label-danger">Borrar detalle</span></a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
