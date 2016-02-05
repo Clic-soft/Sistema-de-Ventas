@@ -299,7 +299,14 @@ class ventasController extends Controller {
 	        	$estado=4;
 	        }
 
-        	$this->_ventas->cambiar_estado($this->filtrarInt($id),$estado);
+	        foreach ($detalles as $detalle) {
+	        	$descuento = $descuento + $detalle->descuento;
+	        	$total = $total + $detalle->total_detalle;
+	        }
+
+	        $subtotal=$total-$descuento;
+
+        	$this->_ventas->cambiar_estado($this->filtrarInt($id),$estado, $subtotal, $descuento, $total);
         } else {
       		$this->redireccionar('admin');
       	}
@@ -464,6 +471,32 @@ class ventasController extends Controller {
 	        }
 
         	$this->_ventas->eliminar_detalle($this->filtrarInt($id));
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
+
+    public function ges_inforem($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	        if (!$this->filtrarInt($id)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getEncabezado($this->filtrarInt($id))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+
+	        $this->_view->setJs(array('ventas','facturar'));
+
+	        $datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+	        $this->_view->pendientes = $this->_ventas->getpendienteFacturas($datos->id_cliente,3);
+
+        	$this->_view->renderizar('gestionar_remision', 'ventas');
         } else {
       		$this->redireccionar('admin');
       	}
