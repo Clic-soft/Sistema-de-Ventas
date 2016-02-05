@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Factura</title>
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/flexboxgrid.min.css">
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/factura.css">
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/imprimir.css" media="print">
+	
+		
+</head>
+<body>
+	<section class="container">
+		<header class="flex middle-xs ">
+			<div class="col-xs">
+				<img src="<?php echo BASE_URL; ?>public/img/logo_arenera.jpg" alt="" class="logo">
+			</div>
+			<div class="col-xs text-center nada ">
+				<p>Arenera Pkaya Rica SAS</p>
+				<p>Isugu-Roldanillo-Valle</p>
+				<p>Calle Curiosa 415, Cali Colombia</p>
+				<p>Tel 123456789009</p>
+			</div>
+			<div class="col-xs text-right facdes ">
+				<p class="factura facdes"><?php echo $this->datos->prefijo;?> </p>
+				<p class="consecutivo"><span class="facdes"><?php echo "000" . $this->datos->num_prefijo;?> </span></p>
+				<p class="date"><span class="">FECHA <?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?></span></p>
+			</div>
+		</header>
+		<div class="datos flex conte">
+			<div class="col-xs-6">
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">CLIENTE:</p>
+					<p class="col-xs-10 d2"><?php echo $this->cliente->nomcom;?></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">DIRECCIÓN:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->cliente->direccion;?></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">CIUDAD:</p>
+					<p class="col-xs-10 d2"></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">EMPLEADO:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->empleado->nombres  ." " . $this->empleado->apellidos;?></p>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">RUCOM:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->cliente->rucom;?></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">NIT:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->cliente->nit;?></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">TELÉFONO:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->cliente->telefono1;?></p>
+				</div>
+				<div class="col-xs-12 flex middle-xs conte">
+					<p class="col-xs-2">EMAIL:</p>
+					<p class="col-xs-10 d2"><?php echo  $this->cliente->email;?></p>
+				</div>
+			</div>
+		</div>
+		<div class="products">
+			<table class="table tableimprimir">
+			  <thead>
+
+				  <tr>
+				    <th class="col-xs-1">Código</th>
+				    <th class="col-xs-5">Producto</th>
+				    <th class="col-xs-2">Cantidad</th>
+				    <th class="col-xs-2">VL Unitario</th>
+				    <th class="col-xs-2">Subtotal</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+				  
+				 
+				<?php foreach($this->detalle as $detalle):?>
+			  <tr>
+				    <td class="col-xs-1 text-center"><?php  echo  $detalle->id; ?></td>
+				    <td class="col-xs-5"><?php echo $detalle->producto;?></td>
+				    <td class="text-center col-xs-2"><?php  echo  $detalle->cantidad;?></td>
+				    <td class="text-center col-xs-2"><?php  echo  $detalle->precio;?></td>
+				    <td class="col-xs-2 text-center"><?php  echo  $detalle->total_detalle;?></td>
+				  </tr>
+					<?php endforeach;?>
+			  </tbody>
+			</table>
+			<footer class="flex">
+				<div class="notes col-xs-8 observaciones">
+					<p><strong>Resolucion Dian :</strong>
+					Este documento se asimila en todos sus efectos a la letra de cambio segun el articulo
+					774 del codigo de comercio</p>
+				</div>
+				<div class="price col-xs-4 mov  ">
+					<div class="table flex mov caja">
+						<p class="col-xs-6 mov centro"><strong class="centro">Subtotal</strong></p>
+						<p class="col-xs-6 mov centro"><?php echo $this->datos->sub_total_venta;?></p>
+					</div>
+					<div class="table flex mov caja ">
+						<p class="col-xs-6 mov centro"><strong  class="centro">Descuento</strong></p>
+						<p class="col-xs-6 mov centro"><?php echo $this->datos->descuento_venta;?></p>
+					</div>
+					<div class="table flex mov caja ">
+						<p class="col-xs-6 mov centro"><strong class="centro">IVA</strong></p>
+						<p class="col-xs-6 mov centro"><?php echo  "$".$this->datos->iva_venta;?></p>
+					</div>
+
+					<div class="table flex mov caja ">
+						<p class="col-xs-6 mov centro"><strong class="centro">Total</strong></p>
+						<p class="col-xs-6 mov centro"><?php echo $this->datos->total_venta;?></p>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</section>
+
+</body>
+</html>

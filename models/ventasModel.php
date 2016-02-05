@@ -138,7 +138,17 @@ class ventasModel extends Model {
             
     }
 
+        ///empleado factura
+    public function getempleado($id){
+      $consulta = $this->_db->get_row("SELECT * from empleados where id=$id");
+      return $consulta;
+    } 
 
+
+    public function getcliente($id){
+        $consulta = $this->_db->get_row("SELECT * from clientes where id=$id");
+          return $consulta;
+    } 
 
     public function eliminar_detalle($id) {
         $id = (int) $id; /* Parse de la variable */
@@ -150,6 +160,14 @@ class ventasModel extends Model {
         $id = (int) $id; /* Parse de la variable */
         $this->_db->query("Delete FROM vehiculos Where id = $id;");
     }
+
+    public function getpendienteFacturas($id,$estado) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT e.* from encabezado_venta as e where e.id_cliente=$id and e.estado_venta=$estado; ");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
 }
 
 ?>

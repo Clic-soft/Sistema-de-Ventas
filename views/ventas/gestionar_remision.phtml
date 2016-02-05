@@ -20,9 +20,11 @@
                     <div class="space"></div>
                     <div>
                         <div class="contenido-button">
-                            <a href="<?php echo BASE_URL; ?>ventas/nueva_venta"><span class="label label-primary">Nueva venta</span></a>
 
                             <a href="<?php echo BASE_URL; ?>ventas"><span class="label label-primary">Actualizar lista</span>
+                            </a>
+
+                            <a href="<?php echo BASE_URL; ?>ventas"><span class="label label-primary">ventas</span>
                             </a>
                         </div>
                     </div>
@@ -30,13 +32,12 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div id="lista_registros">     
-                        <?php if (isset($this->encabezado) && count($this->encabezado)) : ?>  
+                        <?php if (isset($this->pendientes) && count($this->pendientes)) : ?>  
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
                                         <th class="text-center">N°</th>
                                         <th class="text-center">FECHA</th>
-                                        <th class="text-center">CLIENTE</th>
                                         <th class="text-center">FORMA PAGO</th>
                                         <th class="text-center">ESTADO</th>
                                         <th class="text-center">TOTAL</th>
@@ -44,40 +45,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($this->encabezado as $encabezado):?>
+                                <?php foreach($this->pendientes as $pendientes):?>
                                     <tr>
-                                        <td><?php echo $encabezado->prefijo." 000".$encabezado->num_prefijo;?></td>
-                                        <td><?php echo $encabezado->fecha_venta;?></td>
-                                        <td><?php echo $encabezado->nomcom;?></td>
-                                        <td class="text-center"><?php if ($encabezado->forma_pago == 1){ echo "Efectivo";} elseif ($encabezado->forma_pago == 2){ echo "Remision";} elseif ($encabezado->forma_pago == 3){ echo "InfoRem";}?></td>
-                                        <td class="text-center"><?php if ($encabezado->estado_venta == 1){ echo "Creado";} elseif ($encabezado->estado_venta == 2){ echo "Pendiente";} elseif ($encabezado->estado_venta == 3){echo "Pendiente Factura";} elseif ($encabezado->estado_venta == 4){echo "Finalizado";}?></td>
-                                        <td>$<?php echo $encabezado->total_venta;?></td>
+                                        <td><?php echo $pendientes->prefijo." 000".$pendientes->num_prefijo;?></td>
+                                        <td><?php echo $pendientes->fecha_venta;?></td>
+                                        <td class="text-center"><?php if ($pendientes->forma_pago == 1){ echo "Efectivo";} elseif ($pendientes->forma_pago == 2){ echo "Remision";} elseif ($pendientes->forma_pago == 3){ echo "InfoRem";}?></td>
+                                        <td class="text-center"><?php if ($pendientes->estado_venta == 1){ echo "Creado";} elseif ($pendientes->estado_venta == 2){ echo "Pendiente";} elseif ($pendientes->estado_venta == 3){echo "Pendiente Factura";} elseif ($pendientes->estado_venta == 4){echo "Finalizado";}?></td>
+                                        <td>$<?php echo $pendientes->total_venta;?></td>
                                         
-                                    <td class="text-center">
+                                    <td>
                                         <!--<a data-toggle="tooltip" data-placement="left" title="Editar venta" href="<?php echo BASE_URL; ?>ventas/editar_venta/<?php echo $encabezado->id?>" class="ventanaventa"><span class="glyphicon glyphicon-cog"></span></a>
 
                                         <a data-toggle="tooltip" data-placement="left" title="Eliminar venta" href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-trash"></span></a>-->
 
-                                        <a data-toggle="tooltip" data-placement="left" title="Ver lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
+                                        <a data-toggle="tooltip" data-placement="left" title="facturar" href="javascript:facturar(<?php echo $pendientes->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
                                         &nbsp;
-
-                                        <a data-toggle="tooltip" data-placement="left" title="Cambiar estado" href="javascript:cambiar_estado(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
-                                        &nbsp;
-                                        <?php if ($encabezado->estado_venta == 1){?>
-
-                                        <a data-toggle="tooltip" data-placement="left" title="Gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
-
-                                        <?php } else if ($encabezado->estado_venta == 2) {?>
-
-                                        <a data-toggle="tooltip" data-placement="left" title="Abonos" href="<?php echo BASE_URL; ?>ventas/abonos/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-usd"></span></a>
-
-                                        <?php }?>
-                                        &nbsp;
-                                        <a data-toggle="tooltip" data-placement="left" title="Ver factura" href="<?php echo BASE_URL; ?>ventas/ver_factura/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-modal-window"></span></a>
-                                        &nbsp;
-                                        <a data-toggle="tooltip" data-placement="left" title="Ver certificado" href="<?php echo BASE_URL; ?>ventas/ver_certificado/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list-alt"></span></a>
-
-
                                         
                                     </td>
                                 </tr>
@@ -93,7 +75,7 @@
                         <?php else: ?>
                         <div class="space"></div>
                         <div class='alert alert-info'>
-                        <strong>No hay ventas creados.</strong>
+                        <strong>No hay pendientes por facturas.</strong>
                         </div>
                         <?php endif; ?>
                 </div>
