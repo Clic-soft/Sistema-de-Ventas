@@ -177,7 +177,7 @@ class ventasModel extends Model {
     public function cambiar_estado_ges($id, $estado) {
         
         $this->_db->query("UPDATE encabezado_venta SET estado_venta ='".$estado."'
-                                 where id = $id" ); 
+                                 where id = $id" );
             
     }
 
@@ -186,6 +186,30 @@ class ventasModel extends Model {
             $consulta = $this->_db->get_row("SELECT * from vehiculos where id=$id ");
         return $consulta;
 
+    }
+
+    public function getAbonos($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT a.* from abonos as a where a.id_venta=$id");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getAbono($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_row("SELECT a.* from abonos as a where a.id=$id");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function eliminar_abono($id) {
+        $id = (int) $id; /* Parse de la variable */
+        $this->_db->query("Delete FROM abonos Where id = $id;");
+    }
+
+    public function agregar_abono($id, $valor) {
+        $fechaactual = date("Y-m-d H:i:s");
+        $this->_db->query("INSERT INTO abonos (id_venta, fecha_abono, valor) VALUES ('".$id."','".$fechaactual."', '".$valor."');");
     }
 
 }

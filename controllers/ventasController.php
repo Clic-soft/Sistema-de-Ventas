@@ -622,7 +622,194 @@ public function facturar($idrem, $idfac) {
 
 
 
+public function abonos($id) {
+		if (Session::Get('autenticado') == true ){ 
+			$this->_view->titulo = 'VENTAS';
+			$this->_view->navegacion = '';
 
+			$this->_view->setJs(array('abonos'));
+			
+			$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+			$this->_view->abono =$this->_ventas->getAbonos($this->filtrarInt($id));
+			$this->_view->idenc=$this->filtrarInt($id);
+			$abonos =$this->_ventas->getAbonos($this->filtrarInt($id));
+			$total_abonos=0;
+
+			foreach ($abonos as $abono) {
+					$total_abonos = $total_abonos + $abono->valor;
+				}
+
+			$this->_view->tabono = $total_abonos;
+
+
+			$this->_view->renderizar('abonos', "ventas");
+		} else {
+      		$this->redireccionar('admin');
+      	}
+	}
+
+    public function agregar_abono($id) {
+		if (Session::Get('autenticado') == true ){ 
+			$this->_view->titulo = 'Nueva Venta';
+			$this->_view->navegacion = '';
+			$this->_view->idenc=$this->filtrarInt($id);
+
+			$encabezado = $this->_ventas->getEncabezado($this->filtrarInt($id));
+			$abonos =$this->_ventas->getAbonos($this->filtrarInt($id));
+			$total_abonos=0;
+
+			foreach ($abonos as $abono) {
+					$total_abonos = $total_abonos + $abono->valor;
+				}
+
+			$this->_view->sugerido = $encabezado->total_venta - $total_abonos;
+
+			if ($this->getInt('guardar') == 1) {
+				
+				$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
+			//Se valida que las dos contraseñas digitadas coincidan
+
+				if (!$this->getInt('valor') || $this->getInt('valor')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el valor';
+					//Vista de la pagina actual
+					$this->_view->renderizar('agregar_abono','ventas');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if ($this->getInt('valor') > $encabezado->total_venta) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'El valor del abono es mayor al valor total de la venta';
+					//Vista de la pagina actual
+					$this->_view->renderizar('agregar_abono','ventas');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				$totabn= $total_abonos+ $this->getInt('valor');
+
+				if ($totabn > $encabezado->total_venta) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'la sumatoria de los abonos es mayor al total de la venta';
+					//Vista de la pagina actual
+					$this->_view->renderizar('agregar_abono','ventas');
+					//Saca de la funcion principal
+					exit;
+				}				
+
+				$this->_ventas->agregar_abono($this->filtrarInt($id),
+					$this->getInt('valor'));
+
+
+				$abonos2 =$this->_ventas->getAbonos($this->filtrarInt($id));
+				$encabezado = $this->_ventas->getEncabezado($this->filtrarInt($id));
+				$total_abonos2=0;
+
+				foreach ($abonos2 as $abono2) {
+					$total_abonos2 = $total_abonos2 + $abono2->valor;
+				}
+
+				if ($total_abonos2 == $encabezado->total_venta) {
+					$this->_ventas->cambiar_estado_ges($this->filtrarInt($id),3);
+				}
+
+				$this->_view->_mensaje = 'Datos Creados Correctamente';
+			}
+
+			$this->_view->renderizar('agregar_abono', "ventas");
+		} else {
+      		$this->redireccionar('admin');
+      	}
+	}
+
+	public function editar_abono($id) {
+		if (Session::Get('autenticado') == true ){ 
+			$this->_view->titulo = 'Nueva Venta';
+			$this->_view->navegacion = '';
+
+			$this->_view->producto = $this->_ventas->getproductos();
+			
+			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
+			
+			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$this->_view->id =$dato->id;
+
+			if ($this->getInt('guardar') == 1) {
+				
+				$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
+			//Se valida que las dos contraseñas digitadas coincidan
+
+				if (!$this->getInt('producto') || $this->getInt('producto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el producto';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('precio') || $this->getInt('precio')<1) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el precio';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getDecimal('cant') || $this->getDecimal('cant')<=0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la placa del vehiculo';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_detalle',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				$total=($this->getInt('precio')*$this->getDecimal('cant'))-$this->getInt('desc');				
+
+				$this->_ventas->editar_detalle($this->filtrarInt($id),
+					$this->getInt('producto'),
+					$this->getInt('precio'),
+					$this->getDecimal('cant'),
+					$this->getInt('desc'),
+					$total);
+
+				$this->_view->_mensaje = 'Datos Creados Correctamente';
+			}
+
+			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
+			$this->_view->id =$dato->id;
+
+			$this->_view->renderizar('editar_detalle', false, true);
+		} else {
+      		$this->redireccionar('admin');
+      	}
+	}
+
+
+	public function eliminarabono($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	        if (!$this->filtrarInt($id)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('abonos','ventas');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getAbono($this->filtrarInt($id))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('abonos','ventas');
+	        }
+
+        	$this->_ventas->eliminar_abono($this->filtrarInt($id));
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
 
 
 
