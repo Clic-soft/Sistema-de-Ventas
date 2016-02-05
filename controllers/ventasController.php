@@ -502,6 +502,106 @@ class ventasController extends Controller {
       	}
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///  VISTA  DE VER  FACTURA 
+	public function ver_factura($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	     
+    			$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+    			$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
+
+    			$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
+    			$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
+    			$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
+
+
+
+        $this->_view->renderizar('factura', false,true);	
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
+
+//CERTIFICADO VER
+
+public function ver_certificado($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	     
+
+        $this->_view->renderizar('certificado', false,true);	
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }
 

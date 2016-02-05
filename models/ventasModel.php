@@ -138,7 +138,17 @@ class ventasModel extends Model {
             
     }
 
+        ///empleado factura
+    public function getempleado($id){
+      $consulta = $this->_db->get_row("SELECT * from empleados where id=$id");
+      return $consulta;
+    } 
 
+
+    public function getcliente($id){
+        $consulta = $this->_db->get_row("SELECT * from clientes where id=$id");
+          return $consulta;
+    } 
 
     public function eliminar_detalle($id) {
         $id = (int) $id; /* Parse de la variable */

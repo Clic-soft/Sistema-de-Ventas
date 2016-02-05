@@ -1,0 +1,101 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Certificado</title>
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/cssorigen/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/cssorigen/flexboxgrid.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/cssorigen/certificado.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<header class="contenedor">
+		<div class="col-xs-6">
+			<img class="logomine" src="<?php echo BASE_URL; ?>public/img/mineria.jpg">
+
+		</div>
+		<div class="col-xs-6 text-right"><h2>CERTIFICADO DE ORIGEN</h2></div>
+	</header>
+	<section class="contenedor">
+
+		<table class="table Table-list ">
+			  <thead >
+				  <tr>
+				    <th class="col-xs Table-Cam ">Expedientes</th>
+				    <th class="col-xs Table-Cam">Nombre / Razón social</th>
+				    <th class="col-xs Table-Cam">Minerales</th>
+				    <th class="col-xs Table-Cam">Ubicaciones</th>
+
+				    
+				  </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+				    <td class="col-xs text-center"><input type="text" name="expediente"></td>
+				    <td class="col-xs"><input type="text" name="nombre"></td>
+				    <td class="col-xs"><input type="text" name="minerales"></td>
+				    <td class="col-xs"><input type="text" name="ubicaciones"></td>
+				  </tr>
+			  </tbody>
+			</table>
+	</section>
+	<section class="contenedor">
+		<p class="text-center col-xs-10">ARENERA EL PASO - TIERRA BLANCA</p>
+		<p class="text-right folio col-xs-2">12354</p>
+	</section>
+	<section class="contenedor datos">
+		<div class="bolqueta col-xs-12 flex">
+			<p class="col-xs-2">Bolqueta Placa</p>
+			<input type="text" name="bolqueta_placa">
+		</div>
+		<div class="col-xs-7 flex">
+			<p class="">Conductor</p>
+			<input type="text" name="conductor">
+		</div>
+		<div class="col-xs-5 flex">
+			<p class="">C.C.</p>
+			<input type="text" name="cc">
+		</div>
+		<div class="col-xs-12 flex">
+			<p class="col-xs-1">Destino</p>
+			<input type="text" name="destino">
+		</div>
+		<div class="col-xs-5 flex">
+			<p class="">Fecha</p>
+			<input type="text" name="fecha">
+		</div>
+		<div class="col-xs-7 flex">
+			<p class="col-xs-3">Hora de despacho</p>
+			<input type="text" name="hora_despacho">
+		</div>
+	</section>
+	<section class="contenedor material">
+		
+		<div class="col-xs-4">
+			<p>MATERIAL:</p>
+		</div>
+		<div class="col-xs-4 flex">
+			<p>Arena gruesa</p>
+			<input type="checkbox" name="arena_gruesa">
+		</div>
+		<div class="col-xs-4 flex">
+			<p>Balastro</p>
+			<input type="checkbox"  name="balastro">
+		</div>
+	</section>
+	<section class="contenedor">
+		<p class="text-center">Telefónos: 313 627 76 05 - 312 295 60 27 - 317 621 41 60</p>
+	</section>
+	<section class="contenedor firma">
+		<div class="flex">
+			<p class="col-xs-3">Firma del Despachador</p>
+			<input type="textbox" name="firma_despachador" />
+		</div>
+	</section>
+	<footer class="contenedor">
+		<p>- Este certificado sólo es válido por el viaje anteriormente descrito</p>
+		<p>- Vigente para la fecha de su expedición</p>
+		<p>- Favor verificar autenticidad del certificado en los números telefónico relacionados.</p>
+	</footer>
+</body>
+</html>
+

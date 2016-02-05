@@ -1,5 +1,5 @@
 img.brand{
-    width: 100px !important;
+    max-width: 100px;
     margin: 10px auto;
 }
 .txt-left{text-align: left;}

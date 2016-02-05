@@ -1,0 +1,89 @@
+body{
+	font-family: "Roboto", sans-serif;	
+}
+p{
+	margin:1px;
+	padding: 0;
+}
+header{
+	border-bottom:2px solid black;
+	padding: 1em;
+}
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+.logo{
+	max-width: 120px;
+}
+.flex{
+	display: flex;
+}
+.container{
+	margin:0 auto;
+}
+.factura{
+	font-weight: 700;
+	font-size: 2em;
+}
+.consecutivo{
+	color:red;
+	font-size: 2.2em;
+	font-weight: 800;
+}
+.date{
+
+}
+.datos{
+	padding:2.4em 0;
+}
+.datos p{
+	font-weight: 600;
+}
+.datos p.d2{
+	font-weight: 400;
+	margin-left:40px;
+}
+
+.table{
+	width: 100%;
+}
+
+
+table thead tr th{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: .5em 0;
+}
+table thead tr{
+	margin:10px;
+}
+.space{
+	margin:10px 0;
+}
+table tbody tr td{
+	padding: .3em 0;
+	
+}
+footer .notes{
+	margin:1em 0;
+	padding:1em;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+footer .price{
+	margin:1em 0;
+	padding: 1em 0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+footer .price div.table p{
+	border:1px solid black;
+	margin:1px;
+}
+
+@media print{
+	
+}
