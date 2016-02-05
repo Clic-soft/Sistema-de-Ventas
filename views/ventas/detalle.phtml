@@ -20,9 +20,9 @@
                     <div class="space"></div>
                     <div>
                         <div class="contenido-button">
-                            <a href="<?php echo BASE_URL; ?>ventas/nueva_venta"><span class="label label-primary">Nueva venta</span></a>
+                            <a href="<?php echo BASE_URL; ?>ventas/agregar_detalle/<?php echo $this->idenc;?>"><span class="label label-primary">agregar detalle</span></a>
 
-                            <a href="<?php echo BASE_URL; ?>ventas"><span class="label label-primary">Actualizar lista</span>
+                            <a href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $this->idenc;?>"><span class="label label-primary">Actualizar lista</span>
                             </a>
                         </div>
                     </div>
@@ -30,35 +30,31 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div id="lista_registros">     
-                        <?php if (isset($this->encabezado) && count($this->encabezado)) : ?>  
+                        <?php if (isset($this->detalle) && count($this->detalle)) : ?>  
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">N°</th>
-                                        <th class="text-center">FECHA</th>
-                                        <th class="text-center">CLIENTE</th>
-                                        <th class="text-center">FORMA PAGO</th>
-                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">PRODUCTO</th>
+                                        <th class="text-center">VR UNITARIO</th>
+                                        <th class="text-center">CANTIDAD</th>
+                                        <th class="text-center">DESCUENTO</th>
                                         <th class="text-center">TOTAL</th>
                                         <th class="text-center">ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($this->encabezado as $encabezado):?>
+                                <?php foreach($this->detalle as $detalle):?>
                                     <tr>
-                                        <td><?php echo $encabezado->prefijo." 000".$encabezado->num_prefijo;?></td>
-                                        <td><?php echo $encabezado->fecha_venta;?></td>
-                                        <td><?php echo $encabezado->nomcom;?></td>
-                                        <td class="text-center"><?php if ($encabezado->forma_pago == 1){ echo "Efectivo";} elseif ($encabezado->forma_pago == 2){ echo "Remision";} elseif ($encabezado->forma_pago == 3){ echo "InfoRem";}?></td>
-                                        <td class="text-center"><?php if ($encabezado->estado_venta == 1){ echo "Creado";} elseif ($encabezado->estado_venta == 2){ echo "Pendiente";} elseif ($encabezado->estado_venta == 3){echo "Finalizado";} ?></td>
-                                        <td>$<?php echo $encabezado->total_venta;?></td>
+                                        <td><?php echo $detalle->producto;?></td>
+                                        <td>$<?php echo $detalle->precio;?></td>
+                                        <td><?php echo $detalle->cantidad;?></td>
+                                        <td>$<?php echo $detalle->descuento;?></td>
+                                        <td>$<?php echo $detalle->total_detalle;?></td>
                                         
                                     <td>
-                                        <a href="<?php echo BASE_URL; ?>ventas/editar_venta/<?php echo $encabezado->id?>" class="ventanaventa"><span class="label label-primary">Editar venta</span></a>
+                                        <a href="<?php echo BASE_URL; ?>ventas/editar_detalle/<?php echo $detalle->id?>"><span class="label label-primary">editar detalle</span></a>
 
-                                        <a href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="label label-primary">detalles</span></a>
-
-                                        <a href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="label label-danger">Borrar venta</span></a>
+                                        <a href="javascript:borrar_detalle(<?php echo $detalle->id;?>)"><span class="label label-danger">Borrar venta</span></a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>

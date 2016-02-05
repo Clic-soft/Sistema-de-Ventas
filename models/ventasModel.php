@@ -19,7 +19,12 @@ class ventasModel extends Model {
         return $consulta;
     }
 
-   
+    public function getEncabezadosimp($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_row("SELECT e.* FROM encabezado_venta as e WHERE e.id=$id ;");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }   
 
     public function getEncabezado($id) {
         //Se crea y ejecuta la consulta
@@ -46,6 +51,13 @@ class ventasModel extends Model {
 
     }
 
+    public function get_placas() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from vehiculos");
+        return $consulta;
+
+    }
+
     public function getclientes() {
         //Se crea y ejecuta la consulta
             $consulta = $this->_db->get_results("SELECT * from clientes");
@@ -56,6 +68,21 @@ class ventasModel extends Model {
     public function getempleados() {
         //Se crea y ejecuta la consulta
             $consulta = $this->_db->get_results("SELECT * from empleados");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getproductos() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from productos");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getDetalles($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT d.*,p.producto from detalle_ventas as d, productos as p
+                where p.id=d.id_producto and d.id_venta=$id");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -75,10 +102,25 @@ class ventasModel extends Model {
              '".$forma."', '".$id_placa."','".$prefijoco."', '".$numeroco."');");
     }
 
-    public function editar_vehiculo($id, $cliente, $placa) {
 
-        $this->_db->query("UPDATE vehiculos SET id_cliente='".$cliente."', placa='".$placa."' WHERE id = $id;");
+
+
+    public function getDetalle($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT d.* from detalle_ventas as d
+                where d.id=$id");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
     }
+
+    public function agregar_detalle($id, $producto, $precio, $cant, $desc, $total) {
+        $this->_db->query("INSERT INTO detalle_ventas (id_venta, id_producto, precio, cantidad, descuento,
+            total_detalle) 
+            VALUES ('".$id."','".$producto."', '".$precio."', '".$cant."', '".$desc."', '".$total."');");
+    }
+
+
+    
 
     public function eliminar_vehiculo($id) {
         $id = (int) $id; /* Parse de la variable */
