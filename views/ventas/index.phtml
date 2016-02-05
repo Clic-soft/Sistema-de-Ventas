@@ -58,20 +58,29 @@
 
                                         <a data-toggle="tooltip" data-placement="left" title="Eliminar venta" href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-trash"></span></a>-->
 
-                                        <a data-toggle="tooltip" data-placement="left" title="lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
-                                        &nbsp;
-                                        <a data-toggle="tooltip" data-placement="left" title="cambiar estado" href="javascript:cambiar_estado(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
-                                        &nbsp;
                                         <?php if ($encabezado->estado_venta == 1){?>
 
-                                        <a data-toggle="tooltip" data-placement="left" title="gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
+                                        <a data-toggle="tooltip" data-placement="left" title="lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
+                                        &nbsp;
 
-                                        <?php } else if ($encabezado->estado_venta == 2) {?>
+                                        <?php } 
+                                        if ($encabezado->estado_venta == 1) {?>
+
+                                        <a data-toggle="tooltip" data-placement="left" title="cambiar estado" href="javascript:cambiar_estado(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
+                                        &nbsp;
+                                        <?php } 
+
+                                         if ($encabezado->estado_venta == 1){?>
+
+                                        <a data-toggle="tooltip" data-placement="left" title="gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
+                                        &nbsp;
+                                        <?php } 
+                                        if ($encabezado->estado_venta == 2) {?>
 
                                         <a data-toggle="tooltip" data-placement="left" title="abonos" href="<?php echo BASE_URL; ?>ventas/abonos/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-usd"></span></a>
-
-                                        <?php }?>
                                         &nbsp;
+                                        <?php }?>
+                                        
                                         <a data-toggle="tooltip" data-placement="left" title="ver factura" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_factura/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-modal-window"></span></a>
                                         &nbsp;
                                         <a data-toggle="tooltip" data-placement="left" title="ver certificado" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_certificado/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list-alt"></span></a>
