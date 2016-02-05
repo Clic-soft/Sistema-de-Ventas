@@ -48,14 +48,25 @@ class ventasController extends Controller {
 		
     }
 
+    public function getplacascombo() {
+		if (Session::Get('autenticado') == true ){ 
+       	
+        	$id_cliente = $_POST['id_cliente'];
+			$vehiculo = $this->_ventas->getplacas($this->filtrarInt($id_cliente));
+			echo $vehiculo;	
+        } else {
+      		$this->redireccionar('index');
+      	}
+	}
+
     public function nueva_venta() {
 		if (Session::Get('autenticado') == true ){ 
 			$this->_view->titulo = 'Nueva Venta';
 			$this->_view->navegacion = '';
+			$this->_view->setJs(array('comboplacas'));
 
 			$this->_view->cliente = $this->_ventas->getclientes();
 			$this->_view->empleado = $this->_ventas->getempleados();
-			$this->_view->placa = $this->_ventas->getplacas();
 
 			if ($this->getInt('guardar') == 1) {
 				
@@ -103,26 +114,48 @@ class ventasController extends Controller {
 				$id_cons;
 				$nactual;
 
+				$prefijoco;
+				$numeroco;
+				$id_consco;
+				$nactualco;
+
+
 				if($this->getInt('forma') ==1){
 				$pref = $this->_ventas->get_prefijo(1);
+				$prefco = $this->_ventas->get_prefijo(3);
 				$id_cons=$pref->id;
 				$prefijo=$pref->prefijo;
-				$numero=$pref->actual;;
+				$numero=$pref->actual;
+
+				$prefijoco=$prefco->prefijo;
+				$numeroco=$prefco->actual;
+				$id_consco=$prefco->id;
 
 				}else if($this->getInt('forma') ==2){
 				$pref = $this->_ventas->get_prefijo(2);
+				$prefco = $this->_ventas->get_prefijo(4);
 				$id_cons=$pref->id;
 				$prefijo=$pref->prefijo;
-				$numero=$pref->actual;;
+				$numero=$pref->actual;
+
+				$prefijoco=$prefco->prefijo;
+				$numeroco=$prefco->actual;
+				$id_consco=$prefco->id;
 				} 
 
 				else if($this->getInt('forma') ==3){
 				$pref = $this->_ventas->get_prefijo(2);
+				$prefco = $this->_ventas->get_prefijo(4);
 				$id_cons=$pref->id;
 				$prefijo=$pref->prefijo;
-				$numero=$pref->actual;;
+				$numero=$pref->actual;
+
+				$prefijoco=$prefco->prefijo;
+				$numeroco=$prefco->actual;
+				$id_consco=$prefco->id;
 				} 
 
+				$nactualco=$numeroco+1;
 				$nactual=$numero+1;
 				
 				
@@ -132,9 +165,12 @@ class ventasController extends Controller {
 					$this->getInt('id_placa'),
 					$this->getInt('forma'),
 					$prefijo,
-					$numero);
+					$numero,
+					$prefijoco,
+					$numeroco);
 
 				$this->_ventas->act_consecutivo($id_cons,$nactual);
+				$this->_ventas->act_consecutivo($id_consco,$nactualco);
 
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
