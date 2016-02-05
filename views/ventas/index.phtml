@@ -58,54 +58,37 @@
 
                                         <a data-toggle="tooltip" data-placement="left" title="Eliminar venta" href="javascript:borrar_venta(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-trash"></span></a>-->
 
-<<<<<<< HEAD
                                         <?php if ($encabezado->estado_venta == 1){?>
 
                                         <a data-toggle="tooltip" data-placement="left" title="lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
                                         &nbsp;
 
                                         <?php } 
-                                        if ($encabezado->estado_venta == 1) {?>
+                                        if ($encabezado->estado_venta < 3 ) {?>
 
                                         <a data-toggle="tooltip" data-placement="left" title="cambiar estado" href="javascript:cambiar_estado(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
-=======
-                                        <a data-toggle="tooltip" data-placement="left" title="Ver lista detalles" href="<?php echo BASE_URL; ?>ventas/detalle/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list"></span></a>
-                                        &nbsp;
 
-                                        <a data-toggle="tooltip" data-placement="left" title="Cambiar estado" href="javascript:cambiar_estado(<?php echo $encabezado->id;?>)"><span class="glyphicon glyphicon-repeat"></span></a>
->>>>>>> origin/master
                                         &nbsp;
                                         <?php } 
 
-<<<<<<< HEAD
+
                                          if ($encabezado->estado_venta == 1 and $encabezado->forma_pago == 1){?>
-=======
-                                        <a data-toggle="tooltip" data-placement="left" title="Gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
->>>>>>> origin/master
 
-                                        <a data-toggle="tooltip" data-placement="left" title="gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
+                                        <a data-toggle="tooltip" data-placement="left" title="Gestionar inforem" href="<?php echo BASE_URL; ?>ventas/ges_inforem/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-check"></span></a>
+
                                         &nbsp;
-                                        <?php } 
+                                        <?php }
+
                                         if ($encabezado->estado_venta == 2 and $encabezado->forma_pago == 3) {?>
 
-<<<<<<< HEAD
                                         <a data-toggle="tooltip" data-placement="left" title="abonos" href="<?php echo BASE_URL; ?>ventas/abonos/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-usd"></span></a>
                                         &nbsp;
                                         <?php }?>
-                                        
-                                        <a data-toggle="tooltip" data-placement="left" title="ver factura" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_factura/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-modal-window"></span></a>
-                                        &nbsp;
-                                        <a data-toggle="tooltip" data-placement="left" title="ver certificado" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_certificado/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list-alt"></span></a>
-=======
-                                        <a data-toggle="tooltip" data-placement="left" title="Abonos" href="<?php echo BASE_URL; ?>ventas/abonos/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-usd"></span></a>
 
-                                        <?php }?>
-                                        &nbsp;
                                         <a data-toggle="tooltip" data-placement="left" title="Ver factura" href="<?php echo BASE_URL; ?>ventas/ver_factura/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-modal-window"></span></a>
                                         &nbsp;
                                         <a data-toggle="tooltip" data-placement="left" title="Ver certificado" href="<?php echo BASE_URL; ?>ventas/ver_certificado/<?php echo $encabezado->id?>"><span class="glyphicon glyphicon-list-alt"></span></a>
 
->>>>>>> origin/master
 
                                         
                                     </td>
