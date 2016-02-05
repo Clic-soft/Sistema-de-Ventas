@@ -635,9 +635,11 @@ public function abonos($id) {
 			$abonos =$this->_ventas->getAbonos($this->filtrarInt($id));
 			$total_abonos=0;
 
-			foreach ($abonos as $abono) {
+			if (isset($abonos)){
+				foreach ($abonos as $abono) {
 					$total_abonos = $total_abonos + $abono->valor;
 				}
+			}	
 
 			$this->_view->tabono = $total_abonos;
 
@@ -658,10 +660,11 @@ public function abonos($id) {
 			$abonos =$this->_ventas->getAbonos($this->filtrarInt($id));
 			$total_abonos=0;
 
-			foreach ($abonos as $abono) {
+			if (isset($abonos)){
+				foreach ($abonos as $abono) {
 					$total_abonos = $total_abonos + $abono->valor;
 				}
-
+			}
 			$this->_view->sugerido = $encabezado->total_venta - $total_abonos;
 
 			if ($this->getInt('guardar') == 1) {
@@ -728,62 +731,89 @@ public function abonos($id) {
 			$this->_view->titulo = 'Nueva Venta';
 			$this->_view->navegacion = '';
 
-			$this->_view->producto = $this->_ventas->getproductos();
-			
-			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
-			
-			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
-			$this->_view->id =$dato->id;
+			if (!$this->filtrarInt($id)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('abonos','ventas');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getAbono($this->filtrarInt($id))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('abonos','ventas');
+	        }
+
+	        $this->_view->datos = $this->_ventas->getAbono($this->filtrarInt($id));
+	        $data = $this->_ventas->getAbono($this->filtrarInt($id));
+
+
+			$this->_view->idenc=$data->id_venta;
+
+			$encabezado = $this->_ventas->getEncabezado($data->id_venta);
+			$abonos =$this->_ventas->getAbonosedita($data->id_venta,$this->filtrarInt($id));
+			$total_abonos=0;
+
+			if (isset($abonos)){
+				foreach ($abonos as $abono) {
+					$total_abonos = $total_abonos + $abono->valor;
+				}
+			}
+			$this->_view->sugerido = $encabezado->total_venta - $total_abonos;
 
 			if ($this->getInt('guardar') == 1) {
 				
 				$this->_view->datos = (object) $_POST; /* No se debe realizar de esta formaaaa */
 			//Se valida que las dos contraseñas digitadas coincidan
 
-				if (!$this->getInt('producto') || $this->getInt('producto')== 0) {
+				if (!$this->getInt('valor') || $this->getInt('valor')== 0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el producto';
+					$this->_view->_error = 'Debe Ingresar el valor';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_detalle',false,true);
+					$this->_view->renderizar('editar_abono',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
 
-				if (!$this->getInt('precio') || $this->getInt('precio')<1) {
+				if ($this->getInt('valor') > $encabezado->total_venta) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar el precio';
+					$this->_view->_error = 'El valor del abono es mayor al valor total de la venta';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_detalle',false,true);
+					$this->_view->renderizar('editar_abono',false,true);
 					//Saca de la funcion principal
 					exit;
 				}
 
-				if (!$this->getDecimal('cant') || $this->getDecimal('cant')<=0) {
+				$totabn= $total_abonos+ $this->getInt('valor');
+
+				if ($totabn > $encabezado->total_venta) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar la placa del vehiculo';
+					$this->_view->_error = 'la sumatoria de los abonos es mayor al total de la venta';
 					//Vista de la pagina actual
-					$this->_view->renderizar('editar_detalle',false,true);
+					$this->_view->renderizar('editar_abono',false,true);
 					//Saca de la funcion principal
 					exit;
+				}				
+
+				$this->_ventas->editar_abono($this->filtrarInt($id),$this->getInt('valor'));
+
+				
+				$data2 = $this->_ventas->getAbono($this->filtrarInt($id));
+				$encabezado = $this->_ventas->getEncabezado($data2->id_venta);
+				$abonos2 =$this->_ventas->getAbonos($data2->id_venta);
+				$total_abonos2=0;
+
+				if (isset($abonos2)){
+					foreach ($abonos2 as $abono2) {
+						$total_abonos2 = $total_abonos2 + $abono2->valor;
+					}
 				}
 
-				$total=($this->getInt('precio')*$this->getDecimal('cant'))-$this->getInt('desc');				
-
-				$this->_ventas->editar_detalle($this->filtrarInt($id),
-					$this->getInt('producto'),
-					$this->getInt('precio'),
-					$this->getDecimal('cant'),
-					$this->getInt('desc'),
-					$total);
+				if ($total_abonos2 == $encabezado->total_venta) {
+					$this->_ventas->cambiar_estado_ges($data2->id_venta,3);
+				}
 
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
-			$this->_view->datos = $this->_ventas->getDetalle($this->filtrarInt($id));
-			$dato = $this->_ventas->getDetalle($this->filtrarInt($id));
-			$this->_view->id =$dato->id;
-
-			$this->_view->renderizar('editar_detalle', false, true);
+			$this->_view->renderizar('editar_abono', false,true);
 		} else {
       		$this->redireccionar('admin');
       	}

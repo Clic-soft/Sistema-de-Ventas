@@ -14,7 +14,7 @@ class ventasModel extends Model {
             $consulta = $this->_db->get_results("SELECT e.*,c.nomcom, em.nombres, em.apellidos, v.placa 
                                                 FROM encabezado_venta as e, clientes as c, empleados as em, vehiculos as v 
                                                 WHERE e.id_cliente=c.id AND e.id_empleado=em.id AND e.id_placa=v.id
-                                                order by e.fecha_venta DESC;");
+                                                order by e.estado_venta ASC, e.fecha_venta DESC;");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -178,7 +178,6 @@ class ventasModel extends Model {
         
         $this->_db->query("UPDATE encabezado_venta SET estado_venta ='".$estado."'
                                  where id = $id" );
-            
     }
 
     public function get_placas_certificado($id) {
@@ -191,6 +190,13 @@ class ventasModel extends Model {
     public function getAbonos($id) {
         //Se crea y ejecuta la consulta
             $consulta = $this->_db->get_results("SELECT a.* from abonos as a where a.id_venta=$id");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getAbonosedita($id, $idabono) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT a.* from abonos as a where a.id_venta=$id and a.id<>$idabono");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -210,6 +216,13 @@ class ventasModel extends Model {
     public function agregar_abono($id, $valor) {
         $fechaactual = date("Y-m-d H:i:s");
         $this->_db->query("INSERT INTO abonos (id_venta, fecha_abono, valor) VALUES ('".$id."','".$fechaactual."', '".$valor."');");
+    }
+
+    public function editar_abono($id, $valor) {
+        $fechaactual = date("Y-m-d H:i:s");
+        $this->_db->query("UPDATE abonos SET fecha_abono = '".$fechaactual."', 
+            valor= '".$valor."'
+            where id = $id;");
     }
 
 }
