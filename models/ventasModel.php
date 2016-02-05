@@ -103,6 +103,15 @@ class ventasModel extends Model {
     }
 
 
+    public function cambiar_estado($id, $estado, $sub, $desc, $total) {
+        
+        $this->_db->query("UPDATE encabezado_venta SET estado_venta ='".$estado."',
+                                 sub_total_venta = '".$sub."',
+                                 descuento_venta = '".$desc."',
+                                 total_venta = '".$total."'
+                                 where id = $id" ); 
+            
+    }
 
 
     public function getDetalle($id) {

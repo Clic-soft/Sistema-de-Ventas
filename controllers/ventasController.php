@@ -275,6 +275,36 @@ class ventasController extends Controller {
       	}
     }
 
+    public function cambiar_estado($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	        if (!$this->filtrarInt($id)) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+	        //Si no existe un registro con ese id
+	        if (!$this->_ventas->getEncabezado($this->filtrarInt($id))) {
+	            //Se redirecciona al index
+	            $this->redireccionar('index','vehiculos');
+	        }
+
+	        $datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+	        $detalles = $this->_ventas->getDetalles($this->filtrarInt($id));
+
+	        if($datos->forma_pago == 3){
+	        	$estado=2;
+	        }else{
+	        	$estado=4;
+	        }
+
+        	$this->_ventas->cambiar_estado($this->filtrarInt($id),$estado);
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
+
     public function detalle($id) {
 		if (Session::Get('autenticado') == true ){ 
 			$this->_view->titulo = 'VENTAS';

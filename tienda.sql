@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2016 a las 00:08:05
+-- Tiempo de generación: 05-02-2016 a las 04:25:34
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -1356,7 +1356,8 @@ CREATE TABLE `detalle_ventas` (
   `id_venta` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` decimal(11,2) NOT NULL,
+  `descuento` int(11) NOT NULL,
   `total_detalle` int(11) NOT NULL,
   `id_remision` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1365,8 +1366,10 @@ CREATE TABLE `detalle_ventas` (
 -- Volcado de datos para la tabla `detalle_ventas`
 --
 
-INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantidad`, `total_detalle`, `id_remision`) VALUES
-(1, 10, 1, 2000, 4, 8000, 0);
+INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantidad`, `descuento`, `total_detalle`, `id_remision`) VALUES
+(1, 10, 1, 2000, '4.00', 0, 8000, 0),
+(4, 20, 4, 8000, '6.30', 11000, 39400, 0),
+(5, 22, 4, 7000, '4.50', 7000, 24500, 0);
 
 -- --------------------------------------------------------
 
@@ -1437,7 +1440,9 @@ INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_
 (17, 'FAC', 7, 'CO', 3, 2, 1, '2016-02-04 17:31:37', 1, 1, 6, 0, 0, 0, 0),
 (18, 'REM', 8, 'CO', 2, 2, 2, '2016-02-04 17:31:50', 2, 1, 2, 0, 0, 0, 0),
 (19, 'REM', 9, 'CO', 3, 2, 2, '2016-02-04 17:32:04', 2, 1, 2, 0, 0, 0, 0),
-(20, 'REM', 10, 'CO', 4, 1, 2, '2016-02-04 17:32:17', 3, 1, 3, 0, 0, 0, 0);
+(20, 'REM', 10, 'CO', 4, 1, 2, '2016-02-04 17:32:17', 3, 1, 3, 0, 0, 0, 0),
+(21, 'REM', 11, 'CO', 5, 1, 1, '2016-02-04 20:35:18', 2, 1, 3, 0, 0, 0, 0),
+(22, 'REM', 12, 'CO', 6, 1, 1, '2016-02-04 20:40:43', 3, 1, 7, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1496,9 +1501,9 @@ CREATE TABLE `prefijos` (
 
 INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
 (1, 'Factura', 'FAC', 1, 8, 5000),
-(2, 'Remision', 'REM', 1, 11, 5000),
+(2, 'Remision', 'REM', 1, 13, 5000),
 (3, 'certificado origen r', 'CO', 1, 4, 1000),
-(4, 'certificado origen f', 'CO', 1, 5, 1000),
+(4, 'certificado origen f', 'CO', 1, 7, 1000),
 (5, 'Abono', 'ABO', 1, 1, 1000);
 
 -- --------------------------------------------------------
@@ -1784,7 +1789,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
@@ -1794,7 +1799,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `encabezado_venta`
 --
 ALTER TABLE `encabezado_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `insumos`
 --
