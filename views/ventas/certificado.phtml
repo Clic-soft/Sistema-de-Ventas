@@ -2,7 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Certificado</title>
-	<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/cssorigen/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/cssorigen/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/cssorigen/flexboxgrid.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/cssorigen/certificado.css">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700italic' rel='stylesheet' type='text/css'>
@@ -17,17 +17,17 @@
 	</header>
 	<section class="contenedor">
 
-		<table class="table Table-list ">
+		<table class="table table-bordered ">
 			  <thead >
 				  <tr>
-				    <th class="col-xs Table-bordered">Expedientes</th>
+				    <th class="col-xs">Expedientes</th>
 
-				    <th class="col-xs Table-bordered">Nombre Comercial : playa rica
+				    <th class="col-xs">Nombre Comercial
 										
 				    </th>
 
-				    <th class="col-xs Table-bordered">Minerales</th>
-				    <th class="col-xs Table-bordered">Ubicaciones: Roldanillo valle del cauca</th>
+				    <th class="col-xs">Minerales</th>
+				    <th class="col-xs">Ubicaciones</th>
 
 				    
 				  </tr>
@@ -35,9 +35,9 @@
 			  <tbody>
 				  <tr>
 				    <td class="col-xs text-center"><input type="text" name="expediente"></td>
-				    <td class="col-xs"><input type="text" name="nombre"></td>
+				    <td class="col-xs"><input type="text" name="nombre" value="Playa Rica"></td>
 				    <td class="col-xs"><input type="text" name="minerales"></td>
-				    <td class="col-xs"><input type="text" name="ubicaciones"></td>
+				    <td class="col-xs"><input type="text" name="ubicaciones" value="Roldanillo valle del cauca"></td>
 				  </tr>
 			  </tbody>
 			</table>
@@ -48,36 +48,36 @@
 	</section>
 	<section class="contenedor datos">
 		<div class="bolqueta col-xs-12 flex">
-			<p class="col-xs-2 ">Volqueta Placa &nbsp;<?php  echo $this->vehiculo->placa;?> </p>
-			<input type="text" name="bolqueta_placa">
+			<p class="col-xs-2">Bolqueta Placa</p>
+			<input class="col-xs-10" type="text" name="bolqueta_placa" value="<?php  echo $this->vehiculo->placa;?>">
 		</div>
-		<div class="col-xs-7 flex">
-			<p class="">Conductor</p>
-			<input type="text" name="conductor">
+		<div class="col-xs-6 flex">
+			<p class="col-xs-2">Conductor</p>
+			<input class="col-xs-9" type="text" name="conductor">
 		</div>
-		<div class="col-xs-5 flex">
-			<p class="">C.C.</p>
-			<input type="text" name="cc">
+		<div class="col-xs-6 flex">
+			<p class="col-xs-1">C.C.</p>
+			<input class="col-xs-11" type="text" name="cc">
 		</div>
 		<div class="col-xs-12 flex">
 			<p class="col-xs-1">Destino</p>
-			<input type="text" name="destino">
+			<input class="col-xs-11" type="text" name="destino">
 		</div>
-		<div class="col-xs-5 flex">
-			<p class="">FECHA&nbsp;<?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?> </p>
-			<input type="text" name="fecha">
+		<div class="col-xs-4 flex">
+			<p class="col-xs-2">FECHA</p>
+			<input class="col-xs-10" type="text" name="fecha" value="<?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?>">
 		</div>
-		<div class="col-xs-7 flex">
-			<p class="col-xs-3">Hora de despacho</p>
-			<input type="text" name="hora_despacho">
+		<div class="col-xs-8 flex">
+			<p class="col-xs-3">Hora de despacho:</p>
+			<input class="col-xs-9" type="text" name="hora_despacho">
 		</div>
 	</section>
 	<section class="contenedor material">
 		
-		<div class="col-xs-4">
+		<div class="col-xs-3">
 			<p>MATERIAL:</p>
 		</div>
-		<div class="col-xs-4 flex">
+		<div class="col-xs-5 flex">
 			<p>Arena gruesa</p>
 			<input type="checkbox" name="arena_gruesa">
 		</div>
