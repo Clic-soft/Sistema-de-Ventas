@@ -14,7 +14,7 @@ class ventasModel extends Model {
             $consulta = $this->_db->get_results("SELECT e.*,c.nomcom, em.nombres, em.apellidos, v.placa 
                                                 FROM encabezado_venta as e, clientes as c, empleados as em, vehiculos as v 
                                                 WHERE e.id_cliente=c.id AND e.id_empleado=em.id AND e.id_placa=v.id
-                                                order by e.estado_venta ASC, e.fecha_venta DESC;");
+                                                and e.estado_venta != 4 order by e.estado_venta ASC, e.fecha_venta DESC;");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }

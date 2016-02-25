@@ -45,8 +45,8 @@
 						</a>
 					</li>
 
-					<li id="proveedores" class="disable" role="presentation">
-						<a  onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
+					<li id="proveedores" role="presentation">
+						<a  href="<?php echo BASE_URL; ?>proveedores">
 							<i class="glyphicon glyphicon-scale"></i> Proveedores 
 							
 						</a>
@@ -59,8 +59,8 @@
 						</a>
 					</li>
 
-					<li id="reportes" class="disable" role="presentation">
-						<a onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')">
+					<li id="reportes" role="presentation">
+						<a  href="<?php echo BASE_URL; ?>reportes">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
 							
 						</a>

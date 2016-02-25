@@ -1,0 +1,141 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
+    <?php require_once 'inc/header.php'; ?>
+</head>
+<body>
+        <div class="new-count col-xs-12">
+            <div class="clearfix"></div>
+            <form class="form-horizontal" action="" method="POST" id="form" name="form1">
+                <div class="acceso">
+                    <input type="hidden" name="guardar" value="1" />
+                    <?php if (isset($this->_error)): ?>
+                        <div id="_error" class="alert alert-error">
+                            <a class="close" data-dismiss="alert">x</a>
+                            <?php echo $this->_error; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($this->_mensaje)): ?>
+                        <div id="_mensaje" class="alert alert-success">
+                            <a class="close" data-dismiss="alert">x</a>
+                            <?php echo $this->_mensaje; ?>
+                        </div>
+                    <?php endif; ?>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Tipo Empresa:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" name="tipo_empresa" id="tipo_empresa" >
+                                <option class="form-control col-xs-12" value="">-Seleccione-</option>
+                                <?php foreach ($this->empresa as $empresa): ?>
+                                        <option class="col-xs-12 form-control"value="<?php echo $empresa->id; ?>" <?php if($this->datos->id_tipo_cliente == $empresa->id){ ?> selected <?php } ?> ><?php echo $empresa->tipo_cliente; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Tipo Proveedor:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control form_imput" name="tipo_pro" id="tipo_pro" >
+                                <option value="">-Seleccione-</option>
+                                <option value="1" <?php if($this->datos->tipo_proveedor == 1){ ?> selected <?php } ?> >-Combustibles-</option>
+                                <option value="2" <?php if($this->datos->tipo_proveedor == 2){ ?> selected <?php } ?>>-Materiales-</option>
+                                <option value="3" <?php if($this->datos->tipo_proveedor == 3){ ?> selected <?php } ?>>-Servicios-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Autorrenetedor:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control form_imput" name="autorretenedor" id="autorretenedor" >
+                                <option value="">-Seleccione-</option>
+                                <option value="1" <?php if($this->datos->autoretenedor == 1){ ?> selected <?php } ?>>-SI-</option>
+                                <option value="2" <?php if($this->datos->autoretenedor == 2){ ?> selected <?php } ?> >-NO-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Numero Documento:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="numdoc" id="numdoc" class="col-xs-12 form-control" required placeholder="Numero Documento" value="<?php if (isset($this->datos->nit)) echo $this->datos->nit; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Razon Social:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="rsocial" id="rsocial" class="form-control" required
+                                placeholder="Razon Social" value="<?php if (isset($this->datos->razon_social)) echo $this->datos->razon_social; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Representante Legal:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="rep" id="rep" class="form-control" required placeholder="Representante Legal" value="<?php if (isset($this->datos->rep_legal)) echo $this->datos->rep_legal; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Contacto:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="con" id="con" class="form-control" required placeholder="Contacto" value="<?php if (isset($this->datos->contacto)) echo $this->datos->contacto; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Telefono:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="tel" id="tel" class="form-control" required placeholder="Telefono " value="<?php if (isset($this->datos->numero_contacto)) echo $this->datos->numero_contacto; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Direccion:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="dir" id="dir" class="form-control" required placeholder="Direccion" value="<?php if (isset($this->datos->direccion)) echo $this->datos->direccion; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Email:</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="email" id="email" class="form-control" required placeholder="Email" value="<?php if (isset($this->datos->email_contacto)) echo $this->datos->email_contacto; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Estado</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" required name="estado" id="estado">
+                                <option value="">Selecione</option>
+                                <option value="1" <?php if($this->datos->estado == 1){ ?> selected <?php } ?> >ACTIVO</option>
+                                <option value="2" <?php if($this->datos->estado == 2){ ?> selected <?php } ?>>INACTIVO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <center>
+                    <a href="#" class="btn btn-primary btn-center btn" onclick="document.getElementById('form').submit()">Guardar</a>
+                </center>
+            </form>
+        </div>
+    </div>
+ 
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

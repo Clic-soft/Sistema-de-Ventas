@@ -1,0 +1,53 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script>
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#reportes").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="index row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="space"></div>
+            <div class="alert alert-dismissible alert-info">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Reportes.</strong>
+            </div>
+
+            <!--Productos -->
+            <a href="<?php echo BASE_URL; ?>reportes/buscar_factura">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-bed"></span></p>
+                <p class="title">Listado Facturas</p>
+              </div>
+            </a>
+            
+            <!--Clientes -->
+            <a href="<?php echo BASE_URL; ?>reportes/buscar_venta">
+              <div class="col-xs-6 col-md-2 iconos-i">
+                <p><span class="glyphicon glyphicon-folder-open"></span></p>
+                <p class="title">Listado Ventas</p>
+              </div>
+            </a>
+
+          </div>
+            </div>
+        </div>
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

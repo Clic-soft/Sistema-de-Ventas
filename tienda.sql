@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2016 a las 08:43:40
+-- Tiempo de generación: 23-02-2016 a las 01:54:12
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -124,6 +124,41 @@ CREATE TABLE `abonos` (
   `fecha_abono` datetime NOT NULL,
   `valor` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `abonos`
+--
+
+INSERT INTO `abonos` (`id`, `id_venta`, `fecha_abono`, `valor`) VALUES
+(1, 32, '2016-02-05 15:20:07', 20000),
+(2, 32, '2016-02-05 15:21:01', 20000),
+(3, 32, '2016-02-05 15:22:56', 50000),
+(6, 32, '2016-02-05 16:29:53', 25000),
+(7, 32, '2016-02-05 16:30:24', 40000),
+(8, 32, '2016-02-05 16:30:39', 52750),
+(10, 32, '2016-02-05 16:34:28', 10000),
+(11, 13, '2016-02-05 17:56:09', 4000),
+(12, 13, '2016-02-05 18:11:47', 6000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria_insumos`
+--
+
+CREATE TABLE `categoria_insumos` (
+  `id` int(11) NOT NULL,
+  `categoria` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `categoria_insumos`
+--
+
+INSERT INTO `categoria_insumos` (`id`, `categoria`) VALUES
+(1, 'Combustible'),
+(2, 'Materiales'),
+(3, 'Servicios');
 
 -- --------------------------------------------------------
 
@@ -1348,6 +1383,21 @@ INSERT INTO `departamentos` (`id`, `departamento`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detalle_compras`
+--
+
+CREATE TABLE `detalle_compras` (
+  `id` int(11) NOT NULL,
+  `id_compra` int(11) NOT NULL,
+  `id_insumo` int(11) NOT NULL,
+  `precio` int(11) NOT NULL,
+  `cantidad` decimal(11,2) NOT NULL,
+  `total_detalle` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalle_ventas`
 --
 
@@ -1388,7 +1438,9 @@ INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantid
 (21, 29, 4, 10000, '2.00', 0, 20000, 27),
 (22, 29, 4, 50000, '2.00', 5000, 95000, 28),
 (23, 30, 4, 4000, '4.00', 1000, 15000, 0),
-(24, 31, 4, 4000, '4.00', 1000, 15000, 30);
+(24, 31, 4, 4000, '4.00', 1000, 15000, 30),
+(25, 32, 4, 16500, '13.50', 5000, 217750, 0),
+(26, 13, 4, 10000, '1.00', 0, 10000, 0);
 
 -- --------------------------------------------------------
 
@@ -1413,6 +1465,25 @@ CREATE TABLE `empleados` (
 INSERT INTO `empleados` (`id`, `codigo`, `tipo_documento`, `documento`, `nombres`, `apellidos`, `salario_b`) VALUES
 (1, '00145', 2, 1144155366, 'Jorge Andres', 'Ruiz Cordoba', 800000),
 (2, '5945', 2, 1144139561, 'Andres Mauricio', 'Pe??a Angel', 800000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `encabezado_compra`
+--
+
+CREATE TABLE `encabezado_compra` (
+  `id` int(11) NOT NULL,
+  `prefijo` varchar(4) NOT NULL,
+  `num_prefijo` int(11) NOT NULL,
+  `fecha_compra` datetime NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `estado_compra` int(1) NOT NULL DEFAULT '1' COMMENT '1:creado, 2:finalizado',
+  `sub_total_compra` int(10) NOT NULL,
+  `retencion` int(10) NOT NULL,
+  `iva_compra` int(10) NOT NULL,
+  `total_compra` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1452,7 +1523,7 @@ INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_
 (10, 'FAC', 4, '', 0, 2, 2, '2016-01-29 15:05:31', 1, 1, 2, 0, 0, 0, 0),
 (11, 'REM', 5, '', 0, 1, 2, '2016-02-03 21:25:46', 2, 1, 2, 0, 0, 0, 0),
 (12, '', 0, '', 0, 3, 2, '2016-02-03 21:30:44', 3, 1, 4, 0, 0, 0, 0),
-(13, 'REM', 6, '', 0, 3, 2, '2016-02-03 21:31:07', 3, 1, 4, 0, 0, 0, 0),
+(13, 'REM', 6, '', 0, 3, 2, '2016-02-03 21:31:07', 3, 3, 4, 10000, 0, 0, 10000),
 (14, 'FAC', 5, '', 0, 1, 1, '2016-02-04 17:27:40', 1, 4, 7, 166400, 24800, 0, 141600),
 (15, 'REM', 7, '', 0, 2, 2, '2016-02-04 17:28:50', 2, 1, 4, 0, 0, 0, 0),
 (16, 'FAC', 6, 'CO', 2, 2, 2, '2016-02-04 17:31:25', 1, 1, 6, 0, 0, 0, 0),
@@ -1470,7 +1541,8 @@ INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_
 (28, 'REM', 17, 'CO', 11, 1, 1, '2016-02-05 02:02:31', 3, 4, 1, 100000, 5000, 0, 95000),
 (29, 'FAC', 9, 'CO', 5, 1, 1, '2016-02-05 02:08:53', 1, 4, 7, 120000, 5000, 0, 115000),
 (30, 'REM', 18, 'CO', 12, 1, 1, '2016-02-05 02:17:21', 3, 4, 3, 16000, 1000, 0, 15000),
-(31, 'FAC', 10, 'CO', 6, 1, 1, '2016-02-05 02:21:00', 1, 4, 3, 16000, 1000, 0, 15000);
+(31, 'FAC', 10, 'CO', 6, 1, 1, '2016-02-05 02:21:00', 1, 4, 3, 16000, 1000, 0, 15000),
+(32, 'REM', 19, 'CO', 13, 1, 1, '2016-02-05 14:58:49', 3, 3, 3, 222750, 5000, 0, 217750);
 
 -- --------------------------------------------------------
 
@@ -1480,13 +1552,8 @@ INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_
 
 CREATE TABLE `insumos` (
   `id` int(11) NOT NULL,
-  `id_proveedor` int(11) NOT NULL,
-  `insumo` varchar(40) NOT NULL,
-  `fecha_compra` datetime NOT NULL,
-  `vr_unitario` int(10) NOT NULL,
-  `cantidad` int(3) NOT NULL,
-  `id_und_medida` int(11) NOT NULL,
-  `vr_total` int(10) NOT NULL
+  `id_cat_insumos` int(11) NOT NULL,
+  `insumo` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1529,10 +1596,11 @@ CREATE TABLE `prefijos` (
 
 INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
 (1, 'Factura', 'FAC', 1, 11, 5000),
-(2, 'Remision', 'REM', 1, 19, 5000),
+(2, 'Remision', 'REM', 1, 20, 5000),
 (3, 'certificado origen r', 'CO', 1, 7, 1000),
-(4, 'certificado origen f', 'CO', 1, 13, 1000),
-(5, 'Abono', 'ABO', 1, 1, 1000);
+(4, 'certificado origen f', 'CO', 1, 14, 1000),
+(5, 'Abono', 'ABO', 1, 1, 1000),
+(6, 'Compra', 'COM', 1, 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -1575,7 +1643,9 @@ CREATE TABLE `proveedores` (
   `numero_contacto` varchar(20) NOT NULL,
   `email_contacto` varchar(40) NOT NULL,
   `direccion` varchar(40) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo'
+  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo',
+  `tipo_proveedor` int(11) NOT NULL COMMENT '1:combustibles, 2:materiales, 3:servicios',
+  `autoretenedor` int(11) NOT NULL COMMENT '1:SI, 2:NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1694,6 +1764,12 @@ ALTER TABLE `abonos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `categoria_insumos`
+--
+ALTER TABLE `categoria_insumos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `ciudades`
 --
 ALTER TABLE `ciudades`
@@ -1712,6 +1788,12 @@ ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `detalle_compras`
+--
+ALTER TABLE `detalle_compras`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
@@ -1721,6 +1803,12 @@ ALTER TABLE `detalle_ventas`
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `encabezado_compra`
+--
+ALTER TABLE `encabezado_compra`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1797,7 +1885,12 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT de la tabla `categoria_insumos`
+--
+ALTER TABLE `categoria_insumos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
 --
@@ -1814,20 +1907,30 @@ ALTER TABLE `clientes`
 ALTER TABLE `departamentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
+-- AUTO_INCREMENT de la tabla `detalle_compras`
+--
+ALTER TABLE `detalle_compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT de la tabla `encabezado_compra`
+--
+ALTER TABLE `encabezado_compra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
 -- AUTO_INCREMENT de la tabla `encabezado_venta`
 --
 ALTER TABLE `encabezado_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `insumos`
 --
@@ -1842,7 +1945,7 @@ ALTER TABLE `iva`
 -- AUTO_INCREMENT de la tabla `prefijos`
 --
 ALTER TABLE `prefijos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
