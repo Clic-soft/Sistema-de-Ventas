@@ -363,7 +363,7 @@ class ventasController extends Controller {
 
 				if (!$this->getDecimal('cant') || $this->getDecimal('cant')<=0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar la placa del vehiculo';
+					$this->_view->_error = 'Debe Ingresar la cantidad';
 					//Vista de la pagina actual
 					$this->_view->renderizar('agregar_detalle','ventas');
 					//Saca de la funcion principal
@@ -425,7 +425,7 @@ class ventasController extends Controller {
 
 				if (!$this->getDecimal('cant') || $this->getDecimal('cant')<=0) {
 					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'Debe Ingresar la placa del vehiculo';
+					$this->_view->_error = 'Debe Ingresar la cantidad';
 					//Vista de la pagina actual
 					$this->_view->renderizar('editar_detalle',false,true);
 					//Saca de la funcion principal

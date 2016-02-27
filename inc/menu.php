@@ -59,6 +59,13 @@
 						</a>
 					</li>
 
+					<li id="compras"  role="presentation">
+						<a  href="<?php echo BASE_URL; ?>compras">
+							<i class="glyphicon glyphicon-shopping-cart"></i> Compras 
+							
+						</a>
+					</li>
+
 					<li id="reportes" role="presentation">
 						<a  href="<?php echo BASE_URL; ?>reportes">
 							<i class="glyphicon glyphicon-list-alt"></i> Reportes 
