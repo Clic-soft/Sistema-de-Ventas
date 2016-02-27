@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2016 a las 01:54:12
+-- Tiempo de generación: 28-02-2016 a las 00:33:27
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -124,21 +124,6 @@ CREATE TABLE `abonos` (
   `fecha_abono` datetime NOT NULL,
   `valor` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `abonos`
---
-
-INSERT INTO `abonos` (`id`, `id_venta`, `fecha_abono`, `valor`) VALUES
-(1, 32, '2016-02-05 15:20:07', 20000),
-(2, 32, '2016-02-05 15:21:01', 20000),
-(3, 32, '2016-02-05 15:22:56', 50000),
-(6, 32, '2016-02-05 16:29:53', 25000),
-(7, 32, '2016-02-05 16:30:24', 40000),
-(8, 32, '2016-02-05 16:30:39', 52750),
-(10, 32, '2016-02-05 16:34:28', 10000),
-(11, 13, '2016-02-05 17:56:09', 4000),
-(12, 13, '2016-02-05 18:11:47', 6000);
 
 -- --------------------------------------------------------
 
@@ -1321,15 +1306,6 @@ CREATE TABLE `clientes` (
   `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `tipo_documento`, `nit`, `rucom`, `razon_social`, `nomcom`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
-(1, 1, 1, '7587549653', '123456', 'Pruebas Sas', 'Alfredo Gonzales', 1, 1, '1234567', '', 'calle falsa 123', 'alfredg@pruebassas.com', 2),
-(2, 2, 1, '9876543219', '58763', 'la coquita S.A.C', 'guillermo beltran', 1, 1, '1234578', '9845873', 'clle 44 # 32-65', 'lacoqinfo@gmail.com', 1),
-(3, 1, 4, '7589469325', '42678-5548', 'Angel', 'Angel', 0, 0, '7854236', '', 'calle falsa 123', 'angel@outlook.com', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1412,36 +1388,6 @@ CREATE TABLE `detalle_ventas` (
   `id_remision` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `detalle_ventas`
---
-
-INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantidad`, `descuento`, `total_detalle`, `id_remision`) VALUES
-(1, 10, 1, 2000, '4.00', 0, 8000, 0),
-(4, 20, 4, 8000, '6.30', 11000, 39400, 0),
-(5, 22, 4, 7000, '4.50', 7000, 24500, 0),
-(6, 20, 4, 5000, '12.00', 0, 60000, 0),
-(7, 20, 4, 7000, '3.50', 6800, 17700, 0),
-(8, 21, 5, 2000, '4.20', 0, 8400, 0),
-(9, 17, 5, 1200, '12.00', 0, 14400, 0),
-(10, 14, 4, 7000, '4.50', 7000, 24500, 22),
-(11, 14, 4, 8000, '6.30', 11000, 39400, 20),
-(12, 14, 4, 5000, '12.00', 0, 60000, 20),
-(13, 14, 4, 7000, '3.50', 6800, 17700, 20),
-(14, 23, 4, 3000, '10.00', 5000, 25000, 0),
-(15, 23, 5, 7000, '6.50', 2000, 43500, 0),
-(16, 24, 5, 10000, '3.60', 0, 36000, 0),
-(17, 25, 4, 1400, '12.00', 0, 16800, 0),
-(18, 26, 4, 14000, '2.00', 2500, 25500, 0),
-(19, 27, 4, 10000, '2.00', 0, 20000, 0),
-(20, 28, 4, 50000, '2.00', 5000, 95000, 0),
-(21, 29, 4, 10000, '2.00', 0, 20000, 27),
-(22, 29, 4, 50000, '2.00', 5000, 95000, 28),
-(23, 30, 4, 4000, '4.00', 1000, 15000, 0),
-(24, 31, 4, 4000, '4.00', 1000, 15000, 30),
-(25, 32, 4, 16500, '13.50', 5000, 217750, 0),
-(26, 13, 4, 10000, '1.00', 0, 10000, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -1457,14 +1403,6 @@ CREATE TABLE `empleados` (
   `apellidos` varchar(60) NOT NULL,
   `salario_b` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `empleados`
---
-
-INSERT INTO `empleados` (`id`, `codigo`, `tipo_documento`, `documento`, `nombres`, `apellidos`, `salario_b`) VALUES
-(1, '00145', 2, 1144155366, 'Jorge Andres', 'Ruiz Cordoba', 800000),
-(2, '5945', 2, 1144139561, 'Andres Mauricio', 'Pe??a Angel', 800000);
 
 -- --------------------------------------------------------
 
@@ -1508,41 +1446,6 @@ CREATE TABLE `encabezado_venta` (
   `iva_venta` int(10) NOT NULL,
   `total_venta` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `encabezado_venta`
---
-
-INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_co`, `id_cliente`, `id_empleado`, `fecha_venta`, `forma_pago`, `estado_venta`, `id_placa`, `sub_total_venta`, `descuento_venta`, `iva_venta`, `total_venta`) VALUES
-(4, 'FAC', 1, '', 0, 1, 1, '2016-01-29 15:45:24', 1, 1, 1, 0, 0, 0, 0),
-(5, 'FAC', 2, '', 0, 1, 1, '2016-01-29 10:00:25', 1, 1, 3, 0, 0, 0, 0),
-(6, 'REM', 1, '', 0, 1, 2, '2016-01-29 10:00:31', 2, 1, 7, 0, 0, 0, 0),
-(7, 'REM', 2, '', 0, 1, 2, '2016-01-29 10:03:18', 2, 1, 1, 0, 0, 0, 0),
-(8, 'REM', 3, '', 0, 2, 2, '2016-01-29 10:03:39', 2, 1, 2, 0, 0, 0, 0),
-(9, 'FAC', 3, '', 0, 1, 1, '2016-01-29 10:03:49', 1, 1, 1, 0, 0, 0, 0),
-(10, 'FAC', 4, '', 0, 2, 2, '2016-01-29 15:05:31', 1, 1, 2, 0, 0, 0, 0),
-(11, 'REM', 5, '', 0, 1, 2, '2016-02-03 21:25:46', 2, 1, 2, 0, 0, 0, 0),
-(12, '', 0, '', 0, 3, 2, '2016-02-03 21:30:44', 3, 1, 4, 0, 0, 0, 0),
-(13, 'REM', 6, '', 0, 3, 2, '2016-02-03 21:31:07', 3, 3, 4, 10000, 0, 0, 10000),
-(14, 'FAC', 5, '', 0, 1, 1, '2016-02-04 17:27:40', 1, 4, 7, 166400, 24800, 0, 141600),
-(15, 'REM', 7, '', 0, 2, 2, '2016-02-04 17:28:50', 2, 1, 4, 0, 0, 0, 0),
-(16, 'FAC', 6, 'CO', 2, 2, 2, '2016-02-04 17:31:25', 1, 1, 6, 0, 0, 0, 0),
-(17, 'FAC', 7, 'CO', 3, 2, 1, '2016-02-04 17:31:37', 1, 4, 6, 14400, 0, 0, 14400),
-(18, 'REM', 8, 'CO', 2, 2, 2, '2016-02-04 17:31:50', 2, 1, 2, 0, 0, 0, 0),
-(19, 'REM', 9, 'CO', 3, 2, 2, '2016-02-04 17:32:04', 2, 1, 2, 0, 0, 0, 0),
-(20, 'REM', 10, 'CO', 4, 1, 2, '2016-02-04 17:32:17', 3, 4, 3, 134900, 17800, 0, 117100),
-(21, 'REM', 11, 'CO', 5, 1, 1, '2016-02-04 20:35:18', 2, 4, 3, 8400, 0, 0, 8400),
-(22, 'REM', 12, 'CO', 6, 1, 1, '2016-02-04 20:40:43', 3, 4, 7, 31500, 7000, 0, 24500),
-(23, 'REM', 13, 'CO', 7, 2, 1, '2016-02-05 01:49:14', 3, 3, 4, 75500, 7000, 0, 68500),
-(24, 'REM', 14, 'CO', 8, 2, 2, '2016-02-05 01:51:44', 3, 3, 6, 36000, 0, 0, 36000),
-(25, 'FAC', 8, 'CO', 4, 1, 1, '2016-02-05 01:54:57', 1, 4, 3, 16800, 0, 0, 16800),
-(26, 'REM', 15, 'CO', 9, 1, 1, '2016-02-05 01:58:16', 2, 4, 7, 28000, 2500, 0, 25500),
-(27, 'REM', 16, 'CO', 10, 1, 1, '2016-02-05 02:00:57', 3, 4, 7, 20000, 0, 0, 20000),
-(28, 'REM', 17, 'CO', 11, 1, 1, '2016-02-05 02:02:31', 3, 4, 1, 100000, 5000, 0, 95000),
-(29, 'FAC', 9, 'CO', 5, 1, 1, '2016-02-05 02:08:53', 1, 4, 7, 120000, 5000, 0, 115000),
-(30, 'REM', 18, 'CO', 12, 1, 1, '2016-02-05 02:17:21', 3, 4, 3, 16000, 1000, 0, 15000),
-(31, 'FAC', 10, 'CO', 6, 1, 1, '2016-02-05 02:21:00', 1, 4, 3, 16000, 1000, 0, 15000),
-(32, 'REM', 19, 'CO', 13, 1, 1, '2016-02-05 14:58:49', 3, 3, 3, 222750, 5000, 0, 217750);
 
 -- --------------------------------------------------------
 
@@ -1595,10 +1498,10 @@ CREATE TABLE `prefijos` (
 --
 
 INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
-(1, 'Factura', 'FAC', 1, 11, 5000),
-(2, 'Remision', 'REM', 1, 20, 5000),
-(3, 'certificado origen r', 'CO', 1, 7, 1000),
-(4, 'certificado origen f', 'CO', 1, 14, 1000),
+(1, 'Factura', 'FAC', 1, 1, 5000),
+(2, 'Remision', 'REM', 1, 1, 5000),
+(3, 'certificado origen r', 'CO', 1, 1, 1000),
+(4, 'certificado origen f', 'CO', 1, 1, 1000),
 (5, 'Abono', 'ABO', 1, 1, 1000),
 (6, 'Compra', 'COM', 1, 1, 5000);
 
@@ -1616,14 +1519,6 @@ CREATE TABLE `productos` (
   `id_und_medida` int(11) NOT NULL,
   `RutaImagen` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`id`, `referencia`, `producto`, `precio`, `id_und_medida`, `RutaImagen`) VALUES
-(4, '', 'Arena', 2000, 1, NULL),
-(5, '', 'Grava', 3000, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1740,18 +1635,6 @@ CREATE TABLE `vehiculos` (
   `id_cliente` int(11) NOT NULL,
   `placa` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `vehiculos`
---
-
-INSERT INTO `vehiculos` (`id`, `id_cliente`, `placa`) VALUES
-(1, 1, 'Zzz000'),
-(2, 2, 'Zzz000'),
-(3, 1, 'Aaa000'),
-(4, 2, 'Bbb000'),
-(6, 2, 'Aaa000'),
-(7, 1, 'Bbb000');
 
 --
 -- Índices para tablas volcadas
@@ -1885,7 +1768,7 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `categoria_insumos`
 --
@@ -1900,7 +1783,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -1915,22 +1798,22 @@ ALTER TABLE `detalle_compras`
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `encabezado_compra`
 --
 ALTER TABLE `encabezado_compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `encabezado_venta`
 --
 ALTER TABLE `encabezado_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `insumos`
 --
@@ -1950,7 +1833,7 @@ ALTER TABLE `prefijos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
@@ -1980,7 +1863,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
