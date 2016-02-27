@@ -52,8 +52,8 @@
 						</a>
 					</li>
 
-					<li id="compras" class="disable"  role="presentation">
-						<a  onClick="javascript:alert('La opción está deshabilitada por el momento. \nSi tiene alguna duda, contacte a su desarrollador.')" >
+					<li id="insumos"  role="presentation">
+						<a  href="<?php echo BASE_URL; ?>insumos">
 							<i class="glyphicon glyphicon-shopping-cart"></i> Insumos 
 							
 						</a>

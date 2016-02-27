@@ -1,0 +1,35 @@
+<?php if (isset($this->insumos) && count($this->insumos)) : ?>  
+                            <table  class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">CATEGORIA</th>
+                                        <th class="text-center">INSUMO</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->insumos as $insumos):?>
+                                    <tr class="info">
+                                        <td><?php echo $insumos->categoria;?></td>
+                                        <td><?php echo $insumos->insumo;?></td>
+                                        <td><?php echo $insumos->precio;?></td>
+                                        <td>
+                                            <a href="<?php echo BASE_URL; ?>insumos/editar_insumos/<?php echo $insumos->id?>" class="ventanainsumos"><span class="label label-primary">Editar insumos</span></a>
+
+                                            <a href="javascript:borrar_insumos(<?php echo $insumos->id;?>)"><span class="label label-danger">Borrar insumos</span></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class='alert alert-info'>
+                        <strong>No hay insumos  creados.</strong>
+                        </div>
+                        <?php endif; ?>
