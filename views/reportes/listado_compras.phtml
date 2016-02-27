@@ -1,0 +1,115 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script> 
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#reportes").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="space"></div>
+                    <div>
+                        <div class="contenido-button">
+                            <a href="<?php echo BASE_URL; ?>reportes/exportar_listado_compra"><span class="label label-primary">Exportar Excel</span>
+                            </a>
+                            <a href="<?php echo BASE_URL; ?>reportes/buscar_compra"><span class="label label-primary">buscar factura</span>
+                            </a>
+                            <a href="<?php echo BASE_URL; ?>reportes"><span class="label label-primary">Reportes</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="form-horizontal" action="#" method="POST" id="form" name="form">
+                    <input type="hidden" name="guardar" value="1" />
+                    <input type="hidden" name="id_proveedor" id="id_proveedor" value="<?php echo $_SESSION["id_proveedor"]; ?>" />
+                    <input type="hidden" name="fecha_ini" id="fecha_ini" value="<?php echo $_SESSION["fecha_ini"]; ?>"/>
+                    <input type="hidden" name="fecha_fin" id="fecha_fin" value="<?php echo $_SESSION["fecha_fin"]; ?>" />
+                </form>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros">
+                    <?php $total=0;?>     
+                        <?php if (isset($this->reporte) && count($this->reporte)) : ?>  
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">N°</th>
+                                        <th class="text-center">FECHA</th>
+                                        <th class="text-center">PROVEEDOR</th>
+                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">TOTAL</th>
+                                        <th class="text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->reporte as $reporte):?>
+                                    <tr>
+                                        <td><?php echo $reporte->prefijo." 000".$reporte->num_prefijo;?></td>
+                                        <td><?php echo $reporte->fecha_compra;?></td>
+                                        <td><?php echo $reporte->razon_social;?></td>
+                                        <td class="text-center"><?php if ($reporte->estado_compra == 1){ echo "Creado";} elseif ($reporte->estado_compra == 2){ echo "Finalizado";} ?></td>
+                                        <td>$<?php echo $reporte->total_compra;?></td>
+                                        <?php $total=$total+$reporte->total_compra; ?>
+                                        
+                                    <td class="text-center">
+
+                                       <!-- <a data-toggle="tooltip" data-placement="left" title="Ver factura" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_factura/<?php echo $reporte->id?>"><span class="glyphicon glyphicon-modal-window"></span></a>
+                                        &nbsp;
+                                        <a data-toggle="tooltip" data-placement="left" title="Ver certificado" target="_blank" href="<?php echo BASE_URL; ?>ventas/ver_certificado/<?php echo $reporte->id?>"><span class="glyphicon glyphicon-list-alt"></span></a>-->
+                                        
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="4">
+                                        TOTAL
+                                    </td>
+                                    <td colspan="1">
+                                        $<?php echo $total; ?>
+                                    </td>
+                                    <td colspan="1">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class="space"></div>
+                        <div class='alert alert-info'>
+                        <strong>No hay compras creadas.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>

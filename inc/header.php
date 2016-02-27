@@ -1,8 +1,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/> -->
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap-datetimepicker.min"
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap-datetimepicker.min">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/dataTables.bootstrap.css"
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/dataTables.bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/styles.css">
 	<!--<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 
