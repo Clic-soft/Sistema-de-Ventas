@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-02-2016 a las 00:33:27
+-- Tiempo de generación: 15-03-2016 a las 00:04:27
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -1306,6 +1306,13 @@ CREATE TABLE `clientes` (
   `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `tipo_documento`, `nit`, `rucom`, `razon_social`, `nomcom`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
+(1, 1, 2, '1144155366', '12345', 'Andres Ruiz', 'Andres Ruiz', 31, 658, '4887605', '3158787318', 'cra 1 #70-180', 'j_andres272@hotmail.com', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1401,8 +1408,16 @@ CREATE TABLE `empleados` (
   `documento` int(11) NOT NULL,
   `nombres` varchar(60) NOT NULL,
   `apellidos` varchar(60) NOT NULL,
-  `salario_b` int(11) NOT NULL
+  `salario_b` int(11) NOT NULL,
+  `cargo` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `codigo`, `tipo_documento`, `documento`, `nombres`, `apellidos`, `salario_b`, `cargo`) VALUES
+(1, '1', 2, 1144155366, 'Andres', 'Ruiz', 800000, 'Desarrollador de Software');
 
 -- --------------------------------------------------------
 
@@ -1542,6 +1557,13 @@ CREATE TABLE `proveedores` (
   `tipo_proveedor` int(11) NOT NULL COMMENT '1:combustibles, 2:materiales, 3:servicios',
   `autoretenedor` int(11) NOT NULL COMMENT '1:SI, 2:NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id`, `id_tipo_cliente`, `nit`, `razon_social`, `rep_legal`, `id_depto`, `id_ciudad`, `contacto`, `numero_contacto`, `email_contacto`, `direccion`, `estado`, `tipo_proveedor`, `autoretenedor`) VALUES
+(1, 1, '1144155366', 'Aandres Ruiz', 'Andres Ruiz', 18, 694, 'Andres Ruiz', '.158787318', 'j_andres272@hotmail.com', 'cra 1 # 70 -180', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1783,7 +1805,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -1803,7 +1825,7 @@ ALTER TABLE `detalle_ventas`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `encabezado_compra`
 --
@@ -1838,7 +1860,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tipo_clientes`
 --

@@ -38,6 +38,13 @@
 						</a>
 					</li>
 
+					<li id="nomina"  role="presentation">
+						<a  href="<?php echo BASE_URL; ?>nomina">
+							<i class="glyphicon glyphicon-user"></i> Nomina 
+							
+						</a>
+					</li>
+
 					<li id="vehiculos"  role="presentation">
 						<a  href="<?php echo BASE_URL; ?>vehiculos">
 							<i class="glyphicon glyphicon-user"></i> Vehiculos 

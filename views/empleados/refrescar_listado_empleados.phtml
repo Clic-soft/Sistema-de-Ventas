@@ -1,36 +1,32 @@
-<?php if (isset($this->cliente) && count($this->cliente)) : ?>  
-                            <table class='table  table-bordered table-hover table-condensed'>
-                                <thead class="alert alert-info text-head">
+<?php if (isset($this->empleado) && count($this->empleado)) : ?>  
+                            <table class="table table-striped table-hover ">
+                                <thead>
                                     <tr>
-                                        <th class="text-center">TIPO CLIENTE</th>
+                                        <th class="text-center">CODIGO EMPLEADO</th>
                                         <th class="text-center">TIPO DOCUMENTO</th>
                                         <th class="text-center">NUMERO DOCUMENTO</th>
                                         <th class="text-center">NOMBRE</th>
-                                        <th class="text-center">DIRECCION</th>
-                                        <th class="text-center">EMAIL</th>
-                                        <th class="text-center">TELEFONO</th>
+                                        <th class="text-center">SALARIO</th>
                                         <th class="text-center">ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($this->cliente as $cliente):?>
+                                <?php foreach($this->empleado as $empleado):?>
                                     <tr>
-                                        <td><?php echo $cliente->tipo_cliente;?></td>
-                                        <td><?php echo $cliente->tdoc;?></td>
-                                        <td><?php echo $cliente->nit;?></td>
-                                        <td><?php echo $cliente->nomcom;?></td>
-                                        <td><?php echo $cliente->direccion;?></td>
-                                        <td><?php echo $cliente->email;?></td>
-                                        <td><?php echo $cliente->telefono1;?></td>
+                                        <td><?php echo $empleado->codigo;?></td>
+                                        <td><?php echo $empleado->tdoc;?></td>
+                                        <td><?php echo $empleado->documento;?></td>
+                                        <td><?php echo $empleado->nombres." ".$empleado->apellidos;?></td>
+                                        <td>$<?php echo $empleado->salario_b;?></td>
                                     <td>
-                                        <a href="<?php echo BASE_URL; ?>clientes/editar_cliente/<?php echo $cliente->id?>" class="btn2 ventanacliente"><img src="<?php echo BASE_URL; ?>public/img/editar.png" style="vertical-align:middle"/> </a>
+                                        <a href="<?php echo BASE_URL; ?>empleados/editar_empleado/<?php echo $empleado->id?>" class="ventanaempleados"><span class="label label-primary">Editar</span></a>
 
-                                        <a href="javascript:borrar_cliente(<?php echo $cliente->id;?>)" class="btn2"><img src="<?php echo BASE_URL; ?>public/img/remover_todos.png" style="vertical-align:middle"/></a>
+                                        <a href="javascript:borrar_empleado(<?php echo $empleado->id;?>)"><span class="label label-primary">Borrar</span></a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
                                 <tr>
-                                    <td colspan="8">
+                                    <td colspan="6">
                                         <div class="clear"></div>
                                         <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
                                     </td>
@@ -39,6 +35,7 @@
                             </table>
                         <?php else: ?>
                         <div class='alert alert-info'>
-                        <strong>No hay clientes creados.</strong>
+                        <strong>No hay empleados creados.</strong>
+                        <p><a href="<?php echo BASE_URL; ?>empleados/nuevo_empleado"><span class="label label-primary text-center">Añadir un nuevo empleado</span></a></p>
                         </div>
                         <?php endif; ?>

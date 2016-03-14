@@ -98,6 +98,27 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="" class="control-label col-xs-3">Departamento:</label>
+                                    <div class="col-xs-8">
+                                        <select class="form-control form_imput" name="id_depto" id="id_depto" >
+                                            <option value="">-Seleccione-</option>
+                                            <?php foreach ($this->depto as $depto): ?>
+                                                    <option value="<?php echo $depto->id; ?>"><?php echo $depto->departamento; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label col-xs-3">Ciudad:</label>
+                                    <div class="col-xs-8">
+                                        <select class="form-control form_imput" name="id_ciudad" id="id_ciudad" >
+                                            <option value="">-Seleccione-</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="" class="control-label col-xs-3">Telefono1:</label>
                                     <div class="col-xs-8">
                                         <input type="text" name="tel1" id="tel1" class="form-control" required placeholder="Telefono 1" value="">

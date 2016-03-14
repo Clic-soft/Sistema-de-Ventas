@@ -23,7 +23,7 @@ class proveedoresController extends Controller {
 		
 			$this->_view->proveedores = $paginador->paginar($this->_proveedores->getProveedores(),1,20);
 			$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
-			$this->_view->setJs(array('proveedores'));
+			$this->_view->setJs(array('proveedores','combociudad'));
 
 			$this->_view->renderizar('index', "proveedores");
 		} else {
@@ -41,7 +41,7 @@ class proveedoresController extends Controller {
         	$paginador = new Paginador();
         	$this->_view->proveedores = $paginador->paginar($this->_proveedores->getProveedores(), $pagina,20);
         	$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
-        	$this->_view->setJs(array('proveedores'));
+        	$this->_view->setJs(array('proveedores','combociudad'));
         	$this->_view->renderizar('refrescar_listado_proveedores', false, true);
         } else {
       		$this->redireccionar('admin');
@@ -49,13 +49,27 @@ class proveedoresController extends Controller {
 		
     }
 
+        public function getciudadcombo() {
+		if (Session::Get('autenticado') == true ){ 
+			Session::set('modulo', "admin");
+        	
+        	$id_depto = $_POST['id_depto'];
+			$ciudad = $this->_proveedores->getciudadcombo($this->filtrarInt($id_depto));
+			echo $ciudad;	
+        } else {
+      		$this->redireccionar('admin');
+      	}
+	}
+
     public function nuevo_proveedores() {
 		if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 			$this->_view->titulo = 'Nuevo Proveedor';
 			$this->_view->navegacion = '';
+			$this->_view->setJs(array('combociudad'));
 
 			$this->_view->empresa = $this->_proveedores->gettipe();
+			$this->_view->depto = $this->_proveedores->getdepartamentos();
 
 			if ($this->getInt('guardar') == 1) {
 				
@@ -89,6 +103,23 @@ class proveedoresController extends Controller {
 					exit;
 				}
 
+				if (!$this->getInt('id_depto') || $this->getInt('id_depto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el departamento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_proveedores','proveedores');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_ciudad') || $this->getInt('id_ciudad')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la ciudad';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_proveedores','proveedores');
+					//Saca de la funcion principal
+					exit;
+				}
 
 				if (!$this->getTexto('numdoc')) {
 					//Si no cumple la validacion sale mensaje de error
@@ -172,7 +203,9 @@ class proveedoresController extends Controller {
 					$this->getTexto('con'),
 					$this->getTexto('tel'),
 					$this->getSql('dir'),
-					$this->getSql('email'));
+					$this->getSql('email'),
+					$this->getInt('id_depto'),
+					$this->getInt('id_ciudad'));
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
@@ -198,9 +231,14 @@ class proveedoresController extends Controller {
 	            $this->redireccionar('index','proveedores');
 	        }
 
+	        $this->_view->setJs(array('combociudad'));
+
 				
 			$this->_view->empresa = $this->_proveedores->gettipe();
 			$this->_view->datos = $this->_proveedores->getProveedor($this->filtrarInt($id));
+			$d= $this->_proveedores->getProveedor($this->filtrarInt($id));
+			$this->_view->depto = $this->_proveedores->getdepartamentos();
+			$this->_view->ciudad = $this->_proveedores->getciudades($d->id_depto);
 			 /* VALIDACION */
 				if ($this->getInt('guardar') == 1) {
 					
@@ -234,6 +272,23 @@ class proveedoresController extends Controller {
 					exit;
 				}
 
+				if (!$this->getInt('id_ciudad') || $this->getInt('id_ciudad')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_proveedores',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_depto') || $this->getInt('id_depto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el departamento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_proveedores',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
 
 				if (!$this->getTexto('numdoc')) {
 					//Si no cumple la validacion sale mensaje de error
@@ -319,7 +374,9 @@ class proveedoresController extends Controller {
 						$this->getTexto('tel'),
 						$this->getSql('dir'),
 						$this->getSql('email'),
-						$this->getInt('estado'));
+						$this->getInt('estado'),
+						$this->getInt('id_depto'),
+						$this->getInt('id_ciudad'));
 				
 				$this->_view->_mensaje = 'Datos Actualizados Correctamente';
 				}		

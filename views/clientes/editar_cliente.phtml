@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <title>Sistema - Tienda Virtual</title>
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>public/css/bootstrap.min.css">
+
     <?php require_once 'inc/header.php'; ?>
+    <script type="text/javascript">
+            var _ruta_ = '<?php echo BASE_URL; ?>';
+        </script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>views/clientes/js/combociudad.js"></script>
 </head>
 <body>
         <div class="new-count col-xs-12">
@@ -79,6 +84,30 @@
                         <label for="" class="control-label col-xs-3">Nombre Comercial:</label>
                         <div class="col-xs-8">
                             <input type="text" name="nomcom" id="nomcom" class="form-control" required placeholder="Nombre Comercial" value="<?php if (isset($this->datos->nomcom)) echo $this->datos->nomcom; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Departamento:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control form_imput" name="id_depto" id="id_depto" >
+                                <option value="">-Seleccione-</option>
+                                <?php foreach ($this->depto as $depto): ?>
+                                        <option value="<?php echo $depto->id; ?>" <?php if($this->datos->id_depto == $depto->id){ ?> selected <?php } ?> ><?php echo $depto->departamento; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">Ciudad:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control form_imput" name="id_ciudad" id="id_ciudad" >
+                                <option value="">-Seleccione-</option>
+                                <?php foreach ($this->ciudad as $ciudad): ?>
+                                        <option value="<?php echo $ciudad->id; ?>" <?php if($this->datos->id_ciudad == $ciudad->id){ ?> selected <?php } ?> ><?php echo $ciudad->ciudad; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
 

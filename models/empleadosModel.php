@@ -59,20 +59,21 @@ class empleadosModel extends Model {
         return $consulta;
     }
     
-    public function crear_empleado($codigo, $tipo_doc, $numdoc, $nombres, $apellidos, $salario_b) {
+    public function crear_empleado($codigo, $tipo_doc, $numdoc, $nombres, $apellidos, $salario_b, $cargo) {
 
-        $this->_db->query("INSERT INTO empleados (codigo, tipo_documento, documento, nombres, apellidos, salario_b) VALUES
-                            ('".$codigo."', ".$tipo_doc.", '".$numdoc."', '".$nombres."', '".$apellidos."','".$salario_b."');");
+        $this->_db->query("INSERT INTO empleados (codigo, tipo_documento, documento, nombres, apellidos, salario_b, cargo) VALUES
+                            ('".$codigo."', ".$tipo_doc.", '".$numdoc."', '".$nombres."', '".$apellidos."','".$salario_b."','".$cargo."');");
     }
 
-    public function editar_empleado($id, $codigo, $tipo_doc, $numdoc, $nombres, $apellidos, $salario_b) {
+    public function editar_empleado($id, $codigo, $tipo_doc, $numdoc, $nombres, $apellidos, $salario_b, $cargo) {
 
         $this->_db->query("UPDATE empleados SET codigo='".$codigo."', 
                             tipo_documento=".$tipo_doc.",
                             documento='".$numdoc."', 
                             nombres='".$nombres."', 
                             apellidos='".$apellidos."', 
-                            salario_b='".$salario_b."'
+                            salario_b='".$salario_b."',
+                            cargo='".$cargo."',
                             WHERE id = $id;");
     }
 

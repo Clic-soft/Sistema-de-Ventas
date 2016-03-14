@@ -23,7 +23,7 @@ class clientesController extends Controller {
 		
 			$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(),1,20);
 			$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
-			$this->_view->setJs(array('clientes'));
+			$this->_view->setJs(array('combociudad','clientes'));
 
 			$this->_view->renderizar('index', "clientes");
 		} else {
@@ -41,7 +41,7 @@ class clientesController extends Controller {
         	$paginador = new Paginador();
         	$this->_view->cliente = $paginador->paginar($this->_clientes->getClientes(), $pagina,20);
         	$this->_view->paginacion = $paginador->getView('paginacion_dinamica');
-        	$this->_view->setJs(array('clientes'));
+        	$this->_view->setJs(array('combociudad','clientes'));
         	$this->_view->renderizar('refrescar_listado_clientes', false, true);
         } else {
       		$this->redireccionar('admin');
@@ -49,14 +49,28 @@ class clientesController extends Controller {
 		
     }
 
+        public function getciudadcombo() {
+		if (Session::Get('autenticado') == true ){ 
+			Session::set('modulo', "admin");
+        	
+        	$id_depto = $_POST['id_depto'];
+			$ciudad = $this->_clientes->getciudadcombo($this->filtrarInt($id_depto));
+			echo $ciudad;	
+        } else {
+      		$this->redireccionar('admin');
+      	}
+	}
+
     public function nuevo_cliente() {
 		if (Session::Get('autenticado') == true ){ 
 			Session::set('modulo', "admin");
 			$this->_view->titulo = 'Nuevo Cliente';
 			$this->_view->navegacion = '';
+			$this->_view->setJs(array('combociudad'));
 
 			$this->_view->empresa = $this->_clientes->gettipe();
 			$this->_view->documento = $this->_clientes->gettido();
+			$this->_view->depto = $this->_clientes->getdepartamentos();
 
 			if ($this->getInt('guardar') == 1) {
 				
@@ -75,6 +89,24 @@ class clientesController extends Controller {
 				if (!$this->getInt('tipo_doc') || $this->getInt('tipo_doc')== 0) {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_depto') || $this->getInt('id_depto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el departamento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_cliente','clientes');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_ciudad') || $this->getInt('id_ciudad')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar la ciudad';
 					//Vista de la pagina actual
 					$this->_view->renderizar('nuevo_cliente','clientes');
 					//Saca de la funcion principal
@@ -175,7 +207,9 @@ class clientesController extends Controller {
 					$this->getTexto('tel1'),
 					$this->getTexto('tel2'),
 					$this->getSql('dir'),
-					$this->getSql('email'));
+					$this->getSql('email'),
+					$this->getInt('id_depto'),
+					$this->getInt('id_ciudad'));
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
@@ -201,10 +235,14 @@ class clientesController extends Controller {
 	            $this->redireccionar('index','clientes');
 	        }
 
-				
+	        $this->_view->setJs(array('combociudad'));
+								
 			$this->_view->empresa = $this->_clientes->gettipe();
 			$this->_view->documento = $this->_clientes->gettido();
 			$this->_view->datos = $this->_clientes->getCliente($this->filtrarInt($id));
+			$d= $this->_clientes->getCliente($this->filtrarInt($id));
+			$this->_view->depto = $this->_clientes->getdepartamentos();
+			$this->_view->ciudad = $this->_clientes->getciudades($d->id_depto);
 			 /* VALIDACION */
 				if ($this->getInt('guardar') == 1) {
 					
@@ -223,6 +261,24 @@ class clientesController extends Controller {
 				if (!$this->getInt('tipo_doc') || $this->getInt('tipo_doc')== 0) {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('tipo_doc') || $this->getInt('tipo_doc')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar Tipo de Documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_cliente',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_depto') || $this->getInt('id_depto')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el departamento';
 					//Vista de la pagina actual
 					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal
@@ -333,7 +389,9 @@ class clientesController extends Controller {
 						$this->getTexto('tel2'),
 						$this->getSql('dir'),
 						$this->getSql('email'),
-						$this->getInt('estado'));
+						$this->getInt('estado'),
+						$this->getInt('id_depto'),
+						$this->getInt('id_ciudad'));
 				
 				$this->_view->_mensaje = 'Datos Actualizados Correctamente';
 				}		

@@ -35,6 +35,28 @@ class proveedoresModel extends Model {
         return $consulta;
     }
     
+    public function getdepartamentos() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from departamentos");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getciudades($depto) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from ciudades Where id_departamento=$depto");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getciudadcombo($depto) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * FROM ciudades 
+                WHERE id_departamento = $depto ORDER BY ciudad ASC;");
+        //Se retorna la consulta y se recorren los registros
+        return json_encode($consulta);
+    }
+
     public function validarnumdoc($numdoc) {
         //Se crea y ejecuta la consulta
             $consulta = $this->_db->get_row("SELECT c.id FROM proveedores AS c 
@@ -54,18 +76,19 @@ class proveedoresModel extends Model {
     }
     
     public function crear_proveedores($tipo_pro, $tipo_emp, $autoret, $nit, $repc, $rsocial,
-                                     $con, $tel, $dir, $email) {
+                                     $con, $tel, $dir, $email, $depto, $ciudad) {
 
         $this->_db->query("INSERT INTO proveedores (id_tipo_cliente, nit, razon_social, rep_legal,
                         contacto, numero_contacto, email_contacto, direccion, estado, 
-                        tipo_proveedor, autoretenedor)VALUES
+                        tipo_proveedor, autoretenedor, id_depto, id_ciudad)VALUES
                             (".$tipo_emp.", ".$nit.", '".$rsocial."', '".$repc."', '".$con."', '".$tel."',
-                            '".$email."', '".$dir."' ,1 , '".$tipo_pro."', '".$autoret."');");
+                            '".$email."', '".$dir."' ,1 , '".$tipo_pro."', '".$autoret."', 
+                            '".$depto."', '".$ciudad."');");
 
     }
 
     public function editar_proveedores($id, $tipo_pro, $tipo_emp, $autoret, $nit, $repc, $rsocial,
-                                     $con, $tel, $dir, $email, $estado) {
+                                     $con, $tel, $dir, $email, $estado, $depto, $ciudad) {
 
         $this->_db->query("UPDATE proveedores SET id_tipo_cliente='".$tipo_emp."', 
                             tipo_proveedor=".$tipo_pro.",
@@ -77,7 +100,9 @@ class proveedoresModel extends Model {
                             numero_contacto='".$tel."', 
                             direccion='".$dir."', 
                             email_contacto='".$email."', 
-                            estado=".$estado."
+                            estado=".$estado.",
+                            id_depto='".$depto."', 
+                            id_ciudad=".$ciudad."
                             WHERE id = $id;");
     }
 

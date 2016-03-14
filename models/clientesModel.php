@@ -44,6 +44,28 @@ class clientesModel extends Model {
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
+
+    public function getdepartamentos() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from departamentos");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getciudades($depto) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from ciudades Where id_departamento=$depto");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getciudadcombo($depto) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * FROM ciudades 
+                WHERE id_departamento = $depto ORDER BY ciudad ASC;");
+        //Se retorna la consulta y se recorren los registros
+        return json_encode($consulta);
+    }
     
     public function validarnumdoc($tipodoc, $numdoc) {
         //Se crea y ejecuta la consulta
@@ -86,16 +108,17 @@ class clientesModel extends Model {
 
 
     public function crear_cliente($tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,
-                    $dir, $email) {
+                    $dir, $email, $depto, $ciudad) {
 
         $this->_db->query("INSERT INTO clientes (id_tipo_cliente, tipo_documento, nit, rucom, razon_social,
-                            nomcom, telefono1, telefono2, direccion, email) VALUES
+                            nomcom, telefono1, telefono2, direccion, email, id_depto, id_ciudad) VALUES
                             (".$tipo_emp.", ".$tipo_doc.", '".$numdoc."', '".$rucom."', '".$rsocial."',
-                            '".$nomcom."', '".$telefono1."', '".$telefono2."', '".$dir."', '".$email."');");
+                            '".$nomcom."', '".$telefono1."', '".$telefono2."', '".$dir."', '".$email."'
+                            , '".$depto."', '".$ciudad."');");
     }
 
     public function editar_cliente($id, $tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,
-                    $dir, $email, $estado) {
+                    $dir, $email, $estado, $depto, $ciudad) {
 
         $this->_db->query("UPDATE clientes SET id_tipo_cliente='".$tipo_emp."', 
                             tipo_documento=".$tipo_doc.",
@@ -107,7 +130,9 @@ class clientesModel extends Model {
                             telefono2='".$telefono2."', 
                             direccion='".$dir."', 
                             email='".$email."', 
-                            estado=".$estado."
+                            estado=".$estado.",
+                            id_depto='".$depto."', 
+                            id_ciudad=".$ciudad."
                             WHERE id = $id;");
     }
 

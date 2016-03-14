@@ -114,6 +114,15 @@ class empleadosController extends Controller {
 					exit;
 				}
 
+				if (!$this->getSql('cargo')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el cargo del empleado';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_empleado','empleados');
+					//Saca de la funcion principal
+					exit;
+				}
+
 				//Se valida que no exista otro usuario con el mismo nombre
 				if ($this->_empleados->validarnumdoc($this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
@@ -129,7 +138,8 @@ class empleadosController extends Controller {
 					$this->getTexto('numdoc'),
 					$this->getTexto('nombres'),
 					$this->getTexto('apellidos'),
-					$this->getInt('salario'));
+					$this->getInt('salario'),
+					$this->getSql('cargo'));
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
@@ -217,6 +227,14 @@ class empleadosController extends Controller {
 					exit;
 				}
 
+				if (!$this->getSql('cargo')) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el cargo del empleado';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_empleado',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
 				//Se valida que no exista otro usuario con el mismo nombre
 				if ($this->_empleados->validarnumdocedita($this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
@@ -233,7 +251,8 @@ class empleadosController extends Controller {
 						$this->getTexto('numdoc'),
 						$this->getTexto('nombres'),
 						$this->getTexto('apellidos'),
-						$this->getInt('salario'));
+						$this->getInt('salario'),
+						$this->getSql('cargo'));
 				
 				$this->_view->_mensaje = 'Datos Actualizados Correctamente';
 				}		
