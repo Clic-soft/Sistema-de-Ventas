@@ -36,6 +36,18 @@ class ventasModel extends Model {
         return $consulta;
     }
 
+    public function getEncabezado2($id) {
+        //Se crea y ejecuta la consulta
+        $id = (int) $id; /* Parse de la variable */
+            $consulta = $this->_db->get_row("SELECT e.*,c.nomcom, em.nombres, em.apellidos, v.placa, ci.ciudad as city
+                                                FROM encabezado_venta as e, clientes as c, empleados as em, vehiculos as v, ciudades as ci
+                                                WHERE e.id_cliente=c.id AND e.id_empleado=em.id AND e.id_placa=v.id AND c.id_ciudad=ci.id
+                                                AND e.id = $id;");
+
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
     public function get_prefijo($id) {
         //Se crea y ejecuta la consulta
         $id = (int) $id; /* Parse de la variable */
@@ -146,7 +158,11 @@ class ventasModel extends Model {
 
 
     public function getcliente($id){
-        $consulta = $this->_db->get_row("SELECT * from clientes where id=$id");
+        $consulta = $this->_db->get_row("SELECT c.*, ci.ciudad, d.departamento
+                                        from clientes as c, ciudades as ci, departamentos as d
+                                        where c.id_ciudad=ci.id 
+                                        and c.id_depto = d.id
+                                        and c.id=$id");
           return $consulta;
     } 
 

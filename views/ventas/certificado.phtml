@@ -49,28 +49,24 @@
 	<section class="contenedor datos">
 		<div class="bolqueta col-xs-12 flex">
 			<p class="col-xs-2">Bolqueta Placa</p>
-			<input class="col-xs-10" type="text" name="bolqueta_placa" value="<?php  echo $this->vehiculo->placa;?>">
+			<input class="col-xs-10" type="text" name="bolqueta_placa" value="<?php echo $this->vehiculo->placa;?>">
 		</div>
-		<div class="col-xs-6 flex">
-			<p class="col-xs-2">Conductor</p>
-			<input class="col-xs-9" type="text" name="conductor">
-		</div>
-		<div class="col-xs-6 flex">
-			<p class="col-xs-1">C.C.</p>
-			<input class="col-xs-11" type="text" name="cc">
+		<div class="col-xs-12 flex">
+			<p class="col-xs-1">Cliente</p>
+			<input class="col-xs-11" type="text" name="cliente" value="<?php echo $this->cliente->nomcom;?>">
 		</div>
 		<div class="col-xs-12 flex">
 			<p class="col-xs-1">Destino</p>
-			<input class="col-xs-11" type="text" name="destino">
+			<input class="col-xs-11" type="text" name="destino" value="<?php echo $this->cliente->departamento." - ".$this->cliente->ciudad;?>">
 		</div>
 		<div class="col-xs-4 flex">
 			<p class="col-xs-2">FECHA</p>
 			<input class="col-xs-10" type="text" name="fecha" value="<?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?>">
 		</div>
-		<div class="col-xs-8 flex">
+		<!--<div class="col-xs-8 flex">
 			<p class="col-xs-3">Hora de despacho:</p>
 			<input class="col-xs-9" type="text" name="hora_despacho">
-		</div>
+		</div>-->
 	</section>
 	<section class="contenedor material">
 		

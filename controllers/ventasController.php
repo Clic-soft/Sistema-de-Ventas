@@ -582,7 +582,7 @@ public function facturar($idrem, $idfac) {
     	if (Session::Get('autenticado') == true ){ 
 	        //Si el id no es un nro entero
 	     
-    			$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+    			$this->_view->datos = $this->_ventas->getEncabezado2($this->filtrarInt($id));
     			$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
 
     			$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
@@ -606,8 +606,9 @@ public function facturar($idrem, $idfac) {
 	        //Si el id no es un nro entero
 	     
 
-    	$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
+    	$this->_view->datos = $this->_ventas->getEncabezado2($this->filtrarInt($id));
     	$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
+    	$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
     	$this->_view->vehiculo = $this->_ventas->get_placas_certificado($data->id_placa);
 
 
