@@ -67,6 +67,7 @@ class ventasController extends Controller {
 
 			$this->_view->cliente = $this->_ventas->getclientes();
 			$this->_view->empleado = $this->_ventas->getempleados();
+			$this->_view->despachador = $this->_ventas->getdespachador();
 
 			if ($this->getInt('guardar') == 1) {
 				
@@ -85,6 +86,15 @@ class ventasController extends Controller {
 				if (!$this->getInt('id_empleado') || $this->getInt('id_empleado')== 0) {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'Debe Ingresar el empleado';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nueva_venta','ventas');
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('id_despachador') || $this->getInt('id_despachador')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar el despachador';
 					//Vista de la pagina actual
 					$this->_view->renderizar('nueva_venta','ventas');
 					//Saca de la funcion principal
@@ -162,6 +172,7 @@ class ventasController extends Controller {
 
 				$this->_ventas->crear_venta($this->getInt('id_cliente'),
 					$this->getInt('id_empleado'),
+					$this->getInt('id_despachador'),
 					$this->getInt('id_placa'),
 					$this->getInt('forma'),
 					$prefijo,
@@ -557,23 +568,29 @@ public function facturar($idrem, $idfac) {
 
 
 
+///  VISTA  DE VER  FACTURA 
+	public function ver_documento($id) {
+		
+		//VALIDAR QUE ESTE LOGUEADO EL USUARIO
+    	if (Session::Get('autenticado') == true ){ 
+	        //Si el id no es un nro entero
+	     
+    			$this->_view->datos = $this->_ventas->getEncabezado2($this->filtrarInt($id));
+    			$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
+
+    			$this->_view->vehiculo = $this->_ventas->get_placas_certificado($data->id_placa);
+		    	$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
+		    	$this->_view->despachador = $this->_ventas->getempleado($data->id_despachador);
+				$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
+				$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
+				$deta = $this->_ventas->getDetalles($this->filtrarInt($id)); 			
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $this->_view->renderizar('documento', false,true);	
+        } else {
+      		$this->redireccionar('admin');
+      	}
+    }
 
     ///  VISTA  DE VER  FACTURA 
 	public function ver_factura($id) {
@@ -585,10 +602,11 @@ public function facturar($idrem, $idfac) {
     			$this->_view->datos = $this->_ventas->getEncabezado2($this->filtrarInt($id));
     			$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
 
-    			$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
-    			$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
-    			$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
-    			$deta = $this->_ventas->getDetalles($this->filtrarInt($id));  			
+    			$this->_view->vehiculo = $this->_ventas->get_placas_certificado($data->id_placa);
+		    	$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
+				$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
+				$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
+				$deta = $this->_ventas->getDetalles($this->filtrarInt($id)); 			
 
 
         $this->_view->renderizar('factura', false,true);	
@@ -608,8 +626,12 @@ public function facturar($idrem, $idfac) {
 
     	$this->_view->datos = $this->_ventas->getEncabezado2($this->filtrarInt($id));
     	$data=$this->_ventas->getEncabezado($this->filtrarInt($id));
-    	$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
+
     	$this->_view->vehiculo = $this->_ventas->get_placas_certificado($data->id_placa);
+    	$this->_view->empleado = $this->_ventas->getempleado($data->id_empleado);
+		$this->_view->cliente = $this->_ventas->getcliente($data->id_cliente);
+		$this->_view->detalle = $this->_ventas->getDetalles($this->filtrarInt($id));
+		$deta = $this->_ventas->getDetalles($this->filtrarInt($id)); 
 
 
         $this->_view->renderizar('certificado', false,true);	

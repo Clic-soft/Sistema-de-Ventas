@@ -110,11 +110,13 @@ class clientesModel extends Model {
     public function crear_cliente($tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,
                     $dir, $email, $depto, $ciudad) {
 
+        $fechaactual = date("Y-m-d H:i:s");
+
         $this->_db->query("INSERT INTO clientes (id_tipo_cliente, tipo_documento, nit, rucom, razon_social,
-                            nomcom, telefono1, telefono2, direccion, email, id_depto, id_ciudad) VALUES
+                            nomcom, telefono1, telefono2, direccion, email, id_depto, id_ciudad, fecha_creacion) VALUES
                             (".$tipo_emp.", ".$tipo_doc.", '".$numdoc."', '".$rucom."', '".$rsocial."',
                             '".$nomcom."', '".$telefono1."', '".$telefono2."', '".$dir."', '".$email."'
-                            , '".$depto."', '".$ciudad."');");
+                            , '".$depto."', '".$ciudad."', '".$fechaactual."');");
     }
 
     public function editar_cliente($id, $tipo_emp, $tipo_doc, $numdoc, $rucom, $rsocial, $nomcom, $telefono1, $telefono2,

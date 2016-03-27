@@ -1,4 +1,18 @@
-body{font-family: 'Roboto', sans-serif;}.table{width: 100%;}table tbody input{width: 100%;margin:0;border:none;}.table{margin-bottom:5px;}table tbody input:focus{outline: none;}.flex{display: flex;}input{    width: auto;margin-left: 10px;}.contenedor{width: 80%;margin: 0 auto;}.datos p,input{float: left;}.datos p{margin:0;}.datos input{border:none;border-bottom: 1px solid black;margin-bottom:10px;}.datos input:focus{outline: none;}.text-center{text-align: center;}.text-right{text-align: right;}.folio{color:red;font-size: 1.5em;}.material input[type=checkbox]{width: 20%;}.firma input{border:none;}.firma input:focus{outline: none;}footer{border:1px solid black;padding:5px;}footer p{margin:0}
+body{font-family: 'Roboto', sans-serif;}
+.table{width: 100%;}table tbody input{width: 100%;margin:0;border:none;}
+.table{margin-bottom:5px;}table tbody input:focus{outline: none;}
+.flex{display: flex;}input{    width: auto;margin-left: 10px;}
+.contenedor{width: 80%;margin: 0 auto;}
+.datos p,input{float: left;}
+.datos p{margin:0;}
+.datos input{border:none;border-bottom: 1px solid black;margin-bottom:10px;}
+.datos input:focus{outline: none;}
+.text-center{text-align: center;}
+.text-right{text-align: right;}
+.folio{color:red;font-size: 1.5em;}
+.material input[type=checkbox]{width: 20%;}
+.firma input{border:none;}
+.firma input:focus{outline: none;}footer{border:1px solid black;padding:5px;}footer p{margin:0}
 @media print{.contenedor{width: 95%;margin:0 auto;}.folio{color:red;}}
 
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2016 a las 00:04:27
+-- Tiempo de generación: 27-03-2016 a las 21:13:30
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -1303,15 +1303,17 @@ CREATE TABLE `clientes` (
   `telefono2` varchar(20) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo'
+  `estado` int(1) NOT NULL DEFAULT '1' COMMENT '1:activo, 2:inactivo',
+  `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `tipo_documento`, `nit`, `rucom`, `razon_social`, `nomcom`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`) VALUES
-(1, 1, 2, '1144155366', '12345', 'Andres Ruiz', 'Andres Ruiz', 31, 658, '4887605', '3158787318', 'cra 1 #70-180', 'j_andres272@hotmail.com', 1);
+INSERT INTO `clientes` (`id`, `id_tipo_cliente`, `tipo_documento`, `nit`, `rucom`, `razon_social`, `nomcom`, `id_depto`, `id_ciudad`, `telefono1`, `telefono2`, `direccion`, `email`, `estado`, `fecha_creacion`) VALUES
+(1, 1, 2, '1144155366', '12345', 'Andres Ruiz', 'Andres Ruiz', 31, 658, '4887605', '3158787318', 'cra 1 #70-180', 'j_andres272@hotmail.com', 1, '0000-00-00 00:00:00'),
+(2, 1, 1, '123456', '123456', 'Prueba Fecha', 'Prueba Fecha', 31, 141, '1234567', '1234567', 'cra 1 #70-180', 'j@j.com', 1, '2016-03-27 10:01:31');
 
 -- --------------------------------------------------------
 
@@ -1395,6 +1397,13 @@ CREATE TABLE `detalle_ventas` (
   `id_remision` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `detalle_ventas`
+--
+
+INSERT INTO `detalle_ventas` (`id`, `id_venta`, `id_producto`, `precio`, `cantidad`, `descuento`, `total_detalle`, `id_remision`) VALUES
+(1, 1, 1, 2000, '4.00', 0, 8000, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -1409,15 +1418,17 @@ CREATE TABLE `empleados` (
   `nombres` varchar(60) NOT NULL,
   `apellidos` varchar(60) NOT NULL,
   `salario_b` int(11) NOT NULL,
-  `cargo` varchar(40) NOT NULL
+  `cargo` varchar(40) NOT NULL,
+  `despachador` int(11) NOT NULL COMMENT '1:si, 2:no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id`, `codigo`, `tipo_documento`, `documento`, `nombres`, `apellidos`, `salario_b`, `cargo`) VALUES
-(1, '1', 2, 1144155366, 'Andres', 'Ruiz', 800000, 'Desarrollador de Software');
+INSERT INTO `empleados` (`id`, `codigo`, `tipo_documento`, `documento`, `nombres`, `apellidos`, `salario_b`, `cargo`, `despachador`) VALUES
+(1, '1', 2, 1144155366, 'Andres', 'Ruiz', 800000, 'Desarrollador de Software', 2),
+(2, '654', 2, 7456, 'Oinnnihj{o', 'Kuygh', 10000, 'UILGBIJHÑL', 1);
 
 -- --------------------------------------------------------
 
@@ -1459,8 +1470,17 @@ CREATE TABLE `encabezado_venta` (
   `sub_total_venta` int(10) NOT NULL,
   `descuento_venta` int(10) NOT NULL,
   `iva_venta` int(10) NOT NULL,
-  `total_venta` int(10) NOT NULL
+  `total_venta` int(10) NOT NULL,
+  `id_despachador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `encabezado_venta`
+--
+
+INSERT INTO `encabezado_venta` (`id`, `prefijo`, `num_prefijo`, `pref_co`, `num_co`, `id_cliente`, `id_empleado`, `fecha_venta`, `forma_pago`, `estado_venta`, `id_placa`, `sub_total_venta`, `descuento_venta`, `iva_venta`, `total_venta`, `id_despachador`) VALUES
+(1, 'FAC', 1, 'CO', 1, 1, 1, '2016-03-25 10:48:57', 1, 4, 1, 8000, 0, 0, 8000, 2),
+(2, 'FAC', 2, 'CO', 2, 1, 1, '2016-03-27 11:11:44', 1, 1, 1, 0, 0, 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -1513,9 +1533,9 @@ CREATE TABLE `prefijos` (
 --
 
 INSERT INTO `prefijos` (`id`, `nombre`, `prefijo`, `inicial`, `actual`, `final`) VALUES
-(1, 'Factura', 'FAC', 1, 1, 5000),
+(1, 'Factura', 'FAC', 1, 3, 5000),
 (2, 'Remision', 'REM', 1, 1, 5000),
-(3, 'certificado origen r', 'CO', 1, 1, 1000),
+(3, 'certificado origen r', 'CO', 1, 3, 1000),
 (4, 'certificado origen f', 'CO', 1, 1, 1000),
 (5, 'Abono', 'ABO', 1, 1, 1000),
 (6, 'Compra', 'COM', 1, 1, 5000);
@@ -1534,6 +1554,13 @@ CREATE TABLE `productos` (
   `id_und_medida` int(11) NOT NULL,
   `RutaImagen` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `referencia`, `producto`, `precio`, `id_und_medida`, `RutaImagen`) VALUES
+(1, '', 'Arena', 2000, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1657,6 +1684,13 @@ CREATE TABLE `vehiculos` (
   `id_cliente` int(11) NOT NULL,
   `placa` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `vehiculos`
+--
+
+INSERT INTO `vehiculos` (`id`, `id_cliente`, `placa`) VALUES
+(1, 1, 'Zzz000');
 
 --
 -- Índices para tablas volcadas
@@ -1805,7 +1839,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
@@ -1820,12 +1854,12 @@ ALTER TABLE `detalle_compras`
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `encabezado_compra`
 --
@@ -1835,7 +1869,7 @@ ALTER TABLE `encabezado_compra`
 -- AUTO_INCREMENT de la tabla `encabezado_venta`
 --
 ALTER TABLE `encabezado_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `insumos`
 --
@@ -1855,7 +1889,7 @@ ALTER TABLE `prefijos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
@@ -1885,7 +1919,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

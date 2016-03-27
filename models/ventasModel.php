@@ -79,7 +79,14 @@ class ventasModel extends Model {
 
     public function getempleados() {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT * from empleados");
+            $consulta = $this->_db->get_results("SELECT * from empleados where despachador = 2");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+    public function getdespachador() {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_results("SELECT * from empleados where despachador = 1");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -93,8 +100,9 @@ class ventasModel extends Model {
 
     public function getDetalles($id) {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT d.*,p.producto from detalle_ventas as d, productos as p
-                where p.id=d.id_producto and d.id_venta=$id");
+            $consulta = $this->_db->get_results("SELECT d.*,p.producto,u.simbolo 
+                from detalle_ventas as d, productos as p, unidades_medida as u
+                where p.id=d.id_producto and d.id_venta=$id and p.id_und_medida=u.id");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
@@ -106,12 +114,12 @@ class ventasModel extends Model {
     }
 
     
-    public function crear_venta($id_cliente, $id_empleado, $id_placa, $forma, $prefijo, $numero, $prefijoco, $numeroco) {
+    public function crear_venta($id_cliente, $id_empleado, $id_despachador, $id_placa, $forma, $prefijo, $numero, $prefijoco, $numeroco) {
         $fechaactual = date("Y-m-d H:i:s");
         $this->_db->query("INSERT INTO encabezado_venta (prefijo, num_prefijo, id_cliente, id_empleado,
-            fecha_venta, forma_pago, id_placa, pref_co, num_co) 
+            fecha_venta, forma_pago, id_placa, pref_co, num_co, id_despachador) 
             VALUES ('".$prefijo."', '".$numero."', '".$id_cliente."', '".$id_empleado."', '".$fechaactual."',
-             '".$forma."', '".$id_placa."','".$prefijoco."', '".$numeroco."');");
+             '".$forma."', '".$id_placa."','".$prefijoco."', '".$numeroco."', '".$id_despachador."');");
     }
 
 

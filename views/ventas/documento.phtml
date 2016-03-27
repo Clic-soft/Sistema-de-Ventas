@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Documento</title>
+	<link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/cssorigen/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/flexboxgrid.min.css">
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/factura.css">
+	<link rel="stylesheet" type="text/css" href= "<?php echo BASE_URL; ?>public/css/cssimp/imprimir.css" media="print">
+	
+		
+</head>
+<body>
+
+	<section class="contenedor">
+
+		<header class="flex middle-xs ">
+			<div class="col-xs">
+				<img src="<?php echo BASE_URL; ?>public/img/mineria.jpg" alt="" class="logo">
+			</div>
+			<div class="col-xs text-center nada ">
+				<p class="textcentral">VICEPRESIDENCIA DE SEGUIMIENTO DE CONTROL Y SEGURIDAD MINERA</p>
+				<p class="textcentral">Grupo de Regalias y Contraprestaciones Económicas</p>
+			</div>
+			<div class="col-xs text-right facdes ">
+				<p class="factura facdes">CERTIFICADO DE ORIGEN</p>
+				<p class="consecutivo"><span class="facdes"><?php echo "000" . $this->datos->num_co;?></span></p>
+				<p class="facturafecha facdes"><span class="">FECHA <?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?></span></p>
+			</div>
+		</header>
+
+		<section class="contenedor">
+			<table class="table table-bordered ">
+			  	<thead >
+				  	<tr>
+				    	<th class="col-xs texto-normal-titulo">Expedientes</th>
+				    	<th class="col-xs texto-normal-titulo">Nombre</th>
+				    	<th class="col-xs texto-normal-titulo">Minerales</th>
+				    	<th class="col-xs texto-normal-titulo">Lugar Explotacion</th>
+				  	</tr>
+			  	</thead>
+			  	<tbody>
+				  	<tr>
+				    	<td class="col-xs text-center texto-normal">FLO-095</td>
+				    	<td class="col-xs texto-normal">Julio C. Estrada &nbsp; C.C. 6.092.811</td>
+				    	<td class="col-xs texto-normal">Trenes de Rio</td>
+				    	<td class="col-xs texto-normal">Roldanillo valle del cauca</td>
+				  	</tr>
+			  	</tbody>
+			</table>
+		</section>
+
+		<section class="contenedor">
+			<table class="table table-bordered ">
+			  	<tr>
+			    	<td class="col-xs texto-normal-titulo">CLIENTE</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->nomcom;?></td>
+			    	<td class="col-xs texto-normal-titulo">RUCOM</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->rucom;?></td>
+			    	<td class="col-xs texto-normal-titulo">NIT</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->nit;?></td>
+			  	</tr>
+			  	<tr>
+			  		<td class="col-xs texto-normal-titulo">VOLQUETA PLACA</td>
+			    	<td class="col-xs texto-normal"><?php echo strtoupper($this->vehiculo->placa);?></td>
+			    	<td class="col-xs texto-normal-titulo">DEPARTAMENTO</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->departamento;?></td>
+			    	<td class="col-xs texto-normal-titulo">CIUDAD</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->ciudad;?></td>
+			  	</tr>
+			  	<tr>
+			    	<td class="col-xs texto-normal-titulo">TELÉFONO</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->telefono1;?></td>
+			    	<td class="col-xs texto-normal-titulo">DIRECCION</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->direccion;?></td>
+			    	<td class="col-xs texto-normal-titulo">EMAIL</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->email;?></td>
+			  	</tr>
+			</table>
+		</section>
+
+		<section class="contenedor">
+			<table class="table table-bordered tableimprimir">
+				  <thead>
+
+					  <tr>
+					    <th class="col-xs-6 texto-normal-titulo">Producto</th>
+					    <th class="col-xs-2 texto-normal-titulo">Cantidad</th>
+					    <th class="col-xs-2 texto-normal-titulo">VL Unitario</th>
+					    <th class="col-xs-2 texto-normal-titulo">Subtotal</th>
+					  </tr>
+				  </thead>
+				  <?php if (isset($this->detalle) && count($this->detalle)) : ?> 
+				  <tbody>	  
+					<?php foreach($this->detalle as $detalle):?>
+				  	<tr>
+					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?></td>
+					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->cantidad;?></td>
+					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->precio;?></td>
+					    <td class="col-xs-2 text-center texto-normal"><?php  echo  $detalle->total_detalle;?></td>
+					  </tr>
+						<?php endforeach;?>
+
+				  </tbody>
+				  <?php endif; ?>
+				  <tr>
+				  	<td colspan="2" class="observaciones texto-normal"><p><strong>Resolucion Dian :</strong>
+						Este documento se asimila en todos sus efectos a la letra de cambio segun el articulo
+						774 del codigo de comercio</p></td>
+				  	<td class="mov texto-normal-titulo text-center">Total</td>
+					<td class=" mov texto-normal text-center"><?php echo $this->datos->total_venta;?></td>
+				  </tr>	
+				</table>
+		</section>
+
+		<section class="contenedor firma">
+				<p class="col-xs-1 texto-normal-titulo">Despachador</p>
+				<p class="col-xs- texto-normal"><?php echo  $this->despachador->nombres  ." " . $this->despachador->apellidos;?></p>
+		</section><br>
+
+		<section class="contenedor texto-normal " style="border:1px solid #000;">
+			<p>- Este certificado sólo es válido por el viaje anteriormente descrito</p>
+			<p>- Vigente para la fecha de su expedición</p>
+			<p>- Favor verificar autenticidad del certificado en los números telefónico relacionados.</p>
+		</section>
+
+		<section class="contenedor">
+			<hr style="width:100%;border-bottom:1px dashed black"></hr>
+		</section>
+
+		<section class="contenedor">
+			<header class="flex middle-xs ">
+				<div class="col-xs texto-normal">
+					<img src="<?php echo BASE_URL; ?>public/img/logo_arenera.jpg" alt="" class="logo">
+					<p>PMA 0100# 0150-089 DE 2012</p>
+				</div>
+				<div class="col-xs text-center nada texto-normal">
+					<p>Arenera Playa Rica SAS</p>
+					<p>Isugu-Roldanillo-Valle</p>
+					<p>Tel 313 674 9971 - 313 674 6405</p>
+				</div>
+				<div class="col-xs text-right facdes ">
+					<p class="factura facdes"><?php echo $this->datos->prefijo;?> </p>
+					<p class="consecutivo"><span class="facdes"><?php echo "000" . $this->datos->num_prefijo;?> </span></p>
+					<p class="date"><span class="">FECHA <?php echo date('d-m-Y', strtotime($this->datos->fecha_venta));?></span></p>
+				</div>				
+			</header>
+		</section>
+
+		<section class="contenedor">
+			<table class="table table-bordered ">
+			  	<tr>
+			    	<td class="col-xs texto-normal-titulo">CLIENTE</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->nomcom;?></td>
+			    	<td class="col-xs texto-normal-titulo">NIT</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->nit;?></td>
+			    				    	<td class="col-xs texto-normal-titulo">DIRECCION</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->direccion;?></td>
+			  	</tr>
+			  	<tr>
+			    	<td class="col-xs texto-normal-titulo">DEPARTAMENTO</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->departamento;?></td>
+			    	<td class="col-xs texto-normal-titulo">CIUDAD</td>
+			    	<td class="col-xs texto-normal"><?php echo $this->cliente->ciudad;?></td>
+			    	<td class="col-xs texto-normal-titulo">TELÉFONO</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->telefono1;?></td>
+			  	</tr>
+			  	<tr>
+			    	<td class="col-xs texto-normal-titulo">EMAIL</td>
+			    	<td class="col-xs texto-normal"><?php echo  $this->cliente->email;?></td>
+			    	<td class="col-xs texto-normal-titulo">DESPACHADOR</td>
+			    	<td colspan="3" class="col-xs texto-normal"><?php echo  $this->despachador->nombres  ." " . $this->despachador->apellidos;?></td>
+			  	</tr>
+			</table>
+		</section>
+
+		<section class="contenedor">
+			<table class="table table-bordered tableimprimir">
+				  <thead>
+
+					  <tr>
+					    <th class="col-xs-6 texto-normal-titulo">Producto</th>
+					    <th class="col-xs-2 texto-normal-titulo">Cantidad</th>
+					    <th class="col-xs-2 texto-normal-titulo">VL Unitario</th>
+					    <th class="col-xs-2 texto-normal-titulo">Subtotal</th>
+					  </tr>
+				  </thead>
+				  <?php if (isset($this->detalle) && count($this->detalle)) : ?> 
+				  <tbody>	  
+					<?php foreach($this->detalle as $detalle):?>
+				  	<tr>
+					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?></td>
+					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->cantidad;?></td>
+					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->precio;?></td>
+					    <td class="col-xs-2 text-center texto-normal"><?php  echo  $detalle->total_detalle;?></td>
+					  </tr>
+						<?php endforeach;?>
+
+				  </tbody>
+				  <?php endif; ?>
+				  <tr>
+				  	<td colspan="2" rowspan="4" class="observaciones texto-normal"><p><strong>Resolucion Dian :</strong>
+						Este documento se asimila en todos sus efectos a la letra de cambio segun el articulo
+						774 del codigo de comercio</p></td>
+				  	<td class="mov texto-normal-titulo text-center">Subtotal</td>
+					<td class=" mov texto-normal text-center"><?php echo $this->datos->sub_total_venta;?></td>
+				  </tr>
+				  <tr><td class="mov texto-normal-titulo text-center">Descuento</td>
+					<td class=" mov texto-normal text-center"><?php echo $this->datos->descuento_venta;?></td></tr>
+				  <tr><td class="mov texto-normal-titulo text-center">IVA</td>
+					<td class=" mov texto-normal text-center"><?php echo $this->datos->iva_venta;?></td></tr>
+				  <tr><td class="mov texto-normal-titulo text-center">Total</td>
+					<td class=" mov texto-normal text-center"><?php echo $this->datos->total_venta;?></td></tr>
+				</table>
+		</section>
+
+		<section class="contenedor texto-normal " style="border:1px solid #000;">
+			<p>- Resolucion</p>
+		</section>
+
+	</section>
+
+</body>
+</html>

@@ -132,6 +132,15 @@ class empleadosController extends Controller {
 					//Saca de la funcion principal
 					exit;
 				}
+
+				if (!$this->getInt('despachador') || $this->getInt('despachador')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar Si es Despachador';
+					//Vista de la pagina actual
+					$this->_view->renderizar('nuevo_empleado','empleados');
+					//Saca de la funcion principal
+					exit;
+				}
 	
 				$this->_empleados->crear_empleado($this->getTexto('codigo'),
 					$this->getInt('tipo_doc'),
@@ -139,7 +148,8 @@ class empleadosController extends Controller {
 					$this->getTexto('nombres'),
 					$this->getTexto('apellidos'),
 					$this->getInt('salario'),
-					$this->getSql('cargo'));
+					$this->getSql('cargo'),
+					$this->getInt('despachador'));
 				$this->_view->_mensaje = 'Datos Creados Correctamente';
 			}
 
@@ -236,9 +246,18 @@ class empleadosController extends Controller {
 					exit;
 				}
 				//Se valida que no exista otro usuario con el mismo nombre
-				if ($this->_empleados->validarnumdocedita($this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
+				if ($this->_empleados->validarnumdocedita($this->filtrarInt($id), $this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'El numero de documento ya existe con este tipo de documento';
+					//Vista de la pagina actual
+					$this->_view->renderizar('editar_empleado',false,true);
+					//Saca de la funcion principal
+					exit;
+				}
+
+				if (!$this->getInt('despachador') || $this->getInt('despachador')== 0) {
+					//Si no cumple la validacion sale mensaje de error
+					$this->_view->_error = 'Debe Ingresar Si es Despachador';
 					//Vista de la pagina actual
 					$this->_view->renderizar('editar_empleado',false,true);
 					//Saca de la funcion principal
@@ -252,7 +271,8 @@ class empleadosController extends Controller {
 						$this->getTexto('nombres'),
 						$this->getTexto('apellidos'),
 						$this->getInt('salario'),
-						$this->getSql('cargo'));
+						$this->getSql('cargo'),
+						$this->getInt('despachador'));
 				
 				$this->_view->_mensaje = 'Datos Actualizados Correctamente';
 				}		
