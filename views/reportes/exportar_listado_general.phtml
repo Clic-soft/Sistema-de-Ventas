@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<?php
+header("Content-Type: application/vnd.ms-excel");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("content-disposition: attachment;filename=Reporte.xls");
+
+?>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros">
+                    <?php $total=0;?>     
+                        <?php if (isset($this->reporte) && count($this->reporte)) : ?>  
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">N° FACTURA</th>
+                                        <th class="text-center">N° CERTIFICADO</th>
+                                        <th class="text-center">FECHA</th>
+                                        <th class="text-center">FORMA PAGO</th>
+                                        <th class="text-center">TIPO CLIENTE</th>
+                                        <th class="text-center">TIPO DOCUMENTO</th>
+                                        <th class="text-center">NUMERO DOCUMENTO</th>
+                                        <th class="text-center">CLIENTE</th>
+                                        <th class="text-center">PLACA VOLQUETA</th>
+                                        <th class="text-center">DEPARTAMENTO</th>
+                                        <th class="text-center">CIUDAD</th>
+                                        <th class="text-center">VENDEDOR</th>
+                                        <th class="text-center">DESPACHADOR</th>
+                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->reporte as $reporte):?>
+                                    <tr>
+                                        <td><?php echo $reporte->prefijo." 000".$reporte->num_prefijo;?></td>
+                                        <td><?php echo $reporte->pref_co." 000".$reporte->num_co;?></td>
+                                        <td><?php echo $reporte->fecha_venta;?></td>
+                                        <td class="text-center"><?php if ($reporte->forma_pago == 1){ echo "Efectivo";} elseif ($reporte->forma_pago == 2){ echo "Remision";} elseif ($reporte->forma_pago == 3){ echo "InfoRem";}?></td>
+                                        <td><?php echo $reporte->tipo_cliente;?></td>
+                                        <td><?php echo $reporte->tdoc;?></td>
+                                        <td><?php echo $reporte->nit;?></td>
+                                        <td><?php echo $reporte->nomcom;?></td>
+                                        <td><?php echo $reporte->placa;?></td>
+                                        <td><?php echo $reporte->departamento;?></td>
+                                        <td><?php echo $reporte->ciudad;?></td>
+                                        <td><?php echo $reporte->nombres." ".$reporte->apellidos;?></td>
+                                        <td><?php echo $reporte->desnom." ".$reporte->desape;?></td>
+                                        <td class="text-center"><?php if ($reporte->estado_venta == 1){ echo "Creado";} elseif ($reporte->estado_venta == 2){ echo "Pendiente";} elseif ($reporte->estado_venta == 3){echo "Pendiente Factura";} elseif ($reporte->estado_venta == 4){echo "Finalizado";}?></td>
+                                        <td>$<?php echo $reporte->total_venta;?></td>
+                                        <?php $total=$total+$reporte->total_venta; ?>
+                                </tr>
+                                <?php endforeach;?>
+                                <tr>
+                                    <td colspan="14">
+                                        TOTAL
+                                    </td>
+                                    <td colspan="1">
+                                        $<?php echo $total; ?>
+                                    </td>
+                                    <td colspan="1">
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class="space"></div>
+                        <div class='alert alert-info'>
+                        <strong>No hay ventas creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+            

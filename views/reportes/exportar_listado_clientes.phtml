@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<?php
+header("Content-Type: application/vnd.ms-excel");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("content-disposition: attachment;filename=Reporte.xls");
+
+?>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros"> 
+                        <?php if (isset($this->reporte) && count($this->reporte)) : ?>  
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">TIPO CLIENTE</th>
+                                        <th class="text-center">TIPO DOCUMENTO</th>
+                                        <th class="text-center">NUMERO DOCUMENTO</th>
+                                        <th class="text-center">RUCOM</th>
+                                        <th class="text-center">RAZON SOCIAL</th>
+                                        <th class="text-center">NOMBRE COMERCIAL</th>
+                                        <th class="text-center">FECHA CREACION</th>
+                                        <th class="text-center">DEPARTAMENTO</th>
+                                        <th class="text-center">CIUDAD</th>
+                                        <th class="text-center">DIRECCION</th>
+                                        <th class="text-center">TELEFONO</th>
+                                        <th class="text-center">EMAIL</th>
+                                        <th class="text-center">ESTADO</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->reporte as $reporte):?>
+                                    <tr>
+                                        <td><?php echo $reporte->tipo_cliente;?></td>
+                                        <td><?php echo $reporte->tipdoc;?></td>
+                                        <td><?php echo $reporte->nit;?></td>
+                                        <td><?php echo $reporte->rucom;?></td>
+                                        <td><?php echo $reporte->razon_social;?></td>
+                                        <td><?php echo $reporte->nomcom;?></td>
+                                        <td><?php echo $reporte->fecha_creacion;?></td>
+                                        <td><?php echo $reporte->departamento;?></td>
+                                        <td><?php echo $reporte->ciudad;?></td>
+                                        <td><?php echo $reporte->direccion;?></td>
+                                        <td><?php echo $reporte->telefono1;?></td>
+                                        <td><?php echo $reporte->email;?></td>
+                                        <td class="text-center"><?php if ($reporte->estado == 1){ echo "Activo";} elseif ($reporte->estado == 2){ echo "Inactivo";} ?></td>                                       
+                                </tr>
+                                <?php endforeach;?>
+
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class="space"></div>
+                        <div class='alert alert-info'>
+                        <strong>No hay clientes creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
+            

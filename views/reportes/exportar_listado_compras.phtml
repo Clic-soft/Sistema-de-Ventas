@@ -17,6 +17,9 @@ header("content-disposition: attachment;filename=Reporte.xls");
                                         <th class="text-center">FECHA</th>
                                         <th class="text-center">PROVEEDOR</th>
                                         <th class="text-center">ESTADO</th>
+                                        <th class="text-center">SUBTOTAL</th>
+                                        <th class="text-center">RETENCION</th>
+                                        <th class="text-center">IVA</th>
                                         <th class="text-center">TOTAL</th>
                                     </tr>
                                 </thead>
@@ -27,13 +30,28 @@ header("content-disposition: attachment;filename=Reporte.xls");
                                         <td><?php echo $reporte->fecha_compra;?></td>
                                         <td><?php echo $reporte->razon_social;?></td>
                                         <td class="text-center"><?php if ($reporte->estado_compra == 1){ echo "Creado";} elseif ($reporte->estado_compra == 2){ echo "Finalizado";} ?></td>
+                                        <td>$<?php echo $reporte->sub_total_compra;?></td>
+                                        <td>$<?php echo $reporte->retencion;?></td>
+                                        <td>$<?php echo $reporte->iva_compra;?></td>
                                         <td>$<?php echo $reporte->total_compra;?></td>
                                         <?php $total=$total+$reporte->total_compra; ?>
+                                        <?php $subtotal=$subtotal+$reporte->sub_total_compra; ?>
+                                        <?php $ret=$ret+$reporte->retencion; ?>
+                                        <?php $iva=$iva+$reporte->iva_compra; ?>
                                 </tr>
                                 <?php endforeach;?>
                                 <tr>
                                     <td colspan="4">
                                         TOTAL
+                                    </td>
+                                    <td colspan="1">
+                                        $<?php echo $subtotal; ?>
+                                    </td>
+                                    <td colspan="1">
+                                        $<?php echo $ret; ?>
+                                    </td>
+                                    <td colspan="1">
+                                        $<?php echo $iva; ?>
                                     </td>
                                     <td colspan="1">
                                         $<?php echo $total; ?>

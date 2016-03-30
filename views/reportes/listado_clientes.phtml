@@ -1,0 +1,111 @@
+<?php if(isset($_SESSION["usuario"])):?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema - Tienda Virtual</title>
+    <?php require_once 'inc/header.php'; ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/jquery.fancybox.css" />
+    <script src="<?php echo BASE_URL; ?>public/js/jquery.fancybox.js"></script> 
+</head>
+<body>
+    <?php require_once 'inc/menu-l.php'; ?>
+    <script type="text/javascript">
+        $("#reportes").addClass("active");                  
+    </script>
+    <div class="container-fluid col-md-10 col-md-offset-2">
+        <div class="row">
+            <div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="space"></div>
+                    <div>
+                        <div class="contenido-button">
+                            <a href="<?php echo BASE_URL; ?>reportes/exportar_listado_clientes"><span class="label label-primary">Exportar Excel</span>
+                            </a>
+                            <a href="<?php echo BASE_URL; ?>reportes/buscar_cliente"><span class="label label-primary">buscar cliente</span>
+                            </a>
+                            <a href="<?php echo BASE_URL; ?>reportes"><span class="label label-primary">Reportes</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="form-horizontal" action="#" method="POST" id="form" name="form">
+                    <input type="hidden" name="guardar" value="1" />
+                    <input type="hidden" name="id_cliente" id="id_cliente" value="<?php echo $_SESSION["id_cliente"]; ?>" />
+                    <input type="hidden" name="fecha_ini" id="fecha_ini" value="<?php echo $_SESSION["fecha_ini"]; ?>"/>
+                    <input type="hidden" name="fecha_fin" id="fecha_fin" value="<?php echo $_SESSION["fecha_fin"]; ?>" />
+                </form>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="lista_registros"> 
+                        <?php if (isset($this->reporte) && count($this->reporte)) : ?>  
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">TIPO CLIENTE</th>
+                                        <th class="text-center">TIPO DOCUMENTO</th>
+                                        <th class="text-center">NUMERO DOCUMENTO</th>
+                                        <th class="text-center">RUCOM</th>
+                                        <th class="text-center">RAZON SOCIAL</th>
+                                        <th class="text-center">NOMBRE COMERCIAL</th>
+                                        <th class="text-center">FECHA CREACION</th>
+                                        <th class="text-center">DEPARTAMENTO</th>
+                                        <th class="text-center">CIUDAD</th>
+                                        <th class="text-center">DIRECCION</th>
+                                        <th class="text-center">TELEFONO</th>
+                                        <th class="text-center">EMAIL</th>
+                                        <th class="text-center">ESTADO</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($this->reporte as $reporte):?>
+                                    <tr>
+                                        <td><?php echo $reporte->tipo_cliente;?></td>
+                                        <td><?php echo $reporte->tipdoc;?></td>
+                                        <td><?php echo $reporte->nit;?></td>
+                                        <td><?php echo $reporte->rucom;?></td>
+                                        <td><?php echo $reporte->razon_social;?></td>
+                                        <td><?php echo $reporte->nomcom;?></td>
+                                        <td><?php echo $reporte->fecha_creacion;?></td>
+                                        <td><?php echo $reporte->departamento;?></td>
+                                        <td><?php echo $reporte->ciudad;?></td>
+                                        <td><?php echo $reporte->direccion;?></td>
+                                        <td><?php echo $reporte->telefono1;?></td>
+                                        <td><?php echo $reporte->email;?></td>
+                                        <td class="text-center"><?php if ($reporte->estado == 1){ echo "Activo";} elseif ($reporte->estado == 2){ echo "Inactivo";} ?></td>                                       
+                                </tr>
+                                <?php endforeach;?>
+
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="clear"></div>
+                                        <?php if (isset($this->paginacion)) echo $this->paginacion; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                        <div class="space"></div>
+                        <div class='alert alert-info'>
+                        <strong>No hay clientes creados.</strong>
+                        </div>
+                        <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <?php require_once 'inc/footer.php'; ?>
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+</html>
+<?php 
+else:
+    header( 'Location: ../' );
+endif;
+?>
