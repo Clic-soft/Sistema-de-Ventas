@@ -35,9 +35,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Tipo Documento:</label>
+                        <label for="" class="control-label col-xs-3">Tipo de documento:</label>
                         <div class="col-xs-8">
-                            <select class="form_imput" name="tipo_doc" id="tipo_doc" >
+                            <select class="form-control" name="tipo_doc" id="tipo_doc" >
                                 <option value="">-Seleccione-</option>
                                 <?php foreach ($this->documento as $documento): ?>
                                         <option value="<?php echo $documento->id; ?>" <?php if($this->datos->tipo_documento == $documento->id){ ?> selected <?php } ?> ><?php echo $documento->tipo_documento; ?></option>
@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label for="" class="control-label col-xs-3">Despachador:</label>
                         <div class="col-xs-8">
-                            <select class="form_imput" name="despachador" id="despachador" >
+                            <select class="form-control" name="despachador" id="despachador" >
                                 <option value="">-Seleccione-</option>
                                 <option value="1" <?php if($this->datos->despachador == 1){ ?> selected <?php } ?>>-SI-</option>
                                 <option value="2" <?php if($this->datos->despachador == 2){ ?> selected <?php } ?>>-NO-</option>

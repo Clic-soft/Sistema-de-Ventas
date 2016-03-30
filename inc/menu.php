@@ -47,7 +47,7 @@
 
 					<li id="vehiculos"  role="presentation">
 						<a  href="<?php echo BASE_URL; ?>vehiculos">
-							<i class="glyphicon glyphicon-user"></i> Vehiculos 
+							<i class="glyphicon glyphicon-user"></i> Vehículos 
 							
 						</a>
 					</li>
