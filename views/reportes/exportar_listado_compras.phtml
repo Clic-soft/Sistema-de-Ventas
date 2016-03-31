@@ -8,7 +8,10 @@ header("content-disposition: attachment;filename=Reporte.xls");
 ?>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div id="lista_registros">
-                    <?php $total=0;?>     
+                    <?php $total=0;?>
+                    <?php $subtotal=0;?>
+                    <?php $ret=0;?>
+                    <?php $iva=0;?>     
                         <?php if (isset($this->reporte) && count($this->reporte)) : ?>  
                             <table class="table table-striped table-hover ">
                                 <thead>
