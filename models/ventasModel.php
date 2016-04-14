@@ -218,6 +218,14 @@ class ventasModel extends Model {
         return $consulta;
     }
 
+    public function gettAbonos($id) {
+        //Se crea y ejecuta la consulta
+            $consulta = $this->_db->get_row("SELECT sum(a.valor) as tabo from abonos as a where a.id_venta=$id");
+        //Se retorna la consulta y se recorren los registros
+        return $consulta;
+    }
+
+
     public function getAbonosedita($id, $idabono) {
         //Se crea y ejecuta la consulta
             $consulta = $this->_db->get_results("SELECT a.* from abonos as a where a.id_venta=$id and a.id<>$idabono");

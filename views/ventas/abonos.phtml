@@ -34,7 +34,16 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div id="lista_registros">     
+                    <div id="lista_registros">
+
+                        <div class='alert alert-info'>
+                        <strong>Total del venta $<?php echo $this->datos->total_venta;?>.
+                        <?php if (isset($this->tabono)){?>
+                            Total Pendiente de pago $<?php echo $this->datos->total_venta - $this->tabono;?></strong>
+                        <?php }else{?>
+                            Total Pendiente de pago $<?php echo $this->datos->total_venta;?></strong>
+                        <?php } ?>
+                        </div>    
                         <?php if (isset($this->abono) && count($this->abono)) : ?>  
                             <table class="table table-striped table-hover ">
                                 <thead>

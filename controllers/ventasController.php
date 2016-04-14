@@ -654,6 +654,7 @@ public function abonos($id) {
 			
 			$this->_view->datos = $this->_ventas->getEncabezado($this->filtrarInt($id));
 			$this->_view->abono =$this->_ventas->getAbonos($this->filtrarInt($id));
+			$this->_view->tabono =$this->_ventas->gettAbonos($this->filtrarInt($id));
 			$this->_view->idenc=$this->filtrarInt($id);
 			$abonos =$this->_ventas->getAbonos($this->filtrarInt($id));
 			$total_abonos=0;
