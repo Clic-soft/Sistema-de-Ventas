@@ -17,7 +17,7 @@
                 <td><?php echo $encabezado->prefijo." 000".$encabezado->num_prefijo;?></td>
                 <td><?php echo $encabezado->fecha_venta;?></td>
                 <td><?php echo $encabezado->nomcom;?></td>
-                <td class="text-center"><?php if ($encabezado->forma_pago == 1){ echo "Efectivo";} elseif ($encabezado->forma_pago == 2){ echo "Remision";} elseif ($encabezado->forma_pago == 3){ echo "InfoRem";}?></td>
+                <td class="text-center"><?php if ($encabezado->forma_pago == 1){ echo "Efectivo";} elseif ($encabezado->forma_pago == 2){ echo "Remision";} elseif ($encabezado->forma_pago == 3){ echo "InfoRem";} elseif ($encabezado->forma_pago == 4){ echo "Factura Inforem";}?></td>
                 <td class="text-center"><?php if ($encabezado->estado_venta == 1){ echo "Creado";} elseif ($encabezado->estado_venta == 2){ echo "Pendiente";} elseif ($encabezado->estado_venta == 3){echo "Finalizado";} ?></td>
                 <td>$<?php echo $encabezado->total_venta;?></td>
                 

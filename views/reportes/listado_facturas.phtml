@@ -59,7 +59,7 @@
                                         <td><?php echo $reporte->prefijo." 000".$reporte->num_prefijo;?></td>
                                         <td><?php echo $reporte->fecha_venta;?></td>
                                         <td><?php echo $reporte->nomcom;?></td>
-                                        <td class="text-center"><?php if ($reporte->forma_pago == 1){ echo "Efectivo";} elseif ($reporte->forma_pago == 2){ echo "Remision";} elseif ($reporte->forma_pago == 3){ echo "InfoRem";}?></td>
+                                        <td class="text-center"><?php if ($reporte->forma_pago == 1){ echo "Efectivo";} elseif ($reporte->forma_pago == 2){ echo "Remision";} elseif ($reporte->forma_pago == 3){ echo "InfoRem";} elseif ($reporte->forma_pago == 4){ echo "Factura InfoRem";}?></td>
                                         <td class="text-center"><?php if ($reporte->estado_venta == 1){ echo "Creado";} elseif ($reporte->estado_venta == 2){ echo "Pendiente";} elseif ($reporte->estado_venta == 3){echo "Pendiente Factura";} elseif ($reporte->estado_venta == 4){echo "Finalizado";}?></td>
                                         <td>$<?php echo $reporte->total_venta;?></td>
                                         <?php $total=$total+$reporte->total_venta; ?>

@@ -94,7 +94,9 @@
 				  <tbody>	  
 					<?php foreach($this->detalle as $detalle):?>
 				  	<tr>
-					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?></td>
+					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?>
+					    	<?php if ($detalle->id_remision != 0){ echo "(".$detalle->prefijo."".$detalle->num_prefijo.")";}?>
+					    </td>
 					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->cantidad;?></td>
 					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->precio;?></td>
 					    <td class="col-xs-2 text-center texto-normal"><?php  echo  $detalle->total_detalle;?></td>
@@ -184,7 +186,9 @@
 				  <tbody>	  
 					<?php foreach($this->detalle as $detalle):?>
 				  	<tr>
-					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?></td>
+					    <td class="col-xs-6 texto-normal"><?php echo $detalle->producto ." (".$detalle->simbolo.")";?>
+					    	<?php if ($detalle->id_remision != 0){ echo "(".$detalle->prefijo."".$detalle->num_prefijo.")";}?>
+					    </td>
 					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->cantidad;?></td>
 					    <td class="text-center col-xs-2 texto-normal"><?php  echo  $detalle->precio;?></td>
 					    <td class="col-xs-2 text-center texto-normal"><?php  echo  $detalle->total_detalle;?></td>

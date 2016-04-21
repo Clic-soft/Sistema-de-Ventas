@@ -187,16 +187,6 @@ class clientesController extends Controller {
 					exit;
 				}
 
-				//Se valida que no exista otro usuario con el mismo nombre
-				if ($this->_clientes->validarrucom($this->getTexto('rucom'))) {
-					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'El numero rucom ya existe';
-					//Vista de la pagina actual
-					$this->_view->renderizar('nuevo_cliente','clientes');
-					//Saca de la funcion principal
-					exit;
-				}	
-
 				
 				$this->_clientes->crear_cliente($this->getInt('tipo_empresa'),
 					$this->getInt('tipo_doc'),
@@ -362,16 +352,6 @@ class clientesController extends Controller {
 				if ($this->_clientes->validarnumdocedita($this->filtrarInt($id),$this->getInt('tipo_doc'),$this->getTexto('numdoc'))) {
 					//Si no cumple la validacion sale mensaje de error
 					$this->_view->_error = 'El numero de documento ya existe con este tipo de documento';
-					//Vista de la pagina actual
-					$this->_view->renderizar('editar_cliente',false,true);
-					//Saca de la funcion principal
-					exit;
-				}
-
-				//Se valida que no exista otro usuario con el mismo nombre
-				if ($this->_clientes->validarrucomedita($this->filtrarInt($id),$this->getTexto('rucom'))) {
-					//Si no cumple la validacion sale mensaje de error
-					$this->_view->_error = 'El numero rucom ya existe';
 					//Vista de la pagina actual
 					$this->_view->renderizar('editar_cliente',false,true);
 					//Saca de la funcion principal

@@ -163,6 +163,37 @@ class ventasController extends Controller {
 				$prefijoco=$prefco->prefijo;
 				$numeroco=$prefco->actual;
 				$id_consco=$prefco->id;
+				}
+
+				else if($this->getInt('forma') ==4){
+				$pref = $this->_ventas->get_prefijo(1);
+				$id_cons=$pref->id;
+				$prefijo=$pref->prefijo;
+				$numero=$pref->actual;
+
+				$prefijoco="";
+				$numeroco="";
+
+				$nactual=$numero+1;
+
+				$this->_ventas->crear_venta($this->getInt('id_cliente'),
+					$this->getInt('id_empleado'),
+					$this->getInt('id_despachador'),
+					$this->getInt('id_placa'),
+					$this->getInt('forma'),
+					$prefijo,
+					$numero,
+					$prefijoco,
+					$numeroco);
+
+				$this->_ventas->act_consecutivo($id_cons,$nactual);
+
+				$this->_view->_mensaje = 'Datos Creados Correctamente';
+
+				$this->_view->renderizar('nueva_venta', "ventas");
+
+				exit;
+
 				} 
 
 				$nactualco=$numeroco+1;

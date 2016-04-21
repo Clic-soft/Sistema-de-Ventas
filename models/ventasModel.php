@@ -100,9 +100,12 @@ class ventasModel extends Model {
 
     public function getDetalles($id) {
         //Se crea y ejecuta la consulta
-            $consulta = $this->_db->get_results("SELECT d.*,p.producto,u.simbolo 
-                from detalle_ventas as d, productos as p, unidades_medida as u
-                where p.id=d.id_producto and d.id_venta=$id and p.id_und_medida=u.id");
+            $consulta = $this->_db->get_results("SELECT d.*,p.producto,u.simbolo, e.prefijo, e.num_prefijo 
+                                                from detalle_ventas as d 
+                                                inner join productos as p on p.id=d.id_producto 
+                                                inner join unidades_medida as u on p.id_und_medida=u.id 
+                                                left join encabezado_venta as e on d.id_remision=e.id 
+                                                where d.id_venta=$id");
         //Se retorna la consulta y se recorren los registros
         return $consulta;
     }
